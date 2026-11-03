@@ -18,10 +18,10 @@ export function XpCatcherGame({
   const [multiplier, setMultiplier] = useState(2);
   const [floatPops, setFloatPops] = useState([]);
   const [showInfo, setShowInfo] = useState(false);
-  const [basketPos, setBasketPos] = useState(160);
+  const [basketPos, setBasketPos] = useState(170);
 
   const canvasRef = useRef(null);
-  const basketX = useRef(160);
+  const basketX = useRef(170);
   const animFrameId = useRef(null);
   const objectsRef = useRef([]);
   const lastSpawnRef = useRef(0);
@@ -95,8 +95,8 @@ export function XpCatcherGame({
     basketX.current = canvas.width / 2;
     setBasketPos(canvas.width / 2);
 
-    const basketWidth = 90;
-    const basketHeight = 65;
+    const basketWidth = 110;
+    const basketCatchHeight = 40;
 
     const types = [
       { type: 'xp', label: 'XP', color: '#9333ea', radius: 15, points: 10, isVE: false },
@@ -113,7 +113,7 @@ export function XpCatcherGame({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Spawn falling objects
-      if (currentTime - lastSpawnRef.current > 400) {
+      if (currentTime - lastSpawnRef.current > 380) {
         const template = types[Math.floor(Math.random() * types.length)];
         objectsRef.current.push({
           x: Math.random() * (canvas.width - 80) + 40,
@@ -124,7 +124,8 @@ export function XpCatcherGame({
         lastSpawnRef.current = currentTime;
       }
 
-      const basketY = canvas.height - basketHeight - 10;
+      // The rim of the basket is at approx height: 85px from bottom
+      const basketRimY = canvas.height - 85;
 
       // Update & Draw falling objects
       for (let i = objectsRef.current.length - 1; i >= 0; i--) {
@@ -152,9 +153,9 @@ export function XpCatcherGame({
         ctx.fillText(obj.label, obj.x, obj.y);
         ctx.restore();
 
-        // Check catch
+        // Check catch at the basket rim
         const inX = obj.x >= (basketX.current - basketWidth / 2) && obj.x <= (basketX.current + basketWidth / 2);
-        const inY = obj.y >= basketY && obj.y <= (basketY + basketHeight);
+        const inY = obj.y >= basketRimY && obj.y <= (basketRimY + basketCatchHeight);
 
         if (inX && inY) {
           const pts = obj.points * multiplier;
@@ -168,7 +169,7 @@ export function XpCatcherGame({
             {
               id: Date.now() + Math.random(),
               x: obj.x,
-              y: basketY,
+              y: basketRimY,
               text: `+${pts} ${obj.isVE ? 'VEs' : 'XP'}`
             }
           ]);
@@ -195,7 +196,7 @@ export function XpCatcherGame({
 
   const updateBasketPos = (clientX, rect) => {
     const x = clientX - rect.left;
-    const clamped = Math.max(50, Math.min(rect.width - 50, x));
+    const clamped = Math.max(60, Math.min(rect.width - 60, x));
     basketX.current = clamped;
     setBasketPos(clamped);
   };
@@ -213,9 +214,9 @@ export function XpCatcherGame({
     const handleKeyDown = (e) => {
       if (gameState !== 'playing') return;
       const canvas = canvasRef.current;
-      const maxW = canvas ? canvas.width - 50 : 300;
+      const maxW = canvas ? canvas.width - 60 : 300;
       if (e.key === 'ArrowLeft' || e.key === 'a') {
-        const next = Math.max(50, basketX.current - 26);
+        const next = Math.max(60, basketX.current - 26);
         basketX.current = next;
         setBasketPos(next);
       } else if (e.key === 'ArrowRight' || e.key === 'd') {
@@ -278,7 +279,7 @@ export function XpCatcherGame({
           fontSize: '13px',
           boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
         }}>
-          <strong>Rules:</strong> Catch falling purple XP orbs, golden V coins, and gems before the 20-second timer runs out!
+          <strong>Rules:</strong> Drag the golden basket horizontally or use Arrow Keys to catch falling items before the 20-second timer runs out!
           <div style={{ marginTop: '10px' }}>
             <button onClick={() => setShowInfo(false)} style={{ color: '#f5b041', fontWeight: '700' }}>
               Close
@@ -307,28 +308,29 @@ export function XpCatcherGame({
           </div>
         ))}
 
-        {/* Exact Golden Basket from reference */}
+        {/* EXACT GOLDEN WIRE BASKET */}
         <div 
           style={{
             position: 'absolute',
-            bottom: '10px',
+            bottom: '8px',
             left: `${basketPos}px`,
             transform: 'translateX(-50%)',
-            width: '100px',
-            height: '70px',
+            width: '135px',
+            height: '95px',
             pointerEvents: 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            filter: 'drop-shadow(0 0 12px rgba(245, 176, 65, 0.5))'
+            filter: 'drop-shadow(0 0 16px rgba(245, 176, 65, 0.65))',
+            transition: 'transform 0.05s ease-out'
           }}
         >
           <img 
-            src="/assets/ref_golden_basket.png" 
-            alt="Golden Basket" 
+            src="/assets/golden_basket_clean.png" 
+            alt="Exact Golden Basket" 
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             onError={(e) => {
-              e.currentTarget.style.display = 'none';
+              e.currentTarget.src = '/assets/golden_basket.svg';
             }}
           />
         </div>
