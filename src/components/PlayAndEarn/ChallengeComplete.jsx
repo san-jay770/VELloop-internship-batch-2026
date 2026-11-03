@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Share2, Star } from 'lucide-react';
+import { ArrowLeft, Share2 } from 'lucide-react';
 import styles from './Game.module.css';
 
 export function ChallengeComplete({
@@ -44,45 +44,19 @@ export function ChallengeComplete({
 
       {/* Trophy & Heading */}
       <div className={styles.trophyContainer}>
-        <div className={styles.trophyPedestal}>
-          {/* Golden Laurel Wreath and 3D Star */}
-          <div className={styles.wreathGold}>
-            <svg viewBox="0 0 120 120" width="130" height="130" fill="none">
-              <defs>
-                <linearGradient id="goldWreath" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#fef08a" />
-                  <stop offset="50%" stopColor="#f59e0b" />
-                  <stop offset="100%" stopColor="#b45309" />
-                </linearGradient>
-              </defs>
-              {/* Left laurel branch */}
-              <path d="M 30,95 C 15,70 18,35 45,20 C 35,32 35,50 42,70" stroke="url(#goldWreath)" strokeWidth="3" fill="none" />
-              <circle cx="26" cy="75" r="4" fill="url(#goldWreath)" />
-              <circle cx="21" cy="55" r="4" fill="url(#goldWreath)" />
-              <circle cx="28" cy="38" r="4" fill="url(#goldWreath)" />
-              <circle cx="42" cy="24" r="4" fill="url(#goldWreath)" />
-
-              {/* Right laurel branch */}
-              <path d="M 90,95 C 105,70 102,35 75,20 C 85,32 85,50 78,70" stroke="url(#goldWreath)" strokeWidth="3" fill="none" />
-              <circle cx="94" cy="75" r="4" fill="url(#goldWreath)" />
-              <circle cx="99" cy="55" r="4" fill="url(#goldWreath)" />
-              <circle cx="92" cy="38" r="4" fill="url(#goldWreath)" />
-              <circle cx="78" cy="24" r="4" fill="url(#goldWreath)" />
-
-              {/* Central Hexagon Plaque */}
-              <polygon points="60,30 85,45 85,75 60,90 35,75 35,45" fill="#201a14" stroke="url(#goldWreath)" strokeWidth="3" />
-            </svg>
-
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-              <Star size={34} fill="#fcd34d" color="#d97706" />
-            </div>
-          </div>
-
-          <div className={styles.pedestalBase} />
-        </div>
-
         <h2 className={styles.completeTitle}>CHALLENGE COMPLETE!</h2>
         <span className={styles.completeSub}>Outstanding!</span>
+
+        <div className={styles.trophyPedestal} style={{ marginTop: '16px' }}>
+          <img 
+            src="/assets/ref_trophy.png" 
+            alt="Challenge Trophy" 
+            style={{ width: '150px', height: '150px', objectFit: 'contain' }}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
       </div>
 
       {/* Final Score */}

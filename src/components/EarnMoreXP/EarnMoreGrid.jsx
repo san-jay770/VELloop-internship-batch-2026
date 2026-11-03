@@ -104,7 +104,7 @@ export function EarnMoreGrid({
         })}
       </div>
 
-      {/* Level Rewards Banner Card */}
+      {/* Level 05 Rewards Card with Exact Treasure Chest Illustration */}
       <div 
         className={styles.rewardCard} 
         onClick={onViewRewards}
@@ -126,11 +126,11 @@ export function EarnMoreGrid({
         </div>
 
         <img 
-          src="/assets/safe-1.svg" 
-          alt="Level Rewards Vault"
+          src="/assets/ref_treasure_chest.png" 
+          alt="Level Rewards Treasure Chest"
           className={styles.rewardCardImg}
           onError={(e) => {
-            e.currentTarget.src = '/assets/gem.svg';
+            e.currentTarget.src = '/assets/safe-1.svg';
           }}
         />
       </div>

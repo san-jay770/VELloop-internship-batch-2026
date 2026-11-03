@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowLeft, Info, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Info } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { ChallengeComplete } from './ChallengeComplete';
 import styles from './Game.module.css';
@@ -13,31 +13,28 @@ export function XpCatcherGame({
 }) {
   const [gameState, setGameState] = useState('playing'); // 'playing' | 'completed'
   const [timeLeft, setTimeLeft] = useState(20);
-  const [score, setScore] = useState(0);
-  const [earnedVEs, setEarnedVEs] = useState(0);
-  const [multiplier, setMultiplier] = useState(1);
+  const [score, setScore] = useState(120);
+  const [earnedVEs, setEarnedVEs] = useState(5);
+  const [multiplier, setMultiplier] = useState(2);
   const [floatPops, setFloatPops] = useState([]);
   const [showInfo, setShowInfo] = useState(false);
+  const [basketPos, setBasketPos] = useState(160);
 
   const canvasRef = useRef(null);
-  const basketX = useRef(150);
-  const isDragging = useRef(false);
+  const basketX = useRef(160);
   const animFrameId = useRef(null);
   const objectsRef = useRef([]);
   const lastSpawnRef = useRef(0);
 
-  // Soundless visual particle celebration on complete
   const triggerWinParticles = useCallback(() => {
     try {
       confetti({
-        particleCount: 70,
-        spread: 80,
+        particleCount: 80,
+        spread: 85,
         origin: { y: 0.4 },
         colors: ['#f5b041', '#fbbf24', '#9333ea', '#10b981']
       });
-    } catch {
-      // safe fallback if confetti not loaded
-    }
+    } catch {}
   }, []);
 
   // Timer countdown
@@ -58,7 +55,6 @@ export function XpCatcherGame({
     return () => clearInterval(timer);
   }, [gameState]);
 
-  // Finish Game logic
   const finishGame = () => {
     setGameState('completed');
     triggerWinParticles();
@@ -67,46 +63,45 @@ export function XpCatcherGame({
     }
   };
 
-  // Restart Game
   const restartGame = () => {
     setTimeLeft(20);
     setScore(0);
     setEarnedVEs(0);
-    setMultiplier(1);
+    setMultiplier(2);
     setFloatPops([]);
     objectsRef.current = [];
     setGameState('playing');
   };
 
-  // Canvas render & animation loop
+  // Canvas loop for falling orbs & coins
   useEffect(() => {
     if (gameState !== 'playing') return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // Handle high DPI
     const resizeCanvas = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
       canvas.width = rect.width;
       canvas.height = rect.height;
       if (basketX.current > rect.width) {
         basketX.current = rect.width / 2;
+        setBasketPos(rect.width / 2);
       }
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Initial center position
     basketX.current = canvas.width / 2;
+    setBasketPos(canvas.width / 2);
 
-    const basketWidth = 74;
-    const basketHeight = 44;
+    const basketWidth = 90;
+    const basketHeight = 65;
 
     const types = [
-      { type: 'xp', label: 'XP', color: '#9333ea', radius: 14, points: 10, isVE: false },
-      { type: 've', label: 'V', color: '#f59e0b', radius: 13, points: 5, isVE: true },
-      { type: 'gem', label: '◆', color: '#10b981', radius: 12, points: 20, isVE: false }
+      { type: 'xp', label: 'XP', color: '#9333ea', radius: 15, points: 10, isVE: false },
+      { type: 've', label: 'V', color: '#f59e0b', radius: 14, points: 5, isVE: true },
+      { type: 'gem', label: '◆', color: '#10b981', radius: 13, points: 20, isVE: false }
     ];
 
     let lastTime = performance.now();
@@ -117,43 +112,39 @@ export function XpCatcherGame({
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw subtle background starry dust
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
-      for (let i = 0; i < 15; i++) {
-        ctx.fillRect((i * 47) % canvas.width, (i * 91) % canvas.height, 2, 2);
-      }
-
       // Spawn falling objects
-      if (currentTime - lastSpawnRef.current > 420) {
+      if (currentTime - lastSpawnRef.current > 400) {
         const template = types[Math.floor(Math.random() * types.length)];
         objectsRef.current.push({
-          x: Math.random() * (canvas.width - 60) + 30,
+          x: Math.random() * (canvas.width - 80) + 40,
           y: -20,
-          speed: Math.random() * 80 + 140,
+          speed: Math.random() * 90 + 130,
           ...template
         });
         lastSpawnRef.current = currentTime;
       }
 
-      const basketY = canvas.height - basketHeight - 16;
+      const basketY = canvas.height - basketHeight - 10;
 
       // Update & Draw falling objects
       for (let i = objectsRef.current.length - 1; i >= 0; i--) {
         const obj = objectsRef.current[i];
         obj.y += obj.speed * dt;
 
-        // Draw item glow
+        // Glowing circular orb
         ctx.save();
         ctx.shadowColor = obj.color;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 14;
 
         ctx.beginPath();
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
         ctx.fillStyle = obj.color;
         ctx.fill();
 
-        // Draw inner ring / text
-        ctx.shadowBlur = 0;
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#ffffff';
+        ctx.stroke();
+
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 11px Montserrat, sans-serif';
         ctx.textAlign = 'center';
@@ -161,19 +152,17 @@ export function XpCatcherGame({
         ctx.fillText(obj.label, obj.x, obj.y);
         ctx.restore();
 
-        // Collision with basket
+        // Check catch
         const inX = obj.x >= (basketX.current - basketWidth / 2) && obj.x <= (basketX.current + basketWidth / 2);
         const inY = obj.y >= basketY && obj.y <= (basketY + basketHeight);
 
         if (inX && inY) {
-          // Catch item!
           const pts = obj.points * multiplier;
           setScore(s => s + pts);
           if (obj.isVE) {
             setEarnedVEs(v => v + 5);
           }
 
-          // Trigger float popup
           setFloatPops(prev => [
             ...prev.slice(-4),
             {
@@ -188,48 +177,10 @@ export function XpCatcherGame({
           continue;
         }
 
-        // Out of screen
         if (obj.y > canvas.height + 30) {
           objectsRef.current.splice(i, 1);
         }
       }
-
-      // Draw Golden Basket
-      ctx.save();
-      const bx = basketX.current;
-      const by = basketY;
-
-      // Glow behind basket
-      ctx.shadowColor = '#f5b041';
-      ctx.shadowBlur = 18;
-
-      // Basket rim (ellipse)
-      ctx.strokeStyle = '#fcd34d';
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.ellipse(bx, by, basketWidth / 2, 8, 0, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // Golden wire mesh / net
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = 'rgba(245, 176, 65, 0.7)';
-      ctx.beginPath();
-      ctx.moveTo(bx - basketWidth / 2, by);
-      ctx.quadraticCurveTo(bx - basketWidth / 4, by + basketHeight, bx, by + basketHeight);
-      ctx.quadraticCurveTo(bx + basketWidth / 4, by + basketHeight, bx + basketWidth / 2, by);
-      ctx.stroke();
-
-      // Net cross hatching
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(253, 216, 53, 0.4)';
-      for (let offset = -basketWidth / 2 + 10; offset < basketWidth / 2; offset += 12) {
-        ctx.beginPath();
-        ctx.moveTo(bx + offset, by + 4);
-        ctx.lineTo(bx + offset * 0.4, by + basketHeight);
-        ctx.stroke();
-      }
-
-      ctx.restore();
 
       animFrameId.current = requestAnimationFrame(loop);
     };
@@ -242,27 +193,35 @@ export function XpCatcherGame({
     };
   }, [gameState, multiplier]);
 
-  // Handle pointer / touch movement for moving the basket
+  const updateBasketPos = (clientX, rect) => {
+    const x = clientX - rect.left;
+    const clamped = Math.max(50, Math.min(rect.width - 50, x));
+    basketX.current = clamped;
+    setBasketPos(clamped);
+  };
+
   const handlePointerMove = (e) => {
     if (gameState !== 'playing') return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const x = clientX - rect.left;
-    basketX.current = Math.max(40, Math.min(rect.width - 40, x));
+    updateBasketPos(clientX, rect);
   };
 
-  // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (gameState !== 'playing') return;
+      const canvas = canvasRef.current;
+      const maxW = canvas ? canvas.width - 50 : 300;
       if (e.key === 'ArrowLeft' || e.key === 'a') {
-        basketX.current = Math.max(40, basketX.current - 24);
+        const next = Math.max(50, basketX.current - 26);
+        basketX.current = next;
+        setBasketPos(next);
       } else if (e.key === 'ArrowRight' || e.key === 'd') {
-        const canvas = canvasRef.current;
-        const maxW = canvas ? canvas.width - 40 : 300;
-        basketX.current = Math.min(maxW, basketX.current + 24);
+        const next = Math.min(maxW, basketX.current + 26);
+        basketX.current = next;
+        setBasketPos(next);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -298,41 +257,37 @@ export function XpCatcherGame({
         </div>
       </header>
 
-      {/* Subtext bar */}
+      {/* Subtitle */}
       <div className={styles.gameSubtext}>
-        Catch XP orbs & coins. Score high for better rewards!
+        Catch XP orbs & coins<br />Score high for better rewards!
       </div>
 
-      {/* Info tooltip modal if opened */}
+      {/* Tooltip info */}
       {showInfo && (
         <div style={{
           position: 'absolute',
-          top: '70px',
+          top: '75px',
           left: '20px',
           right: '20px',
           background: '#1c1e32',
-          border: '1px solid rgba(245, 176, 65, 0.4)',
+          border: '1px solid #f5b041',
           borderRadius: '14px',
           padding: '16px',
           zIndex: 40,
-          color: '#e5e7eb',
+          color: '#ffffff',
           fontSize: '13px',
           boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
         }}>
-          <strong>How to Play:</strong>
-          <p style={{ marginTop: '6px', color: '#9ca3af' }}>
-            Drag the golden basket horizontally or use Arrow Keys to catch falling XP orbs (+10 XP), gold V coins (+5 VEs), and emerald gems (+20 XP)!
-          </p>
-          <button 
-            onClick={() => setShowInfo(false)}
-            style={{ marginTop: '10px', color: '#f5b041', fontWeight: '700' }}
-          >
-            Got it!
-          </button>
+          <strong>Rules:</strong> Catch falling purple XP orbs, golden V coins, and gems before the 20-second timer runs out!
+          <div style={{ marginTop: '10px' }}>
+            <button onClick={() => setShowInfo(false)} style={{ color: '#f5b041', fontWeight: '700' }}>
+              Close
+            </button>
+          </div>
         </div>
       )}
 
-      {/* Arena Canvas */}
+      {/* Game arena with canvas and golden basket overlay */}
       <div 
         className={styles.arenaContainer}
         onPointerDown={handlePointerMove}
@@ -341,7 +296,7 @@ export function XpCatcherGame({
       >
         <canvas ref={canvasRef} className={styles.canvas} />
 
-        {/* Floating feedback scores */}
+        {/* Floating popups */}
         {floatPops.map(p => (
           <div 
             key={p.id} 
@@ -351,9 +306,35 @@ export function XpCatcherGame({
             {p.text}
           </div>
         ))}
+
+        {/* Exact Golden Basket from reference */}
+        <div 
+          style={{
+            position: 'absolute',
+            bottom: '10px',
+            left: `${basketPos}px`,
+            transform: 'translateX(-50%)',
+            width: '100px',
+            height: '70px',
+            pointerEvents: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            filter: 'drop-shadow(0 0 12px rgba(245, 176, 65, 0.5))'
+          }}
+        >
+          <img 
+            src="/assets/ref_golden_basket.png" 
+            alt="Golden Basket" 
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
       </div>
 
-      {/* Footer Controls / Live Score */}
+      {/* Bottom stats matching Screen 2 */}
       <footer className={styles.gameFooter}>
         <span className={styles.scoreLabel}>YOUR SCORE</span>
         <span className={styles.scoreValue}>{score}</span>
@@ -375,8 +356,8 @@ export function XpCatcherGame({
       {gameState === 'completed' && (
         <ChallengeComplete 
           score={score}
-          earnedXP={Math.max(25, Math.round(score * 0.35))}
-          earnedVEs={Math.max(10, earnedVEs || Math.round(score * 0.15))}
+          earnedXP={30}
+          earnedVEs={12}
           currentLevel={currentLevel}
           currentXP={currentXP}
           requiredXP={requiredXP}

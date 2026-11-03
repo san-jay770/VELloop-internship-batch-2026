@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { TrendingUp, Target, Gift } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { LevelBadge } from '../LevelHero/LevelBadge';
 import styles from './LevelUpModal.module.css';
 
 export function LevelUpModal({ 
@@ -14,7 +13,7 @@ export function LevelUpModal({
   useEffect(() => {
     try {
       confetti({
-        particleCount: 100,
+        particleCount: 90,
         spread: 90,
         origin: { y: 0.5 },
         colors: ['#f5b041', '#fbbf24', '#9333ea', '#10b981', '#ffffff']
@@ -27,15 +26,19 @@ export function LevelUpModal({
       <div className={styles.modalCard}>
         <div className={styles.titleArea}>
           <h2 className={styles.levelUpTitle}>LEVEL UP!</h2>
-          <p className={styles.levelUpSub}>You've reached {levelName}</p>
+          <p className={styles.levelUpSub}>You've reached</p>
         </div>
 
         {/* Central Hexagon Badge & 3D Pedestal */}
         <div className={styles.pedestalWrapper}>
-          <div className={styles.badgeCenter}>
-            <LevelBadge level={level} size={94} />
-          </div>
-          <div className={styles.pedestalBase3D} />
+          <img 
+            src="/assets/ref_level_up_pedestal.png" 
+            alt={`Level ${level} Celebration Pedestal`}
+            style={{ width: '170px', height: '170px', objectFit: 'contain' }}
+            onError={(e) => {
+              e.currentTarget.src = '/assets/lvl-5.svg';
+            }}
+          />
         </div>
 
         {/* 2-Column Rewards */}
@@ -43,19 +46,20 @@ export function LevelUpModal({
           <div className={styles.rewardItem}>
             <span className={styles.rewardAmount}>+{veReward} VEs</span>
             <img 
-              src="/assets/gold.svg" 
-              alt="VE Coins" 
+              src="/assets/ref_coins_stack.png" 
+              alt="VE Coins Stack" 
               className={styles.rewardImg}
-              onError={(e) => { e.currentTarget.src = '/assets/ve.svg'; }}
+              onError={(e) => { e.currentTarget.src = '/assets/gold.svg'; }}
             />
           </div>
 
           <div className={styles.rewardItem}>
             <span className={styles.rewardAmount}>+{gemReward} Gems</span>
             <img 
-              src="/assets/gem.svg" 
-              alt="Gems" 
-              className={styles.rewardImg} 
+              src="/assets/ref_gems_stack.png" 
+              alt="Purple Gems" 
+              className={styles.rewardImg}
+              onError={(e) => { e.currentTarget.src = '/assets/gem.svg'; }}
             />
           </div>
         </div>

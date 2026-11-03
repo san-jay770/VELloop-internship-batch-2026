@@ -29,3 +29,4 @@ export function TopNav({ onOpenMenu, onOpenNotifications }) {
     </header>
   );
 }
+

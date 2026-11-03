@@ -43,3 +43,4 @@ export function EmptyState({ message = "Your XP journey starts here.", onCta, ct
     </div>
   );
 }
+

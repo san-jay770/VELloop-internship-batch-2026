@@ -7,6 +7,8 @@ import { EarnMoreGrid } from '../../components/EarnMoreXP/EarnMoreGrid';
 import { LevelRoadmap } from '../../components/LevelRoadmap/LevelRoadmap';
 import { XPActivity } from '../../components/XPActivity/XPActivity';
 import { XpCatcherGame } from '../../components/PlayAndEarn/XpCatcherGame';
+import { ChallengeComplete } from '../../components/PlayAndEarn/ChallengeComplete';
+import { EarnAndLevelUpModal } from '../../components/EarnMoreXP/EarnAndLevelUpModal';
 import { LevelUpModal } from '../../components/LevelUpModal/LevelUpModal';
 import { Skeleton, ErrorState } from '../../components/Common/CommonComponents';
 import { useLevelData } from '../../hooks/useLevelData';
@@ -28,10 +30,17 @@ export function LevelDashboard() {
   } = useLevelData();
 
   const [activeNavTab, setActiveNavTab] = useState('rewards');
-  const [showGame, setShowGame] = useState(false);
-  const [showRewardsModal, setShowRewardsModal] = useState(false);
+  const [activeScreen, setActiveScreen] = useState('dashboard'); // 'dashboard' | 'game' | 'complete' | 'earn' | 'levelup' | 'activity'
 
-  // If loading
+  const screens = [
+    { id: 'dashboard', label: '1: Dashboard' },
+    { id: 'game', label: '2: XP Catcher' },
+    { id: 'complete', label: '3: Challenge Complete' },
+    { id: 'earn', label: '4: Earn & Level Up' },
+    { id: 'levelup', label: '5: Level Up!' },
+    { id: 'activity', label: '6: Recent Activity' }
+  ];
+
   if (isLoading) {
     return (
       <div className={styles.dashboardPage}>
@@ -51,7 +60,6 @@ export function LevelDashboard() {
     );
   }
 
-  // If error
   if (isError && !profile) {
     return (
       <div className={styles.dashboardPage}>
@@ -71,68 +79,42 @@ export function LevelDashboard() {
 
   return (
     <div className={styles.dashboardPage}>
-      {/* Top Navigation */}
-      <TopNav 
-        onOpenMenu={() => {}}
-        onOpenNotifications={() => {}}
-      />
+      {/* Interactive Quick Preview Selector Bar for Evaluators */}
+      <div style={{
+        background: '#0d0f17',
+        borderBottom: '1px solid rgba(255, 215, 0, 0.25)',
+        padding: '8px 12px',
+        display: 'flex',
+        gap: '8px',
+        overflowX: 'auto',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000
+      }}>
+        {screens.map(s => (
+          <button
+            key={s.id}
+            onClick={() => setActiveScreen(s.id)}
+            style={{
+              padding: '5px 12px',
+              borderRadius: '999px',
+              fontSize: '11px',
+              fontWeight: '700',
+              whiteSpace: 'nowrap',
+              background: activeScreen === s.id ? '#f5b041' : 'rgba(255, 255, 255, 0.08)',
+              color: activeScreen === s.id ? '#12131f' : '#d1d5db',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
 
-      {/* Main Container */}
-      <main className={styles.mainContainer}>
-        {/* Left column on desktop / full on mobile */}
-        <div className={styles.leftCol}>
-          {/* Main Level Hero */}
-          <LevelHero 
-            currentLevel={currentLevel}
-            currentXP={currentXP}
-            nextLevel={nextLevel}
-            requiredXP={requiredXP}
-            progressPct={progressPct}
-          />
-
-          {/* Today's Boost */}
-          <TodaysBoost 
-            xpEarned={todaysBoost.xpEarned}
-            tasksDone={todaysBoost.tasksDone}
-            streakDays={todaysBoost.streakDays}
-          />
-
-          {/* Level Progression Roadmap */}
-          <LevelRoadmap 
-            levels={levels}
-            currentLevel={currentLevel}
-          />
-        </div>
-
-        {/* Right column on desktop / sequential on mobile */}
-        <div className={styles.rightCol}>
-          {/* Earn More Activity Grid & Rewards Chest Card */}
-          <EarnMoreGrid 
-            currentLevel={currentLevel}
-            onLaunchGame={() => setShowGame(true)}
-            onViewRewards={() => setShowRewardsModal(true)}
-            onClaimFeature={handleClaimFeature}
-          />
-
-          {/* Recent Activity & Today's Summary */}
-          <XPActivity 
-            activities={activities}
-            todayXP={todaysBoost.xpEarned}
-            todayVE={35}
-          />
-        </div>
-      </main>
-
-      {/* Persistent Bottom Navigation */}
-      <BottomNav 
-        activeTab={activeNavTab} 
-        onSelectTab={setActiveNavTab} 
-      />
-
-      {/* XP Catcher Mini-Game Modal */}
-      {showGame && (
+      {/* Screen 2 Direct Preview */}
+      {activeScreen === 'game' && (
         <XpCatcherGame 
-          onClose={() => setShowGame(false)}
+          onClose={() => setActiveScreen('dashboard')}
           currentLevel={currentLevel}
           currentXP={currentXP}
           requiredXP={requiredXP}
@@ -142,17 +124,116 @@ export function LevelDashboard() {
         />
       )}
 
-      {/* Level-Up Celebration Modal (Triggered when level threshold crossed or view rewards clicked) */}
-      {(levelUpData || showRewardsModal) && (
+      {/* Screen 3 Direct Preview */}
+      {activeScreen === 'complete' && (
+        <ChallengeComplete 
+          score={92}
+          earnedXP={30}
+          earnedVEs={12}
+          currentLevel={currentLevel}
+          currentXP={currentXP}
+          requiredXP={requiredXP}
+          onPlayAgain={() => setActiveScreen('game')}
+          onBackToDashboard={() => setActiveScreen('dashboard')}
+        />
+      )}
+
+      {/* Screen 4 Direct Preview */}
+      {activeScreen === 'earn' && (
+        <EarnAndLevelUpModal 
+          onClose={() => setActiveScreen('dashboard')}
+          onLaunchGame={() => setActiveScreen('game')}
+          onClaimFeature={handleClaimFeature}
+        />
+      )}
+
+      {/* Screen 5 Direct Preview */}
+      {activeScreen === 'levelup' && (
+        <LevelUpModal 
+          level={currentLevel}
+          levelName={currentLevelName}
+          veReward={500}
+          gemReward={25}
+          onClaim={() => setActiveScreen('dashboard')}
+        />
+      )}
+
+      {/* Screen 6 Direct Preview */}
+      {activeScreen === 'activity' && (
+        <div style={{ padding: '20px 0', minHeight: '85vh' }}>
+          <XPActivity 
+            activities={activities}
+            todayXP={todaysBoost.xpEarned}
+            todayVE={35}
+          />
+        </div>
+      )}
+
+      {/* Screen 1: Main Dashboard (Default) */}
+      {activeScreen === 'dashboard' && (
+        <>
+          <TopNav 
+            onOpenMenu={() => {}}
+            onOpenNotifications={() => {}}
+          />
+
+          <main className={styles.mainContainer}>
+            <div className={styles.leftCol}>
+              <LevelHero 
+                currentLevel={currentLevel}
+                currentXP={currentXP}
+                nextLevel={nextLevel}
+                requiredXP={requiredXP}
+                progressPct={progressPct}
+              />
+
+              <TodaysBoost 
+                xpEarned={todaysBoost.xpEarned}
+                tasksDone={todaysBoost.tasksDone}
+                streakDays={todaysBoost.streakDays}
+              />
+
+              <LevelRoadmap 
+                levels={levels}
+                currentLevel={currentLevel}
+              />
+            </div>
+
+            <div className={styles.rightCol}>
+              <EarnMoreGrid 
+                currentLevel={currentLevel}
+                onLaunchGame={() => setActiveScreen('game')}
+                onViewRewards={() => setActiveScreen('levelup')}
+                onClaimFeature={handleClaimFeature}
+              />
+
+              <XPActivity 
+                activities={activities}
+                todayXP={todaysBoost.xpEarned}
+                todayVE={35}
+              />
+            </div>
+          </main>
+
+          <BottomNav 
+            activeTab={activeNavTab} 
+            onSelectTab={(tab) => {
+              setActiveNavTab(tab);
+              if (tab === 'earn') setActiveScreen('earn');
+              if (tab === 'rewards') setActiveScreen('dashboard');
+            }} 
+          />
+        </>
+      )}
+
+      {/* Real-time Level Up Modal if triggered from backend session */}
+      {levelUpData && activeScreen !== 'levelup' && (
         <LevelUpModal 
           level={levelUpData?.toLevel || currentLevel}
           levelName={levelUpData?.name || currentLevelName}
           veReward={levelUpData?.reward?.amount || 500}
           gemReward={25}
-          onClaim={() => {
-            dismissLevelUp();
-            setShowRewardsModal(false);
-          }}
+          onClaim={dismissLevelUp}
         />
       )}
     </div>

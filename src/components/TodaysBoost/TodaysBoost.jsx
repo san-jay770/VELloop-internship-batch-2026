@@ -41,3 +41,4 @@ export function TodaysBoost({ xpEarned = 215, tasksDone = "4 / 8", streakDays = 
     </section>
   );
 }
+

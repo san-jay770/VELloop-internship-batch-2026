@@ -118,3 +118,4 @@ export function XPActivity({ activities = [], todayXP = 215, todayVE = 35 }) {
     </section>
   );
 }
+

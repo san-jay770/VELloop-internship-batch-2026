@@ -198,3 +198,4 @@ npm run preview
 - **Developer:** Sanjay Senthil Kumar
 - **Project:** VELOOP Rewards Internship 2026
 - **Task:** Task 16 – Complete Level-Up Dashboard Redesign
+

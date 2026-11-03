@@ -24,3 +24,4 @@ export function XPProgressBar({ currentXP = 6420, requiredXP = 8000, progressPct
     </div>
   );
 }
+

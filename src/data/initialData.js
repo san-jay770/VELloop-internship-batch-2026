@@ -141,3 +141,4 @@ export const earningOpportunities = [
     status: "available"
   }
 ];
+
