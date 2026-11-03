@@ -95,8 +95,7 @@ export function XpCatcherGame({
     basketX.current = canvas.width / 2;
     setBasketPos(canvas.width / 2);
 
-    const basketWidth = 110;
-    const basketCatchHeight = 40;
+    const basketCatchWidth = 110;
 
     const types = [
       { type: 'xp', label: 'XP', color: '#9333ea', radius: 15, points: 10, isVE: false },
@@ -124,8 +123,8 @@ export function XpCatcherGame({
         lastSpawnRef.current = currentTime;
       }
 
-      // The rim of the basket is at approx height: 85px from bottom
-      const basketRimY = canvas.height - 85;
+      // Basket is 115px high, resting 15px above bottom. The top rim is at: canvas.height - 110 to -80
+      const basketRimY = canvas.height - 115;
 
       // Update & Draw falling objects
       for (let i = objectsRef.current.length - 1; i >= 0; i--) {
@@ -135,7 +134,7 @@ export function XpCatcherGame({
         // Glowing circular orb
         ctx.save();
         ctx.shadowColor = obj.color;
-        ctx.shadowBlur = 14;
+        ctx.shadowBlur = 16;
 
         ctx.beginPath();
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
@@ -154,8 +153,8 @@ export function XpCatcherGame({
         ctx.restore();
 
         // Check catch at the basket rim
-        const inX = obj.x >= (basketX.current - basketWidth / 2) && obj.x <= (basketX.current + basketWidth / 2);
-        const inY = obj.y >= basketRimY && obj.y <= (basketRimY + basketCatchHeight);
+        const inX = obj.x >= (basketX.current - basketCatchWidth / 2) && obj.x <= (basketX.current + basketCatchWidth / 2);
+        const inY = obj.y >= basketRimY && obj.y <= (basketRimY + 45);
 
         if (inX && inY) {
           const pts = obj.points * multiplier;
@@ -169,7 +168,7 @@ export function XpCatcherGame({
             {
               id: Date.now() + Math.random(),
               x: obj.x,
-              y: basketRimY,
+              y: basketRimY - 10,
               text: `+${pts} ${obj.isVE ? 'VEs' : 'XP'}`
             }
           ]);
@@ -196,7 +195,7 @@ export function XpCatcherGame({
 
   const updateBasketPos = (clientX, rect) => {
     const x = clientX - rect.left;
-    const clamped = Math.max(60, Math.min(rect.width - 60, x));
+    const clamped = Math.max(65, Math.min(rect.width - 65, x));
     basketX.current = clamped;
     setBasketPos(clamped);
   };
@@ -214,9 +213,9 @@ export function XpCatcherGame({
     const handleKeyDown = (e) => {
       if (gameState !== 'playing') return;
       const canvas = canvasRef.current;
-      const maxW = canvas ? canvas.width - 60 : 300;
+      const maxW = canvas ? canvas.width - 65 : 300;
       if (e.key === 'ArrowLeft' || e.key === 'a') {
-        const next = Math.max(60, basketX.current - 26);
+        const next = Math.max(65, basketX.current - 26);
         basketX.current = next;
         setBasketPos(next);
       } else if (e.key === 'ArrowRight' || e.key === 'd') {
@@ -308,26 +307,26 @@ export function XpCatcherGame({
           </div>
         ))}
 
-        {/* EXACT GOLDEN WIRE BASKET */}
+        {/* USER'S EXACT 3D GOLDEN WIRE BASKET */}
         <div 
           style={{
             position: 'absolute',
-            bottom: '8px',
+            bottom: '12px',
             left: `${basketPos}px`,
             transform: 'translateX(-50%)',
-            width: '135px',
-            height: '95px',
+            width: '124px',
+            height: '118px',
             pointerEvents: 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            filter: 'drop-shadow(0 0 16px rgba(245, 176, 65, 0.65))',
-            transition: 'transform 0.05s ease-out'
+            filter: 'drop-shadow(0 0 20px rgba(245, 176, 65, 0.75))',
+            transition: 'transform 0.04s ease-out'
           }}
         >
           <img 
             src="/assets/golden_basket_clean.png" 
-            alt="Exact Golden Basket" 
+            alt="User Golden Basket" 
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             onError={(e) => {
               e.currentTarget.src = '/assets/golden_basket.svg';
