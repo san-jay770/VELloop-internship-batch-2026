@@ -16,18 +16,18 @@ export function ChallengeComplete({
 
   return (
     <div className={styles.completeScreen} role="dialog" aria-modal="true">
-      {/* Top Header */}
-      <div className={styles.completeHeader}>
+      {/* Top Header Icons */}
+      <div className={styles.completeTopBar}>
         <button 
-          className={styles.infoBtn} 
+          className={styles.headerIconBtn} 
           onClick={onBackToDashboard}
           aria-label="Back to dashboard"
         >
-          <ArrowLeft size={22} color="#ffffff" />
+          <ArrowLeft size={22} color="#ffffff" strokeWidth={2} />
         </button>
 
         <button 
-          className={styles.infoBtn} 
+          className={styles.headerIconBtn} 
           onClick={() => {
             if (navigator.share) {
               navigator.share({
@@ -38,117 +38,92 @@ export function ChallengeComplete({
           }}
           aria-label="Share score"
         >
-          <Share2 size={20} color="#ffffff" />
+          <Share2 size={20} color="#ffffff" strokeWidth={2} />
         </button>
       </div>
 
-      {/* Trophy & Heading matching Screen 3 exactly */}
-      <div className={styles.trophyContainer}>
-        <div style={{ textAlign: 'center', marginBottom: '14px' }}>
-          <h2 style={{
-            fontSize: '24px',
-            fontWeight: '900',
-            color: '#ffffff',
-            letterSpacing: '1px',
-            lineHeight: '1.15',
-            textTransform: 'uppercase'
-          }}>
-            CHALLENGE<br />COMPLETE!
-          </h2>
-          <span style={{
-            fontSize: '15px',
-            fontWeight: '500',
-            color: '#e5e7eb',
-            marginTop: '4px',
-            display: 'inline-block'
-          }}>
-            Outstanding!
-          </span>
+      <div className={styles.completeInnerContent}>
+        {/* Title Header */}
+        <div className={styles.titleBlock}>
+          <span className={styles.challengeWord}>CHALLENGE</span>
+          <h2 className={styles.completeWord}>COMPLETE!</h2>
+          <span className={styles.outstandingWord}>Outstanding!</span>
         </div>
 
-        <div className={styles.trophyPedestal} style={{ marginTop: '8px', marginBottom: '20px' }}>
+        {/* Exact Trophy Image uploaded by user */}
+        <div className={styles.trophyWrapper}>
           <img 
-            src="/assets/ref_trophy.png" 
-            alt="Challenge Complete Trophy with Laurel and Star" 
-            style={{ width: '190px', height: '140px', objectFit: 'contain' }}
+            src="/assets/trophy_exact.png" 
+            alt="Challenge Complete Trophy with Gold Star and Laurel" 
+            className={styles.trophyImage}
             onError={(e) => {
-              e.currentTarget.style.display = 'none';
+              e.currentTarget.src = '/assets/trophy_raw.png';
             }}
           />
         </div>
-      </div>
 
-      {/* Final Score Block matching Screen 3 */}
-      <div className={styles.scoreCardBlock}>
-        <span className={styles.finalScoreTitle}>FINAL SCORE</span>
-        <div className={styles.finalScoreNumRow}>
-          <span className={styles.finalScoreNum}>{score}</span>
-          <span className={styles.bestPill}>New Best!</span>
+        {/* Final Score Card */}
+        <div className={styles.scoreContainerCard}>
+          <span className={styles.finalScoreTag}>FINAL SCORE</span>
+          
+          <div className={styles.scoreRow}>
+            <span className={styles.scoreBigNumber}>{score}</span>
+            <span className={styles.newBestPill}>New Best!</span>
+          </div>
+
+          {/* 2 Sub-cards: +30 XP Experience and +12 VEs Your Reward */}
+          <div className={styles.twoColumnRewards}>
+            <div className={styles.rewardSubCard}>
+              <span className={styles.rewardVal}>+{earnedXP} XP</span>
+              <span className={styles.rewardSub}>Experience</span>
+            </div>
+
+            <div className={styles.rewardSubCard}>
+              <span className={styles.rewardVal}>+{earnedVEs} VEs</span>
+              <span className={styles.rewardSub}>Your Reward</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Level Progression */}
+        <div className={styles.levelProgressSection}>
+          <div className={styles.levelLabelsRow}>
+            <span>Level {String(currentLevel).padStart(2, '0')}</span>
+            <span>Level {String(currentLevel + 1).padStart(2, '0')}</span>
+          </div>
+
+          <div className={styles.progBarTrack}>
+            <div 
+              className={styles.progBarFill} 
+              style={{ width: `${pct}%` }} 
+            />
+          </div>
+
+          <div className={styles.progRatioText}>
+            {currentXP.toLocaleString()} / {requiredXP.toLocaleString()} XP
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className={styles.bottomButtonsWrapper}>
+          <button 
+            className={styles.playAgainBtn}
+            onClick={onPlayAgain}
+          >
+            Play Again
+          </button>
+
+          <button 
+            className={styles.backDashboardBtn}
+            onClick={onBackToDashboard}
+          >
+            Back to Dashboard
+          </button>
         </div>
       </div>
 
-      {/* 2-Column Rewards */}
-      <div className={styles.rewardsGrid}>
-        <div className={styles.rewardBox}>
-          <span className={styles.rewardBoxVal}>+{earnedXP} XP</span>
-          <span className={styles.rewardBoxLabel}>Experience</span>
-        </div>
-
-        <div className={styles.rewardBox}>
-          <span className={styles.rewardBoxVal}>+{earnedVEs} VEs</span>
-          <span className={styles.rewardBoxLabel}>Your Reward</span>
-        </div>
-      </div>
-
-      {/* Level Progress */}
-      <div className={styles.resultProgressCard}>
-        <div className={styles.resultProgHeader}>
-          <span>Level {String(currentLevel).padStart(2, '0')}</span>
-          <span>Level {String(currentLevel + 1).padStart(2, '0')}</span>
-        </div>
-
-        <div style={{
-          width: '100%',
-          height: '8px',
-          background: 'rgba(255,255,255,0.08)',
-          borderRadius: '999px',
-          overflow: 'hidden'
-        }}>
-          <div style={{
-            width: `${pct}%`,
-            height: '100%',
-            background: 'linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%)',
-            borderRadius: '999px'
-          }} />
-        </div>
-
-        <div style={{
-          textAlign: 'center',
-          marginTop: '8px',
-          fontSize: '11px',
-          fontWeight: '600',
-          color: '#9ca3af'
-        }}>
-          {currentXP.toLocaleString()} / {requiredXP.toLocaleString()} XP
-        </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className={styles.buttonsGroup}>
-        <button 
-          className={styles.btnPrimaryGold}
-          onClick={onPlayAgain}
-        >
-          Play Again
-        </button>
-
-        <button 
-          className={styles.btnSecondaryDark}
-          onClick={onBackToDashboard}
-        >
-          Back to Dashboard
-        </button>
-      </div>
+      {/* Subtle bottom golden wave motif */}
+      <div className={styles.bottomWaveDecoration} />
     </div>
   );
 }
