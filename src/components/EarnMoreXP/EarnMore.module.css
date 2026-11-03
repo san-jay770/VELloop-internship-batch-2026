@@ -1,0 +1,273 @@
+.earnMoreSection {
+  padding: 0 20px 24px 20px;
+  width: 100%;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.arrowBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 176, 65, 0.4);
+  background: rgba(245, 176, 65, 0.08);
+  color: #f5b041;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.arrowBtn:hover {
+  background: #f5b041;
+  color: #161827;
+  transform: translateX(2px);
+}
+
+.sectionSub {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+/* 6-Item Grid in Dashboard */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.gridItem {
+  background: #1c1e32;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.gridItem:hover {
+  background: #242944;
+  border-color: rgba(245, 176, 65, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.iconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.gridItem:hover .iconBox {
+  transform: scale(1.08);
+}
+
+.itemLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #d1d5db;
+  line-height: 1.2;
+}
+
+/* Level Rewards Card */
+.rewardCard {
+  background: linear-gradient(135deg, #20243d 0%, #161828 100%);
+  border: 1px solid rgba(245, 176, 65, 0.3);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.rewardCard:hover {
+  border-color: rgba(245, 176, 65, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 176, 65, 0.15);
+}
+
+.rewardCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+}
+
+.rewardCardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.rewardCardSub {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.viewRewardsLink {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f5b041;
+  margin-top: 8px;
+}
+
+.rewardCardImg {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(147, 51, 234, 0.35));
+  animation: floatBob 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Full "EARN & LEVEL UP" Modal / View (Screen 4) */
+.fullModalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: #161827;
+  z-index: 200;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  animation: popIn 0.25s ease forwards;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  margin-right: 14px;
+}
+
+.modalTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.modalSub {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.modalBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.earnListCard {
+  background: #1c1e32;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.earnListCard:hover {
+  background: #232742;
+  border-color: rgba(245, 176, 65, 0.35);
+  transform: translateX(2px);
+}
+
+.cardLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cardDesc {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.cardXpBadge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f5b041;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.motivationBanner {
+  margin-top: 16px;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, rgba(245, 176, 65, 0.12) 0%, rgba(22, 24, 39, 0.6) 100%);
+  border: 1px solid rgba(245, 176, 65, 0.3);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.motivationText {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}

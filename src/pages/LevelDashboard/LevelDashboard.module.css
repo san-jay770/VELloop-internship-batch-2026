@@ -1,0 +1,49 @@
+.dashboardPage {
+  min-height: 100vh;
+  background-color: #161827;
+  color: #ffffff;
+  padding-bottom: 90px;
+  position: relative;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Outer layout wrapper */
+.mainContainer {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* Responsive desktop enhancements */
+@media (min-width: 1024px) {
+  .mainContainer {
+    max-width: 1140px;
+    padding: 24px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .leftCol {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .rightCol {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.skeletonWrapper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 520px;
+  margin: 0 auto;
+}

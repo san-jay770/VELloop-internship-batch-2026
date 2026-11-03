@@ -1,0 +1,90 @@
+.boostSection {
+  padding: 0 20px 20px 20px;
+  width: 100%;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.headerIcon {
+  color: #f59e0b;
+}
+
+.boostGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.boostCard {
+  background: #1c1e32;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.boostCard:hover {
+  background: #232742;
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.iconCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.purpleCircle {
+  background: rgba(147, 51, 234, 0.15);
+  color: #a855f7;
+  border: 1px solid rgba(147, 51, 234, 0.3);
+}
+
+.goldCircle {
+  background: rgba(245, 176, 65, 0.15);
+  color: #f5b041;
+  border: 1px solid rgba(245, 176, 65, 0.3);
+}
+
+.flameCircle {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f97316;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.cardLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: #9ca3af;
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+
+.cardValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+}

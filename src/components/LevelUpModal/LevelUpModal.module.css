@@ -1,0 +1,153 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 11, 20, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modalCard {
+  width: 100%;
+  max-width: 420px;
+  background: radial-gradient(120% 120% at 50% 0%, #20243d 0%, #131525 100%);
+  border: 1px solid rgba(245, 176, 65, 0.4);
+  border-radius: 28px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(245, 176, 65, 0.2);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.titleArea {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.levelUpTitle {
+  font-size: 28px;
+  font-weight: 900;
+  color: #f5b041;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(245, 176, 65, 0.5);
+  line-height: 1.1;
+}
+
+.levelUpSub {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* Pedestal & Badge */
+.pedestalWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.badgeCenter {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: floatBob 3s ease-in-out infinite;
+}
+
+.pedestalBase3D {
+  width: 180px;
+  height: 38px;
+  background: linear-gradient(180deg, #d97706 0%, #78350f 100%);
+  border-radius: 50%;
+  box-shadow: 0 12px 25px rgba(245, 176, 65, 0.4);
+  margin-top: -16px;
+}
+
+/* Reward cards */
+.rewardsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.rewardItem {
+  background: #1c1e32;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.rewardAmount {
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.rewardImg {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Perks list */
+.perksList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 0 4px;
+}
+
+.perkRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #d1d5db;
+}
+
+.perkIcon {
+  color: #f5b041;
+}
+
+/* Claim Button */
+.claimBtn {
+  width: 100%;
+  background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
+  color: #12131f;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(245, 176, 65, 0.4);
+  transition: all 0.2s ease;
+}
+
+.claimBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(245, 176, 65, 0.6);
+}
