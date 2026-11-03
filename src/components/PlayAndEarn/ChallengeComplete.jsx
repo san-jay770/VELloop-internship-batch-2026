@@ -16,7 +16,7 @@ export function ChallengeComplete({
 
   return (
     <div className={styles.completeScreen} role="dialog" aria-modal="true">
-      {/* Header */}
+      {/* Top Header */}
       <div className={styles.completeHeader}>
         <button 
           className={styles.infoBtn} 
@@ -42,16 +42,35 @@ export function ChallengeComplete({
         </button>
       </div>
 
-      {/* Trophy & Heading */}
+      {/* Trophy & Heading matching Screen 3 exactly */}
       <div className={styles.trophyContainer}>
-        <h2 className={styles.completeTitle}>CHALLENGE COMPLETE!</h2>
-        <span className={styles.completeSub}>Outstanding!</span>
+        <div style={{ textAlign: 'center', marginBottom: '14px' }}>
+          <h2 style={{
+            fontSize: '24px',
+            fontWeight: '900',
+            color: '#ffffff',
+            letterSpacing: '1px',
+            lineHeight: '1.15',
+            textTransform: 'uppercase'
+          }}>
+            CHALLENGE<br />COMPLETE!
+          </h2>
+          <span style={{
+            fontSize: '15px',
+            fontWeight: '500',
+            color: '#e5e7eb',
+            marginTop: '4px',
+            display: 'inline-block'
+          }}>
+            Outstanding!
+          </span>
+        </div>
 
-        <div className={styles.trophyPedestal} style={{ marginTop: '16px' }}>
+        <div className={styles.trophyPedestal} style={{ marginTop: '8px', marginBottom: '20px' }}>
           <img 
             src="/assets/ref_trophy.png" 
-            alt="Challenge Trophy" 
-            style={{ width: '150px', height: '150px', objectFit: 'contain' }}
+            alt="Challenge Complete Trophy with Laurel and Star" 
+            style={{ width: '190px', height: '140px', objectFit: 'contain' }}
             onError={(e) => {
               e.currentTarget.style.display = 'none';
             }}
@@ -59,7 +78,7 @@ export function ChallengeComplete({
         </div>
       </div>
 
-      {/* Final Score */}
+      {/* Final Score Block matching Screen 3 */}
       <div className={styles.scoreCardBlock}>
         <span className={styles.finalScoreTitle}>FINAL SCORE</span>
         <div className={styles.finalScoreNumRow}>

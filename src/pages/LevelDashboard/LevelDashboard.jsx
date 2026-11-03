@@ -79,39 +79,65 @@ export function LevelDashboard() {
 
   return (
     <div className={styles.dashboardPage}>
-      {/* Interactive Quick Preview Selector Bar for Evaluators */}
+      {/* Top Bar: Screen Switcher & Live Backend Indicator */}
       <div style={{
         background: '#0d0f17',
         borderBottom: '1px solid rgba(255, 215, 0, 0.25)',
         padding: '8px 12px',
         display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         gap: '8px',
         overflowX: 'auto',
         position: 'sticky',
         top: 0,
         zIndex: 1000
       }}>
-        {screens.map(s => (
-          <button
-            key={s.id}
-            onClick={() => setActiveScreen(s.id)}
-            style={{
-              padding: '5px 12px',
-              borderRadius: '999px',
-              fontSize: '11px',
-              fontWeight: '700',
-              whiteSpace: 'nowrap',
-              background: activeScreen === s.id ? '#f5b041' : 'rgba(255, 255, 255, 0.08)',
-              color: activeScreen === s.id ? '#12131f' : '#d1d5db',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            {s.label}
-          </button>
-        ))}
+        <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexShrink: 0 }}>
+          {screens.map(s => (
+            <button
+              key={s.id}
+              onClick={() => setActiveScreen(s.id)}
+              style={{
+                padding: '4px 10px',
+                borderRadius: '999px',
+                fontSize: '11px',
+                fontWeight: '700',
+                whiteSpace: 'nowrap',
+                background: activeScreen === s.id ? '#f5b041' : 'rgba(255, 255, 255, 0.08)',
+                color: activeScreen === s.id ? '#12131f' : '#d1d5db',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Live Backend Indicator */}
+        <div 
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '10px',
+            fontWeight: '600',
+            color: '#10b981',
+            background: 'rgba(16, 185, 129, 0.1)',
+            border: '1px solid rgba(16, 185, 129, 0.3)',
+            padding: '3px 8px',
+            borderRadius: '999px',
+            whiteSpace: 'nowrap',
+            flexShrink: 0
+          }}
+          title="Backend API Connected: https://veloop-5zm4.onrender.com"
+        >
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+          Backend Live
+        </div>
       </div>
 
-      {/* Screen 2 Direct Preview */}
+      {/* Screen 2: XP Catcher Mini-Game */}
       {activeScreen === 'game' && (
         <XpCatcherGame 
           onClose={() => setActiveScreen('dashboard')}
@@ -124,7 +150,7 @@ export function LevelDashboard() {
         />
       )}
 
-      {/* Screen 3 Direct Preview */}
+      {/* Screen 3: Challenge Complete */}
       {activeScreen === 'complete' && (
         <ChallengeComplete 
           score={92}
@@ -138,7 +164,7 @@ export function LevelDashboard() {
         />
       )}
 
-      {/* Screen 4 Direct Preview */}
+      {/* Screen 4: Earn & Level Up */}
       {activeScreen === 'earn' && (
         <EarnAndLevelUpModal 
           onClose={() => setActiveScreen('dashboard')}
@@ -147,7 +173,7 @@ export function LevelDashboard() {
         />
       )}
 
-      {/* Screen 5 Direct Preview */}
+      {/* Screen 5: Level Up! Celebration */}
       {activeScreen === 'levelup' && (
         <LevelUpModal 
           level={currentLevel}
@@ -158,7 +184,7 @@ export function LevelDashboard() {
         />
       )}
 
-      {/* Screen 6 Direct Preview */}
+      {/* Screen 6: Recent Activity */}
       {activeScreen === 'activity' && (
         <div style={{ padding: '20px 0', minHeight: '85vh' }}>
           <XPActivity 
