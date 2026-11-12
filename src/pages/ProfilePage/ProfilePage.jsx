@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLevelData } from '../../hooks/useLevelData';
 import {
@@ -7,14 +7,94 @@ import {
   ArrowLeft,
   Mail,
   ShieldCheck,
-  Info
+  Info,
+  Camera
 } from 'lucide-react';
 import { BottomNav } from '../../components/Navigation/BottomNav';
 import styles from './ProfilePage.module.css';
 
+const MAX_PHOTO_SIZE = 5 * 1024 * 1024;
+const ALLOWED_PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
 export function ProfilePage() {
   const navigate = useNavigate();
   const { profile, isLoading } = useLevelData();
+  const photoInputRef = useRef(null);
+  const [photoUrl, setPhotoUrl] = useState('');
+  const [photoError, setPhotoError] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [saveMessage, setSaveMessage] = useState('');
+
+  useEffect(() => {
+    return () => {
+      if (photoUrl) {
+        URL.revokeObjectURL(photoUrl);
+      }
+    };
+  }, [photoUrl]);
+
+  const handlePhotoSelect = (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+
+    if (!file) return;
+
+    if (!ALLOWED_PHOTO_TYPES.includes(file.type)) {
+      setPhotoError('Choose a JPG, PNG, WebP, or GIF image.');
+      return;
+    }
+
+    if (file.size > MAX_PHOTO_SIZE) {
+      setPhotoError('The photo must be 5 MB or smaller.');
+      return;
+    }
+
+    setPhotoError('');
+    setPhotoUrl(URL.createObjectURL(file));
+  };
+
+  const handleEditProfile = () => {
+    setIsEditing(true);
+    setFieldErrors({});
+    setSaveMessage('');
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setFullName('');
+    setEmail('');
+    setFieldErrors({});
+    setSaveMessage('');
+  };
+
+  const handleSaveChanges = (event) => {
+    event.preventDefault();
+
+    const errors = {};
+    if (!fullName.trim()) {
+      errors.fullName = 'Enter your full name.';
+    }
+    if (!email.trim()) {
+      errors.email = 'Enter your email address.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      errors.email = 'Enter a valid email address.';
+    }
+
+    setSaveMessage('');
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
+    setFieldErrors({});
+    setSaveMessage(
+      'Profile saving is not available yet. Your changes have not been permanently saved.'
+    );
+  };
 
   const handleTabSelect = (tab) => {
     if (tab === 'home' || tab === 'rewards' || tab === 'earn') {
@@ -48,8 +128,49 @@ export function ProfilePage() {
       <main className={styles.content}>
         <section className={styles.profileCard}>
           <div className={styles.avatar}>
-            <UserRound size={38} />
+            {photoUrl ? (
+              <img src={photoUrl} alt="Selected profile photo preview" />
+            ) : (
+              <UserRound size={38} />
+            )}
           </div>
+
+          <div className={styles.photoActions}>
+            <input
+              ref={photoInputRef}
+              className={styles.fileInput}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              onChange={handlePhotoSelect}
+              aria-label="Choose a profile photo"
+            />
+            <button
+              className={styles.secondaryButton}
+              type="button"
+              onClick={() => photoInputRef.current?.click()}
+            >
+              <Camera size={16} />
+              {photoUrl ? 'Change Photo' : 'Upload Photo'}
+            </button>
+            {photoUrl && (
+              <button
+                className={styles.textButton}
+                type="button"
+                onClick={() => {
+                  setPhotoUrl('');
+                  setPhotoError('');
+                }}
+              >
+                Remove Photo
+              </button>
+            )}
+          </div>
+          {photoError && (
+            <p className={styles.fieldError} role="alert">
+              {photoError}
+            </p>
+          )}
+          <p className={styles.photoNote}>Preview only. Photos are not uploaded or saved.</p>
 
           <h2>
             {isLoading
@@ -69,7 +190,18 @@ export function ProfilePage() {
         </section>
 
         <section className={styles.section}>
-          <h2>Account Information</h2>
+          <div className={styles.sectionHeading}>
+            <h2>Account Information</h2>
+            {!isEditing && (
+              <button
+                className={styles.secondaryButton}
+                type="button"
+                onClick={handleEditProfile}
+              >
+                Edit Profile
+              </button>
+            )}
+          </div>
 
           <div className={styles.infoCard}>
             <div className={styles.infoIcon}>
@@ -100,6 +232,75 @@ export function ProfilePage() {
               <strong>Not verified by backend</strong>
             </div>
           </div>
+
+          {isEditing && (
+            <form className={styles.editForm} onSubmit={handleSaveChanges} noValidate>
+              <h3>Edit Profile</h3>
+              <div className={styles.formField}>
+                <label htmlFor="profile-full-name">Full Name</label>
+                <input
+                  id="profile-full-name"
+                  name="fullName"
+                  type="text"
+                  autoComplete="name"
+                  value={fullName}
+                  onChange={(event) => {
+                    setFullName(event.target.value);
+                    setFieldErrors((current) => ({ ...current, fullName: '' }));
+                    setSaveMessage('');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.fullName)}
+                  aria-describedby={fieldErrors.fullName ? 'profile-name-error' : undefined}
+                />
+                {fieldErrors.fullName && (
+                  <span className={styles.fieldError} id="profile-name-error" role="alert">
+                    {fieldErrors.fullName}
+                  </span>
+                )}
+              </div>
+
+              <div className={styles.formField}>
+                <label htmlFor="profile-email">Email</label>
+                <input
+                  id="profile-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    setFieldErrors((current) => ({ ...current, email: '' }));
+                    setSaveMessage('');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.email)}
+                  aria-describedby={fieldErrors.email ? 'profile-email-error' : undefined}
+                />
+                {fieldErrors.email && (
+                  <span className={styles.fieldError} id="profile-email-error" role="alert">
+                    {fieldErrors.email}
+                  </span>
+                )}
+              </div>
+
+              <div className={styles.formActions}>
+                <button className={styles.primaryButton} type="submit">
+                  Save Changes
+                </button>
+                <button
+                  className={styles.secondaryButton}
+                  type="button"
+                  onClick={handleCancelEdit}
+                >
+                  Cancel
+                </button>
+              </div>
+              {saveMessage && (
+                <p className={styles.saveMessage} role="status">
+                  {saveMessage}
+                </p>
+              )}
+            </form>
+          )}
         </section>
 
         <div className={styles.infoNote}>
