@@ -88,10 +88,13 @@ export function LevelDashboard() {
 
   const currentLevel = profile?.currentLevel || 5;
   const currentLevelName = profile?.currentLevelName || "Ascendant";
-  const currentXP = profile?.currentXP || 6420;
-  const nextLevel = profile?.nextLevel || 6;
-  const requiredXP = profile?.requiredXP || 8000;
-  const progressPct = profile?.progressPct || 80;
+  const currentXP = profile?.currentXP ?? 6420;
+  const nextLevel = profile?.nextLevel ?? 6;
+  const requiredXP = profile?.requiredXP ?? 8000;
+  const xpToNext = Math.max(0, requiredXP - currentXP);
+  const progressPct = profile?.progressPct ?? 80;
+  const nextLevelData = levels.find(item => Number(item.level) === Number(nextLevel));
+  const nextLevelReward = nextLevelData?.reward;
 
   return (
     <div className={styles.dashboardPage}>
@@ -132,11 +135,11 @@ export function LevelDashboard() {
       {/* Screen 5: Level Up! Celebration */}
       {activeScreen === 'levelup' && (
         <LevelUpModal
-          level={currentLevel}
-          levelName={currentLevelName}
-          veReward={500}
-          gemReward={25}
-          onClaim={() => setActiveScreen('dashboard')}
+          level={nextLevel}
+          levelName={nextLevelData?.name}
+          reward={nextLevelReward}
+          isRewardPreview
+          onClose={() => setActiveScreen('dashboard')}
         />
       )}
 
@@ -151,6 +154,8 @@ export function LevelDashboard() {
             activities={activities}
             todayXP={todaysBoost.xpEarned}
             todayVE={35}
+            showAll
+            onStartEarning={() => navigate('/Lvl-Dashboard')}
           />
           <BottomNav
             activeTab={activeNavTab}
@@ -174,6 +179,7 @@ export function LevelDashboard() {
                 currentXP={currentXP}
                 nextLevel={nextLevel}
                 requiredXP={requiredXP}
+                xpToNext={xpToNext}
                 progressPct={progressPct}
               />
 
@@ -192,6 +198,9 @@ export function LevelDashboard() {
             <div className={styles.rightCol}>
               <EarnMoreGrid
                 currentLevel={currentLevel}
+                nextLevel={nextLevel}
+                nextLevelName={nextLevelData?.name}
+                nextLevelReward={nextLevelReward}
                 onLaunchGame={() => setActiveScreen('game')}
                 onViewRewards={() => setActiveScreen('levelup')}
                 onClaimFeature={handleClaimFeature}
@@ -201,6 +210,8 @@ export function LevelDashboard() {
                 activities={activities}
                 todayXP={todaysBoost.xpEarned}
                 todayVE={35}
+                onViewAll={() => navigate('/Lvl-Dashboard/activity')}
+                onStartEarning={() => setActiveScreen('earn')}
               />
             </div>
           </main>
@@ -217,9 +228,8 @@ export function LevelDashboard() {
         <LevelUpModal
           level={levelUpData?.toLevel || currentLevel}
           levelName={levelUpData?.name || currentLevelName}
-          veReward={levelUpData?.reward?.amount || 500}
-          gemReward={25}
-          onClaim={dismissLevelUp}
+          reward={levelUpData?.reward}
+          onClose={dismissLevelUp}
         />
       )}
     </div>

@@ -1,0 +1,192 @@
+.page {
+  min-height: 100vh;
+  padding: 28px 20px 110px;
+  background: var(--bg-body);
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+.header {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.backButton {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--gold-primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.headerIcon {
+  margin-left: auto;
+  color: var(--gold-primary);
+}
+
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.balanceCard {
+  padding: 26px;
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, #282c47, #191b2d);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.cardLabel {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.cardLabel svg {
+  color: var(--gold-primary);
+}
+
+.balanceCard > h2 {
+  margin: 24px 0 8px;
+  color: var(--gold-light);
+  font-size: 32px;
+}
+
+.balanceCard > p {
+  max-width: 440px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+  padding-top: 17px;
+  border-top: 1px solid var(--border-card);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.status {
+  color: var(--gold-primary);
+}
+
+.section {
+  margin-top: 30px;
+}
+
+.sectionHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.sectionHeading svg {
+  color: var(--gold-primary);
+}
+
+.emptyState {
+  padding: 35px 20px;
+  text-align: center;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+}
+
+.emptyIcon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 15px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(245, 176, 65, 0.1);
+  color: var(--gold-primary);
+}
+
+.emptyState h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.emptyState p {
+  max-width: 390px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.infoNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.infoNote svg {
+  flex-shrink: 0;
+  color: var(--gold-primary);
+}
+
+.infoNote p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 20px 14px 105px;
+  }
+
+  .balanceCard {
+    padding: 21px;
+  }
+
+  .balanceCard > h2 {
+    font-size: 27px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+}

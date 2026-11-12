@@ -10,6 +10,21 @@
   margin-bottom: 16px;
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.viewAllBtn {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #f5b041;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .title {
   font-size: 14px;
   font-weight: 700;
@@ -151,4 +166,3 @@
   font-size: 11px;
   color: #9ca3af;
 }
-

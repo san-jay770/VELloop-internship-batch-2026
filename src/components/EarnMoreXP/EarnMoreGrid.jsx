@@ -16,7 +16,10 @@ export function EarnMoreGrid({
   onLaunchGame, 
   onViewRewards, 
   onClaimFeature,
-  currentLevel = 5 
+  currentLevel = 5,
+  nextLevel = currentLevel + 1,
+  nextLevelName,
+  nextLevelReward
 }) {
   const [showFullEarnModal, setShowFullEarnModal] = useState(false);
 
@@ -93,7 +96,12 @@ export function EarnMoreGrid({
               onClick={item.action}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && item.action()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  item.action();
+                }
+              }}
             >
               <div className={styles.iconBox} style={{ backgroundColor: item.bg }}>
                 <IconComponent size={22} color="#ffffff" />
@@ -110,14 +118,24 @@ export function EarnMoreGrid({
         onClick={onViewRewards}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => e.key === 'Enter' && onViewRewards && onViewRewards()}
+        onKeyDown={(e) => {
+          if ((e.key === 'Enter' || e.key === ' ') && onViewRewards) {
+            e.preventDefault();
+            onViewRewards();
+          }
+        }}
       >
         <div className={styles.rewardCardContent}>
           <h3 className={styles.rewardCardTitle}>
-            Level {String(currentLevel).padStart(2, '0')} Rewards
+            Level {String(nextLevel).padStart(2, '0')} Reward
           </h3>
           <p className={styles.rewardCardSub}>
-            Amazing rewards await you!
+            {nextLevelReward &&
+            typeof nextLevelReward.type === 'string' &&
+            typeof nextLevelReward.amount === 'number' &&
+            Number.isFinite(nextLevelReward.amount)
+              ? `${nextLevelReward.amount.toLocaleString()} ${nextLevelReward.type}${nextLevelName ? ` at ${nextLevelName}` : ''}`
+              : 'Reward details are not available.'}
           </p>
           <div className={styles.viewRewardsLink}>
             <span>View Rewards</span>

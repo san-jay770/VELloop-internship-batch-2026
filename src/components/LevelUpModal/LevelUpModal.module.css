@@ -80,7 +80,7 @@
 /* Reward cards */
 .rewardsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 12px;
   width: 100%;
   margin-bottom: 20px;
@@ -96,6 +96,8 @@
   align-items: center;
   text-align: center;
   gap: 8px;
+  min-height: 100px;
+  justify-content: center;
 }
 
 .rewardAmount {

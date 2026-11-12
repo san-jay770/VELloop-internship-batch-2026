@@ -1,0 +1,164 @@
+
+.page {
+  min-height: 100vh;
+  padding: 28px 20px 110px;
+  background: var(--bg-body);
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+.header {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.backButton {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--gold-primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.headerIcon {
+  margin-left: auto;
+  color: var(--gold-primary);
+}
+
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.profileCard {
+  padding: 30px 22px;
+  text-align: center;
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, #282c47, #191b2d);
+}
+
+.avatar {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--gold-primary);
+  background: rgba(245, 176, 65, 0.12);
+  color: var(--gold-primary);
+}
+
+.profileCard h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.profileCard p {
+  max-width: 420px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.section {
+  margin-top: 30px;
+}
+
+.section > h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+}
+
+.infoCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  padding: 17px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.infoIcon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(245, 176, 65, 0.1);
+  color: var(--gold-primary);
+}
+
+.infoCard span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.infoCard strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.infoNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.infoNote svg {
+  flex-shrink: 0;
+  color: var(--gold-primary);
+}
+
+.infoNote p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 20px 14px 105px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .profileCard {
+    padding: 25px 17px;
+  }
+}

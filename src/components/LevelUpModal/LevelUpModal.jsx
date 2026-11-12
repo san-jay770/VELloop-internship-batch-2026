@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
-import { TrendingUp, Target, Gift } from 'lucide-react';
+import { Gift } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import styles from './LevelUpModal.module.css';
 
 export function LevelUpModal({ 
-  level = 5, 
-  levelName = "Ascendant",
-  veReward = 500, 
-  gemReward = 25, 
-  onClaim,
+  level,
+  levelName,
+  reward,
+  onClose,
+  isRewardPreview = false,
   isStandalone = false 
 }) {
   useEffect(() => {
-    if (!isStandalone) {
+    if (!isStandalone && !isRewardPreview) {
       try {
         confetti({
           particleCount: 80,
@@ -22,74 +22,50 @@ export function LevelUpModal({
         });
       } catch {}
     }
-  }, [isStandalone]);
+  }, [isStandalone, isRewardPreview]);
+
+  const hasReward = reward &&
+    typeof reward.type === 'string' &&
+    typeof reward.amount === 'number' &&
+    Number.isFinite(reward.amount);
+  const rewardLabel = hasReward
+    ? `${Number(reward.amount).toLocaleString()} ${reward.type}`
+    : 'Reward details are not available for this level.';
 
   const content = (
     <div className={styles.modalCard} style={isStandalone ? { maxWidth: '100%', background: 'transparent', border: 'none', boxShadow: 'none', padding: '16px 14px' } : {}}>
       <div className={styles.titleArea}>
-        <h2 className={styles.levelUpTitle}>LEVEL UP!</h2>
-        <p className={styles.levelUpSub}>You've reached</p>
+        <h2 className={styles.levelUpTitle}>{isRewardPreview ? 'NEXT LEVEL REWARD' : 'LEVEL UP!'}</h2>
+        <p className={styles.levelUpSub}>
+          {isRewardPreview
+            ? `Reach Level ${String(level).padStart(2, '0')}${levelName ? ` · ${levelName}` : ''} to unlock`
+            : `You've reached Level ${String(level).padStart(2, '0')}${levelName ? ` · ${levelName}` : ''}`}
+        </p>
       </div>
 
-      {/* Central Hexagon Badge & 3D Pedestal */}
       <div className={styles.pedestalWrapper}>
         <img 
-          src="/assets/ref_level_up_pedestal.png" 
-          alt={`Level ${level} Celebration Pedestal`}
+          src={isRewardPreview ? '/assets/ref_treasure_chest.png' : '/assets/ref_level_up_pedestal.png'}
+          alt={isRewardPreview ? `Level ${level} reward chest` : `Level ${level} Celebration Pedestal`}
           style={{ width: '180px', height: '170px', objectFit: 'contain' }}
           onError={(e) => {
-            e.currentTarget.src = '/assets/lvl-5.svg';
+            e.currentTarget.src = isRewardPreview ? '/assets/safe-1.svg' : '/assets/lvl-5.svg';
           }}
         />
       </div>
 
-      {/* 2-Column Rewards */}
       <div className={styles.rewardsGrid}>
         <div className={styles.rewardItem}>
-          <span className={styles.rewardAmount}>+{veReward} VEs</span>
-          <img 
-            src="/assets/ref_coins_stack.png" 
-            alt="VE Coins Stack" 
-            className={styles.rewardImg}
-            onError={(e) => { e.currentTarget.src = '/assets/gold.svg'; }}
-          />
-        </div>
-
-        <div className={styles.rewardItem}>
-          <span className={styles.rewardAmount}>+{gemReward} Gems</span>
-          <img 
-            src="/assets/ref_gems_stack.png" 
-            alt="Purple Gems" 
-            className={styles.rewardImg}
-            onError={(e) => { e.currentTarget.src = '/assets/gem.svg'; }}
-          />
+          <Gift size={26} className={styles.perkIcon} />
+          <span className={styles.rewardAmount}>{rewardLabel}</span>
         </div>
       </div>
 
-      {/* Unlocked Perks */}
-      <div className={styles.perksList}>
-        <div className={styles.perkRow}>
-          <TrendingUp size={18} className={styles.perkIcon} />
-          <span>Higher daily XP limit</span>
-        </div>
-
-        <div className={styles.perkRow}>
-          <Target size={18} className={styles.perkIcon} />
-          <span>Access to new challenges</span>
-        </div>
-
-        <div className={styles.perkRow}>
-          <Gift size={18} className={styles.perkIcon} />
-          <span>Better reward opportunities</span>
-        </div>
-      </div>
-
-      {/* Claim Rewards Button */}
       <button 
         className={styles.claimBtn}
-        onClick={onClaim}
+        onClick={onClose}
       >
-        Claim Rewards
+        {isRewardPreview ? 'Close' : 'Continue'}
       </button>
     </div>
   );

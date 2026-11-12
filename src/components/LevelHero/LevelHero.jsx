@@ -8,6 +8,7 @@ export function LevelHero({
   currentXP = 6420, 
   nextLevel = 6, 
   requiredXP = 8000, 
+  xpToNext = Math.max(0, requiredXP - currentXP),
   progressPct = 80,
   userName = "VeLooper" 
 }) {
@@ -37,10 +38,11 @@ export function LevelHero({
         <XPProgressBar 
           currentXP={currentXP} 
           requiredXP={requiredXP} 
+          xpToNext={xpToNext}
+          nextLevel={nextLevel}
           progressPct={progressPct} 
         />
       </div>
     </section>
   );
 }
-

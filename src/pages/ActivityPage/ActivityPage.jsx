@@ -41,8 +41,9 @@ export function ActivityPage() {
         activities={activities}
         todayXP={todaysBoost.xpEarned}
         todayVE={35}
+        showAll
+        onStartEarning={() => navigate('/Lvl-Dashboard')}
       />
     </div>
   );
 }
-

@@ -112,7 +112,21 @@ export const api = {
         method: 'POST',
         body: JSON.stringify({ score })
       });
-      if (!res.ok) throw new Error('Failed to record game session');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => null);
+        const responseMessage = typeof errorData?.message === 'string'
+          ? errorData.message
+          : '';
+
+        if (
+          res.status === 403 &&
+          responseMessage.trim().toLowerCase() === 'come back later to claim this again.'
+        ) {
+          throw new Error('You recently claimed an XP Catcher reward. Please come back later to play again.');
+        }
+
+        throw new Error(responseMessage || 'Failed to record game session');
+      }
       const data = await res.json();
       console.log('✅ Successfully recorded game session on backend:', data);
       return data;

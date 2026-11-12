@@ -8,9 +8,17 @@ import {
   Coins, 
   ChevronRight 
 } from 'lucide-react';
+import { EmptyState } from '../Common/CommonComponents';
 import styles from './XPActivity.module.css';
 
-export function XPActivity({ activities = [], todayXP = 215, todayVE = 35 }) {
+export function XPActivity({
+  activities = [],
+  todayXP = 215,
+  todayVE = 35,
+  showAll = false,
+  onViewAll,
+  onStartEarning
+}) {
   const [filterType, setFilterType] = useState('all');
 
   const getIconForType = (type) => {
@@ -39,22 +47,30 @@ export function XPActivity({ activities = [], todayXP = 215, todayVE = 35 }) {
     <section className={styles.activitySection} aria-label="Recent Activity">
       <div className={styles.headerRow}>
         <h2 className={styles.title}>RECENT ACTIVITY</h2>
-        <button 
-          className={styles.filterBtn}
-          aria-label="Filter activities"
-          onClick={() => {
-            const types = ['all', 'game', 'daily_tasks', 'refer_earn'];
-            const nextIdx = (types.indexOf(filterType) + 1) % types.length;
-            setFilterType(types[nextIdx]);
-          }}
-          title={`Filter: ${filterType}`}
-        >
-          <Filter size={16} />
-        </button>
+        <div className={styles.headerActions}>
+          {onViewAll && (
+            <button className={styles.viewAllBtn} onClick={onViewAll}>
+              View all
+              <ChevronRight size={16} />
+            </button>
+          )}
+          <button
+            className={styles.filterBtn}
+            aria-label="Filter activities"
+            onClick={() => {
+              const types = ['all', 'game', 'daily_tasks', 'refer_earn'];
+              const nextIdx = (types.indexOf(filterType) + 1) % types.length;
+              setFilterType(types[nextIdx]);
+            }}
+            title={`Filter: ${filterType}`}
+          >
+            <Filter size={16} />
+          </button>
+        </div>
       </div>
 
       <div className={styles.activityList}>
-        {filtered.slice(0, 5).map(item => {
+        {(showAll ? filtered : filtered.slice(0, 5)).map(item => {
           const conf = getIconForType(item.type);
           const IconComp = conf.icon;
           const isVE = item.unit === 'VEs' || (item.label && item.label.includes('VE'));
@@ -80,42 +96,46 @@ export function XPActivity({ activities = [], todayXP = 215, todayVE = 35 }) {
             </div>
           );
         })}
+        {filtered.length === 0 && (
+          <EmptyState
+            message={activities.length === 0 ? 'Your XP journey starts here.' : 'No XP activity matches this filter.'}
+            onCta={onStartEarning}
+          />
+        )}
       </div>
 
-      {/* Today's Summary Card */}
-      <div className={styles.summaryCard}>
-        <h3 className={styles.summaryTitle}>Today's Summary</h3>
-        <div className={styles.summaryGrid}>
-          {/* XP Total */}
-          <div className={styles.summaryItem}>
-            <div 
-              className={styles.summaryBadgeIcon}
-              style={{ background: 'rgba(147, 51, 234, 0.2)', color: '#c084fc', border: '1px solid rgba(147, 51, 234, 0.3)' }}
-            >
-              XP
+      {activities.length > 0 && (
+        <div className={styles.summaryCard}>
+          <h3 className={styles.summaryTitle}>Today's Summary</h3>
+          <div className={styles.summaryGrid}>
+            <div className={styles.summaryItem}>
+              <div
+                className={styles.summaryBadgeIcon}
+                style={{ background: 'rgba(147, 51, 234, 0.2)', color: '#c084fc', border: '1px solid rgba(147, 51, 234, 0.3)' }}
+              >
+                XP
+              </div>
+              <div className={styles.summaryDetails}>
+                <span className={styles.summaryValue}>{todayXP} XP</span>
+                <span className={styles.summaryLabel}>Total Earned</span>
+              </div>
             </div>
-            <div className={styles.summaryDetails}>
-              <span className={styles.summaryValue}>{todayXP} XP</span>
-              <span className={styles.summaryLabel}>Total Earned</span>
-            </div>
-          </div>
 
-          {/* VEs Total */}
-          <div className={styles.summaryItem}>
-            <div 
-              className={styles.summaryBadgeIcon}
-              style={{ background: 'rgba(245, 176, 65, 0.2)', color: '#fcd34d', border: '1px solid rgba(245, 176, 65, 0.3)' }}
-            >
-              V
-            </div>
-            <div className={styles.summaryDetails}>
-              <span className={styles.summaryValue}>{todayVE} VEs</span>
-              <span className={styles.summaryLabel}>Total Earned</span>
+            <div className={styles.summaryItem}>
+              <div
+                className={styles.summaryBadgeIcon}
+                style={{ background: 'rgba(245, 176, 65, 0.2)', color: '#fcd34d', border: '1px solid rgba(245, 176, 65, 0.3)' }}
+              >
+                V
+              </div>
+              <div className={styles.summaryDetails}>
+                <span className={styles.summaryValue}>{todayVE} VEs</span>
+                <span className={styles.summaryLabel}>Total Earned</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
-
