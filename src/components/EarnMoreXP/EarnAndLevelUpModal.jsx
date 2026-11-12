@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { 
   ArrowLeft, 
   Play, 
@@ -13,19 +13,22 @@ import {
 } from 'lucide-react';
 import styles from './EarnMore.module.css';
 
-export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature }) {
+export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isStandalone = false }) {
   const [claimedMap, setClaimedMap] = useState({});
+  const [pendingMap, setPendingMap] = useState({});
   const [claimToast, setClaimToast] = useState('');
+  const [claimToastType, setClaimToastType] = useState('success');
+  const pendingClaims = useRef(new Set());
 
   const items = [
     {
       id: 'watch_earn',
       title: 'Watch & Earn',
       desc: 'Watch ads and earn',
-      reward: '+50 XP',
+      reward: '+15 XP',
       icon: Play,
       bg: '#9333ea',
-      action: () => handleClaim('watch_earn', 50)
+      action: () => handleClaim('watch_earn')
     },
     {
       id: 'daily_tasks',
@@ -34,16 +37,16 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature }) {
       reward: '+30 XP',
       icon: ClipboardCheck,
       bg: '#10b981',
-      action: () => handleClaim('daily_tasks', 30)
+      action: () => handleClaim('daily_tasks')
     },
     {
       id: 'refer_earn',
       title: 'Refer & Earn',
       desc: 'Invite friends & earn',
-      reward: '+100 XP',
+      reward: '+50 XP',
       icon: Users,
       bg: '#f59e0b',
-      action: () => handleClaim('refer_earn', 100)
+      action: () => handleClaim('refer_earn')
     },
     {
       id: 'mini_games',
@@ -61,7 +64,8 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature }) {
       reward: '+25 XP',
       icon: Flame,
       bg: '#ef4444',
-      action: () => handleClaim('streak_bonus', 25)
+      disabled: true,
+      action: () => {}
     },
     {
       id: 'xp_catcher',
@@ -74,16 +78,43 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature }) {
     }
   ];
 
-  const handleClaim = (key, xp) => {
-    if (claimedMap[key]) return;
-    setClaimedMap(prev => ({ ...prev, [key]: true }));
-    setClaimToast(`Claimed +${xp} XP!`);
-    setTimeout(() => setClaimToast(''), 2500);
-    if (onClaimFeature) onClaimFeature(key);
+  const handleClaim = async (key) => {
+    if (claimedMap[key] || pendingClaims.current.has(key)) return;
+
+    pendingClaims.current.add(key);
+    setPendingMap(prev => ({ ...prev, [key]: true }));
+    setClaimToast('');
+
+    try {
+      if (typeof onClaimFeature !== 'function') {
+        throw new Error('Claim service is unavailable.');
+      }
+
+      const result = await onClaimFeature(key);
+      const xpAdded = Number(result?.xpAdded);
+
+      if (result?.success !== true || !Number.isFinite(xpAdded) || xpAdded <= 0) {
+        throw new Error('Backend did not confirm this claim.');
+      }
+
+      setClaimedMap(prev => ({ ...prev, [key]: true }));
+      setClaimToast(`Claimed +${xpAdded} XP!`);
+      setClaimToastType('success');
+    } catch (error) {
+      setClaimToast(error?.message || 'Claim failed. Please try again.');
+      setClaimToastType('error');
+    } finally {
+      pendingClaims.current.delete(key);
+      setPendingMap(prev => ({ ...prev, [key]: false }));
+    }
   };
 
+  const containerStyle = isStandalone 
+    ? { position: 'relative', minHeight: '100%', zIndex: 1, background: '#090a12', animation: 'none' } 
+    : {};
+
   return (
-    <div className={styles.fullModalOverlay} role="dialog" aria-modal="true">
+    <div className={styles.fullModalOverlay} style={containerStyle} role="dialog" aria-modal="true">
       <div className={styles.modalHeader}>
         <button 
           className={styles.backBtn}
@@ -104,11 +135,11 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature }) {
       <div className={styles.modalBody}>
         {claimToast && (
           <div style={{
-            background: 'rgba(16, 185, 129, 0.2)',
-            border: '1px solid #10b981',
+            background: claimToastType === 'success' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.15)',
+            border: `1px solid ${claimToastType === 'success' ? '#10b981' : '#ef4444'}`,
             borderRadius: '12px',
             padding: '10px 16px',
-            color: '#34d399',
+            color: claimToastType === 'success' ? '#34d399' : '#f87171',
             fontSize: '13px',
             fontWeight: '600',
             textAlign: 'center',
@@ -117,22 +148,32 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature }) {
             justifyContent: 'center',
             gap: '8px'
           }}>
-            <CheckCircle2 size={16} />
+            {claimToastType === 'success' ? <CheckCircle2 size={16} /> : null}
             {claimToast}
           </div>
         )}
 
         {items.map(item => {
           const IconComp = item.icon;
-          const isClaimed = claimedMap[item.id];
+          const isClaimed = Boolean(claimedMap[item.id]);
+          const isPending = Boolean(pendingMap[item.id]);
+          const isDisabled = Boolean(item.disabled || isClaimed || isPending);
           return (
             <div 
               key={item.id}
               className={styles.earnListCard}
-              onClick={item.action}
+              onClick={() => {
+                if (!isDisabled) item.action();
+              }}
               role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && item.action()}
+              aria-disabled={isDisabled}
+              tabIndex={isDisabled ? -1 : 0}
+              onKeyDown={(e) => {
+                if ((e.key === 'Enter' || e.key === ' ') && !isDisabled) {
+                  e.preventDefault();
+                  item.action();
+                }
+              }}
             >
               <div className={styles.cardLeft}>
                 <div className={styles.iconBox} style={{ backgroundColor: item.bg }}>
@@ -145,8 +186,12 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature }) {
               </div>
 
               <div className={styles.cardXpBadge}>
-                {isClaimed ? (
-                  <span style={{ color: '#10b981' }}>Done ✓</span>
+                {isPending ? (
+                  <span>Claiming...</span>
+                ) : isClaimed ? (
+                  <span style={{ color: '#10b981' }}>Done ?</span>
+                ) : item.disabled ? (
+                  <span>Coming soon</span>
                 ) : (
                   <span>{item.reward}</span>
                 )}
@@ -167,4 +212,3 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature }) {
     </div>
   );
 }
-

@@ -4,18 +4,24 @@ import styles from './Game.module.css';
 
 export function ChallengeComplete({
   score = 92,
-  earnedXP = 30,
-  earnedVEs = 12,
+  earnedXP,
+  earnedVEs,
+  isNewBest = false,
   currentLevel = 5,
   currentXP = 6420,
   requiredXP = 8000,
   onPlayAgain,
-  onBackToDashboard
+  onBackToDashboard,
+  isStandalone = false
 }) {
   const pct = Math.min(100, Math.round((currentXP / requiredXP) * 100));
 
+  const screenStyle = isStandalone 
+    ? { position: 'relative', width: '100%', minHeight: '100%', zIndex: 1, backgroundColor: '#0b0c14' } 
+    : {};
+
   return (
-    <div className={styles.completeScreen} role="dialog" aria-modal="true">
+    <div className={styles.completeScreen} style={screenStyle} role="dialog" aria-modal="true">
       {/* Top Header Icons */}
       <div className={styles.completeTopBar}>
         <button 
@@ -68,21 +74,26 @@ export function ChallengeComplete({
           
           <div className={styles.scoreRow}>
             <span className={styles.scoreBigNumber}>{score}</span>
-            <span className={styles.newBestPill}>New Best!</span>
+            {isNewBest && <span className={styles.newBestPill}>New Best!</span>}
           </div>
 
-          {/* 2 Sub-cards: +30 XP Experience and +12 VEs Your Reward */}
-          <div className={styles.twoColumnRewards}>
-            <div className={styles.rewardSubCard}>
-              <span className={styles.rewardVal}>+{earnedXP} XP</span>
-              <span className={styles.rewardSub}>Experience</span>
-            </div>
+          {(Number(earnedXP) > 0 || Number(earnedVEs) > 0) && (
+            <div className={styles.twoColumnRewards}>
+              {Number(earnedXP) > 0 && (
+                <div className={styles.rewardSubCard}>
+                  <span className={styles.rewardVal}>+{earnedXP} XP</span>
+                  <span className={styles.rewardSub}>Experience</span>
+                </div>
+              )}
 
-            <div className={styles.rewardSubCard}>
-              <span className={styles.rewardVal}>+{earnedVEs} VEs</span>
-              <span className={styles.rewardSub}>Your Reward</span>
+              {Number(earnedVEs) > 0 && (
+                <div className={styles.rewardSubCard}>
+                  <span className={styles.rewardVal}>+{earnedVEs} VEs</span>
+                  <span className={styles.rewardSub}>Your Reward</span>
+                </div>
+              )}
             </div>
-          </div>
+          )}
         </div>
 
         {/* Level Progression */}

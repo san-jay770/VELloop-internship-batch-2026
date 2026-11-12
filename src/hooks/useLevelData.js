@@ -44,43 +44,42 @@ export function useLevelData() {
   const handleGameCompleted = async (score) => {
     try {
       const result = await api.submitGameSession(score);
-      
-      // Update profile XP if provided by backend
+      const earnedXP = Number(result?.reward?.xp);
+
+      if (!result || typeof result !== 'object' || !Number.isFinite(earnedXP) || earnedXP <= 0) {
+        throw new Error('Game reward was not confirmed by the backend.');
+      }
+
       if (result.profile) {
         setProfile(result.profile);
       } else {
-        // Optimistic local update
         setProfile(prev => {
           if (!prev) return prev;
-          const newXP = prev.currentXP + (result.reward?.xp || 25);
+          const newXP = prev.currentXP + earnedXP;
           const req = prev.requiredXP || 8000;
-          const pct = Math.min(100, Math.round((newXP / req) * 100));
           return {
             ...prev,
             currentXP: newXP,
             xpToNext: Math.max(0, req - newXP),
-            progressPct: pct
+            progressPct: Math.min(100, Math.round((newXP / req) * 100))
           };
         });
       }
 
-      // Add activity
       const newAct = result.activity || {
         id: `game-${Date.now()}`,
         type: 'game',
         label: 'Mini-Game Challenge | VE Coin Catch',
-        xpDelta: result.reward?.xp || 25,
+        xpDelta: earnedXP,
         timestamp: new Date().toISOString()
       };
       setActivities(prev => [newAct, ...prev]);
 
-      // Update today's boost
       setTodaysBoost(prev => ({
         ...prev,
-        xpEarned: prev.xpEarned + (result.reward?.xp || 25)
+        xpEarned: prev.xpEarned + earnedXP
       }));
 
-      // Check level-up
       if (result.levelUp) {
         setLevelUpData(result.levelUp);
       }
@@ -88,43 +87,56 @@ export function useLevelData() {
       return result;
     } catch (err) {
       console.error('Error recording game session:', err);
-      return null;
+      throw err;
     }
   };
 
   // Claim feature
   const handleClaimFeature = async (featureKey) => {
     const res = await api.claimEarningFeature(featureKey);
-    if (res.success || res.xpAdded) {
-      const added = res.xpAdded || 30;
-      setProfile(prev => {
-        if (!prev) return prev;
-        const newXP = prev.currentXP + added;
-        const req = prev.requiredXP || 8000;
-        return {
-          ...prev,
-          currentXP: newXP,
-          xpToNext: Math.max(0, req - newXP),
-          progressPct: Math.min(100, Math.round((newXP / req) * 100))
-        };
-      });
+    const added = Number(res?.xpAwarded ?? res?.xpAdded);
 
-      setTodaysBoost(prev => ({
-        ...prev,
-        xpEarned: prev.xpEarned + added
-      }));
-
-      setActivities(prev => [
-        {
-          id: `claim-${Date.now()}`,
-          type: featureKey,
-          label: `Completed | ${featureKey.replace('_', ' ').toUpperCase()}`,
-          xpDelta: added,
-          timestamp: new Date().toISOString()
-        },
-        ...prev
-      ]);
+    if (!Number.isFinite(added) || added <= 0) {
+      throw new Error('Claim was not confirmed by the backend.');
     }
+
+    setProfile(prev => {
+      if (!prev) return prev;
+
+      const serverProfile = res.profile || {};
+      const newXP = Number(serverProfile.currentXP ?? (prev.currentXP + added));
+      const req = Number(serverProfile.requiredXP ?? prev.requiredXP ?? 8000);
+
+      return {
+        ...prev,
+        ...serverProfile,
+        currentXP: newXP,
+        requiredXP: req,
+        xpToNext: Number(serverProfile.xpToNext ?? Math.max(0, req - newXP)),
+        progressPct: Number(serverProfile.progressPct ?? Math.min(100, Math.round((newXP / req) * 100)))
+      };
+    });
+
+    setTodaysBoost(prev => ({
+      ...prev,
+      xpEarned: Number(prev.xpEarned || 0) + added
+    }));
+
+    setActivities(prev => [
+      res.activity || {
+        id: `claim-${Date.now()}`,
+        type: featureKey,
+        label: `Completed | ${featureKey.replace('_', ' ').toUpperCase()}`,
+        xpDelta: added,
+        timestamp: new Date().toISOString()
+      },
+      ...prev
+    ]);
+
+    if (res.levelUp) {
+      setLevelUpData(res.levelUp);
+    }
+
     return res;
   };
 

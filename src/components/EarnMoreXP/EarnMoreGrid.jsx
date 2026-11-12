@@ -143,9 +143,7 @@ export function EarnMoreGrid({
             setShowFullEarnModal(false);
             if (onLaunchGame) onLaunchGame();
           }}
-          onClaimFeature={(key) => {
-            if (onClaimFeature) onClaimFeature(key);
-          }}
+          onClaimFeature={(key) => onClaimFeature?.(key)}
         />
       )}
     </section>

@@ -5,7 +5,7 @@ import {
   earningOpportunities
 } from '../data/initialData';
 
-const BASE_URL = 'https://veloop-5zm4.onrender.com';
+const BASE_URL = '';
 const TIMEOUT_MS = 10000;
 
 let backendOnline = true;
@@ -23,7 +23,7 @@ async function fetchWithTimeout(url, options = {}) {
       }
     });
     clearTimeout(timeoutId);
-    backendOnline = true;
+    backendOnline = response.ok;
     return response;
   } catch (error) {
     clearTimeout(timeoutId);
@@ -101,8 +101,8 @@ export const api = {
       if (!res.ok) throw new Error('Failed to claim reward');
       return await res.json();
     } catch (err) {
-      console.warn('Simulated local claim due to backend network:', err.message);
-      return { success: true, claimedKey: featureKey, xpAdded: 30 };
+      console.warn('Claim request failed:', err.message);
+      throw err;
     }
   },
 
@@ -117,15 +117,8 @@ export const api = {
       console.log('✅ Successfully recorded game session on backend:', data);
       return data;
     } catch (err) {
-      console.warn('Local simulation of game score:', err.message);
-      const earnedXP = Math.round(score * 0.35);
-      const earnedVE = Math.round(score * 0.15);
-      return {
-        score,
-        reward: { xp: earnedXP, ve: earnedVE },
-        playsRemainingToday: 3,
-        levelUp: null
-      };
+      console.warn('Game session submission failed:', err.message);
+      throw err;
     }
   }
 };

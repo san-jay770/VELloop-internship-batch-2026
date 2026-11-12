@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -9,6 +10,13 @@ export default defineConfig({
     open: false,
     allowedHosts: [
       'coauthor-handstand-reference.ngrok-free.dev'
-    ]
+    ],
+    proxy: {
+      '/api': {
+        target: 'https://veloop-5zm4.onrender.com',
+        changeOrigin: true,
+        secure: true
+      }
+    }
   }
 });

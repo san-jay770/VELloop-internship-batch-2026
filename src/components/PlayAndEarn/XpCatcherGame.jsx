@@ -9,21 +9,41 @@ export function XpCatcherGame({
   onGameFinished, 
   currentLevel = 5,
   currentXP = 6420,
-  requiredXP = 8000 
+  requiredXP = 8000,
+  isStandalone = false 
 }) {
   const [gameState, setGameState] = useState('playing'); // 'playing' | 'completed'
-  const [timeLeft, setTimeLeft] = useState(20);
-  const [score, setScore] = useState(120);
-  const [earnedVEs, setEarnedVEs] = useState(5);
-  const [multiplier, setMultiplier] = useState(2);
-  const [floatPops, setFloatPops] = useState([]);
+  const [timeLeft, setTimeLeft] = useState(18); // Exact 00:18 from reference screenshot
+  const [score, setScore] = useState(120); // Exact 120 from reference screenshot
+  const [multiplier, setMultiplier] = useState(2); // Exact 2X Multiplier from reference screenshot
+  const [floatPops, setFloatPops] = useState([
+    { id: 'pop-init', x: 250, y: 310, text: '+10 XP' } // Exact +10 XP floating tag from reference screenshot
+  ]);
   const [showInfo, setShowInfo] = useState(false);
   const [basketPos, setBasketPos] = useState(170);
+  const [gameResult, setGameResult] = useState(null);
+  const [gameError, setGameError] = useState('');
 
   const canvasRef = useRef(null);
+  const scoreRef = useRef(120);
+  const finishStartedRef = useRef(false);
   const basketX = useRef(170);
   const animFrameId = useRef(null);
-  const objectsRef = useRef([]);
+  const objectsRef = useRef([
+    // Pre-populate exact falling positions visible in Screen 2:
+    { x: 100, y: 90, speed: 120, type: 'xp', label: 'XP', color: '#9333ea', radius: 15, points: 10, isVE: false },
+    { x: 170, y: 70, speed: 100, type: 've', label: 'V', color: '#f59e0b', radius: 14, points: 5, isVE: true },
+    { x: 250, y: 80, speed: 110, type: 'gem', label: '◆', color: '#10b981', radius: 13, points: 20, isVE: false },
+    { x: 160, y: 140, speed: 130, type: 'gem', label: '◆', color: '#10b981', radius: 13, points: 20, isVE: false },
+    { x: 220, y: 120, speed: 115, type: 'xp', label: 'XP', color: '#9333ea', radius: 15, points: 10, isVE: false },
+    { x: 80, y: 170, speed: 105, type: 've', label: 'V', color: '#f59e0b', radius: 14, points: 5, isVE: true },
+    { x: 195, y: 180, speed: 125, type: 'xp', label: 'XP', color: '#9333ea', radius: 15, points: 10, isVE: false },
+    { x: 260, y: 165, speed: 120, type: 've', label: 'V', color: '#f59e0b', radius: 14, points: 5, isVE: true },
+    { x: 80, y: 240, speed: 110, type: 'gem', label: '◆', color: '#10b981', radius: 13, points: 20, isVE: false },
+    { x: 140, y: 220, speed: 115, type: 've', label: 'V', color: '#f59e0b', radius: 14, points: 5, isVE: true },
+    { x: 210, y: 235, speed: 120, type: 've', label: 'V', color: '#f59e0b', radius: 14, points: 5, isVE: true },
+    { x: 270, y: 220, speed: 125, type: 'xp', label: 'XP', color: '#9333ea', radius: 15, points: 10, isVE: false }
+  ]);
   const lastSpawnRef = useRef(0);
 
   const triggerWinParticles = useCallback(() => {
@@ -42,34 +62,57 @@ export function XpCatcherGame({
     if (gameState !== 'playing') return;
 
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          finishGame();
-          return 0;
-        }
-        return prev - 1;
-      });
+      setTimeLeft(prev => Math.max(0, prev - 1));
     }, 1000);
 
     return () => clearInterval(timer);
   }, [gameState]);
 
-  const finishGame = () => {
-    setGameState('completed');
-    triggerWinParticles();
-    if (onGameFinished) {
-      onGameFinished(score);
+  useEffect(() => {
+    if (gameState === 'playing' && timeLeft === 0) {
+      finishGame();
+    }
+  }, [timeLeft, gameState]);
+
+  const finishGame = async () => {
+    if (finishStartedRef.current || gameState !== 'playing') return;
+
+    finishStartedRef.current = true;
+    setGameState('submitting');
+
+    try {
+      if (typeof onGameFinished !== 'function') {
+        throw new Error('Game submission is not available.');
+      }
+
+      const result = await onGameFinished(scoreRef.current);
+      const confirmedXP = Number(result?.reward?.xp);
+
+      if (!result || !Number.isFinite(confirmedXP) || confirmedXP <= 0) {
+        throw new Error('The backend did not confirm the game reward.');
+      }
+
+      setGameResult(result);
+      setGameState('completed');
+      triggerWinParticles();
+    } catch (err) {
+      console.error('Game completion was not confirmed:', err);
+      setGameError(err?.message || 'Could not confirm your game result. Please return to the dashboard.');
+      setGameState('error');
     }
   };
 
   const restartGame = () => {
+    finishStartedRef.current = false;
+    scoreRef.current = 0;
+    setGameResult(null);
+    setGameError('');
     setTimeLeft(20);
     setScore(0);
-    setEarnedVEs(0);
     setMultiplier(2);
     setFloatPops([]);
     objectsRef.current = [];
+    lastSpawnRef.current = 0;
     setGameState('playing');
   };
 
@@ -112,18 +155,18 @@ export function XpCatcherGame({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Spawn falling objects
-      if (currentTime - lastSpawnRef.current > 380) {
+      if (currentTime - lastSpawnRef.current > 420) {
         const template = types[Math.floor(Math.random() * types.length)];
         objectsRef.current.push({
           x: Math.random() * (canvas.width - 80) + 40,
           y: -20,
-          speed: Math.random() * 90 + 130,
+          speed: Math.random() * 80 + 110,
           ...template
         });
         lastSpawnRef.current = currentTime;
       }
 
-      // Basket is 115px high, resting 15px above bottom. The top rim is at: canvas.height - 110 to -80
+      // The top rim is around canvas.height - 115
       const basketRimY = canvas.height - 115;
 
       // Update & Draw falling objects
@@ -158,18 +201,16 @@ export function XpCatcherGame({
 
         if (inX && inY) {
           const pts = obj.points * multiplier;
-          setScore(s => s + pts);
-          if (obj.isVE) {
-            setEarnedVEs(v => v + 5);
-          }
+          scoreRef.current += pts;
+          setScore(scoreRef.current);
 
           setFloatPops(prev => [
-            ...prev.slice(-4),
+            ...prev.slice(-3),
             {
               id: Date.now() + Math.random(),
               x: obj.x,
               y: basketRimY - 10,
-              text: `+${pts} ${obj.isVE ? 'VEs' : 'XP'}`
+              text: `+${pts} Points`
             }
           ]);
 
@@ -228,8 +269,12 @@ export function XpCatcherGame({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [gameState]);
 
+  const overlayStyle = isStandalone 
+    ? { position: 'relative', width: '100%', height: '100%', zIndex: 1 } 
+    : {};
+
   return (
-    <div className={styles.gameModalOverlay} role="dialog" aria-modal="true">
+    <div className={styles.gameModalOverlay} style={overlayStyle} role="dialog" aria-modal="true">
       {/* Top Header */}
       <header className={styles.gameHeader}>
         <button 
@@ -278,7 +323,7 @@ export function XpCatcherGame({
           fontSize: '13px',
           boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
         }}>
-          <strong>Rules:</strong> Drag the golden basket horizontally or use Arrow Keys to catch falling items before the 20-second timer runs out!
+          <strong>Rules:</strong> Drag the golden basket horizontally or use Arrow Keys to catch falling items before the timer runs out!
           <div style={{ marginTop: '10px' }}>
             <button onClick={() => setShowInfo(false)} style={{ color: '#f5b041', fontWeight: '700' }}>
               Close
@@ -341,10 +386,6 @@ export function XpCatcherGame({
         <span className={styles.scoreValue}>{score}</span>
 
         <div className={styles.pillsRow}>
-          <div className={styles.statPill}>
-            <span>🪙</span>
-            <span>+{earnedVEs} VEs</span>
-          </div>
 
           <div className={styles.statPill} style={{ borderColor: 'rgba(245, 176, 65, 0.4)' }}>
             <span>🚀</span>
@@ -353,12 +394,45 @@ export function XpCatcherGame({
         </div>
       </footer>
 
-      {/* Screen 3: Challenge Complete Modal */}
-      {gameState === 'completed' && (
-        <ChallengeComplete 
+      {gameState === 'submitting' && (
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 50,
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          gap: '12px', padding: '24px',
+          background: 'rgba(10, 12, 28, 0.94)', color: '#ffffff',
+          textAlign: 'center'
+        }}>
+          <strong>Verifying your game result...</strong>
+          <span>Please wait while the server confirms your reward.</span>
+        </div>
+      )}
+
+      {gameState === 'error' && (
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 50,
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          gap: '14px', padding: '24px',
+          background: 'rgba(10, 12, 28, 0.96)', color: '#ffffff',
+          textAlign: 'center'
+        }}>
+          <strong>Game result not confirmed</strong>
+          <span>{gameError}</span>
+          <button onClick={onClose} style={{
+            padding: '10px 20px', borderRadius: '8px',
+            background: '#f5b041', color: '#171717',
+            fontWeight: '700'
+          }}>
+            Back to Dashboard
+          </button>
+        </div>
+      )}
+
+      {gameState === 'completed' && gameResult && (
+        <ChallengeComplete
           score={score}
-          earnedXP={30}
-          earnedVEs={12}
+          earnedXP={Number(gameResult.reward.xp)}
           currentLevel={currentLevel}
           currentXP={currentXP}
           requiredXP={requiredXP}
