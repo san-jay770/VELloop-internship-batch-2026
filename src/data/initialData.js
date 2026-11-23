@@ -12,17 +12,30 @@ export const initialProfile = {
   progressPct: 80
 };
 
+export const LEVEL_XP_REQUIREMENTS = {
+  1: 0,
+  2: 1000,
+  3: 2500,
+  4: 5000,
+  5: 8000,
+  6: 11000,
+  7: 15000,
+  8: 20000,
+  9: 26000,
+  10: 35000
+};
+
 export const initialLevels = [
-  { level: 1, name: "Starter", reward: null, status: "completed" },
-  { level: 2, name: "Explorer", reward: { type: "VEs", amount: 100 }, status: "completed" },
-  { level: 3, name: "Achiever", reward: { type: "Gems", amount: 10 }, status: "completed" },
-  { level: 4, name: "Momentum", reward: { type: "VEs", amount: 250 }, status: "completed" },
-  { level: 5, name: "Ascendant", reward: { type: "VEs", amount: 500 }, status: "current" },
-  { level: 6, name: "Vanguard", reward: { type: "Spins", amount: 2 }, status: "locked" },
-  { level: 7, name: "Trailblazer", reward: { type: "Gems", amount: 15 }, status: "locked" },
-  { level: 8, name: "Champion", reward: { type: "VEs", amount: 750 }, status: "locked" },
-  { level: 9, name: "Legend", reward: { type: "Spins", amount: 3 }, status: "locked" },
-  { level: 10, name: "Mythic", reward: { type: "VEs", amount: 1000 }, status: "locked" }
+  { level: 1, name: "Starter", reward: null, xpRequired: 0, status: "completed" },
+  { level: 2, name: "Explorer", reward: { type: "VEs", amount: 100 }, xpRequired: 1000, status: "completed" },
+  { level: 3, name: "Achiever", reward: { type: "Gems", amount: 10 }, xpRequired: 2500, status: "completed" },
+  { level: 4, name: "Momentum", reward: { type: "VEs", amount: 250 }, xpRequired: 5000, status: "completed" },
+  { level: 5, name: "Ascendant", reward: { type: "VEs", amount: 500 }, xpRequired: 8000, status: "current" },
+  { level: 6, name: "Vanguard", reward: { type: "Spins", amount: 2 }, xpRequired: 11000, status: "locked" },
+  { level: 7, name: "Trailblazer", reward: { type: "Gems", amount: 15 }, xpRequired: 15000, status: "locked" },
+  { level: 8, name: "Champion", reward: { type: "VEs", amount: 750 }, xpRequired: 20000, status: "locked" },
+  { level: 9, name: "Legend", reward: { type: "Spins", amount: 3 }, xpRequired: 26000, status: "locked" },
+  { level: 10, name: "Mythic", reward: { type: "VEs", amount: 1000 }, xpRequired: 35000, status: "locked" }
 ];
 
 export const initialTodaysBoost = {

@@ -1,0 +1,178 @@
+.summaryContainer {
+  width: 100%;
+  padding: 0 20px 16px 20px;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .summaryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .summaryGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.metricCard {
+  background: linear-gradient(180deg, #181b30 0%, #121424 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.metricHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metricIconWrapGold {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(245, 176, 65, 0.15);
+  color: #f5b041;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metricIconWrapGreen {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metricIconWrapAmber {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metricIconWrapPurple {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(147, 51, 234, 0.15);
+  color: #c084fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metricLabel {
+  font-size: 10px;
+  font-weight: 800;
+  color: #9ca3af;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.metricValueRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.metricBigText {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+}
+
+.denomText {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.metricRewardText {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fcd34d;
+}
+
+.tierNamePill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f5b041;
+  background: rgba(245, 176, 65, 0.12);
+  border: 1px solid rgba(245, 176, 65, 0.3);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.statusPillGreen {
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.14);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.targetPill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fcd34d;
+  background: rgba(245, 176, 65, 0.14);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.lockedPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #9ca3af;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px 7px;
+  border-radius: 999px;
+}
+
+.metricSub {
+  font-size: 11px;
+  color: #9ca3af;
+  line-height: 1.3;
+}
+
+.metricSubWarning {
+  font-size: 11px;
+  color: #f5b041;
+  font-weight: 600;
+  line-height: 1.3;
+}
+

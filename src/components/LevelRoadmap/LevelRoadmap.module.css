@@ -1,101 +1,664 @@
-.roadmapContainer {
-  padding: 0 20px 24px 20px;
+.roadmapSection {
   width: 100%;
+  padding: 0 0 24px 0;
+  position: relative;
 }
 
-.roadmapHeader {
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.titleArea {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.badgeRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  gap: 10px;
 }
 
-.roadmapTitle {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 800;
   letter-spacing: 0.8px;
+  color: #f5b041;
+  background: rgba(245, 176, 65, 0.12);
+  border: 1px solid rgba(245, 176, 65, 0.28);
+  padding: 4px 10px;
+  border-radius: 999px;
   text-transform: uppercase;
+}
+
+.tierCount {
+  font-size: 12px;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.4px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+  max-width: 650px;
+  line-height: 1.45;
+}
+
+.controlsGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  align-self: flex-start;
+}
+
+@media (min-width: 768px) {
+  .controlsGroup {
+    align-self: auto;
+  }
+}
+
+.jumpBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 176, 65, 0.12);
+  border: 1px solid rgba(245, 176, 65, 0.35);
+  color: #fcd34d;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+.jumpBtn:hover {
+  background: rgba(245, 176, 65, 0.24);
+  transform: translateY(-1px);
+}
+
+.arrowGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.arrowBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #1c1f36;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.arrowBtn:hover:not(:disabled) {
+  background: #282d4e;
+  border-color: rgba(245, 176, 65, 0.4);
+  color: #f5b041;
+}
+
+.arrowDisabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Horizontal Track Wrapper */
+.scrollWrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .trackScroll {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   overflow-x: auto;
-  padding-bottom: 12px;
+  padding: 16px 20px 24px 20px;
+  scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 .trackScroll::-webkit-scrollbar {
-  height: 4px;
-}
-.trackScroll::-webkit-scrollbar-thumb {
-  background: rgba(245, 176, 65, 0.3);
-  border-radius: 4px;
+  height: 6px;
 }
 
-.nodeCard {
-  flex: 0 0 130px;
-  background: #1c1e32;
+.trackScroll::-webkit-scrollbar-track {
+  background: rgba(14, 16, 28, 0.8);
+  border-radius: 999px;
+  margin: 0 20px;
+}
+
+.trackScroll::-webkit-scrollbar-thumb {
+  background: rgba(245, 176, 65, 0.3);
+  border-radius: 999px;
+}
+
+.trackScroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 176, 65, 0.55);
+}
+
+/* Individual Level Card */
+.levelCard {
+  flex: 0 0 180px;
+  background: linear-gradient(180deg, #181b30 0%, #111322 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: 16px 12px;
+  border-radius: 20px;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   position: relative;
-  transition: all 0.2s ease;
+  cursor: pointer;
   scroll-snap-align: start;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, border-color 0.22s ease;
 }
 
-.nodeCard:hover {
-  background: #232742;
-  transform: translateY(-2px);
+.levelCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.nodeCurrent {
+/* Pipeline Connecting Track */
+.pipelineNode {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.nodePoint {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #374151;
+  border: 2px solid #111322;
+  z-index: 2;
+}
+
+.nodeConnectorLine {
+  position: absolute;
+  left: 50%;
+  width: calc(100% + 20px);
+  height: 3px;
+  top: 3px;
+  z-index: 1;
+}
+
+.lineCompleted {
+  background: linear-gradient(90deg, #10b981 0%, #10b981 100%);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.lineCurrent {
+  background: linear-gradient(90deg, #10b981 0%, #f5b041 50%, #4b5563 100%);
+  box-shadow: 0 0 10px rgba(245, 176, 65, 0.7);
+}
+
+.lineLocked {
+  background: #262942;
+}
+
+/* Status variants */
+.cardCompleted {
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.cardCompleted .nodePoint {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.cardCurrent {
   border-color: #f5b041;
-  background: radial-gradient(circle at 50% 0%, #29243d 0%, #1c1e32 100%);
-  box-shadow: 0 0 20px rgba(245, 176, 65, 0.25);
+  background: radial-gradient(120% 120% at 50% 0%, #292444 0%, #16182c 100%);
+  box-shadow: 0 0 25px rgba(245, 176, 65, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.nodeLocked {
-  opacity: 0.65;
+.cardCurrent:hover {
+  box-shadow: 0 0 35px rgba(245, 176, 65, 0.45);
 }
 
-.statusTag {
+.cardCurrent .nodePoint {
+  background: #f5b041;
+  box-shadow: 0 0 12px #f5b041;
+  transform: scale(1.3);
+}
+
+.cardNextMilestone {
+  border: 1px dashed rgba(245, 176, 65, 0.55);
+  background: linear-gradient(180deg, #1e203a 0%, #121424 100%);
+}
+
+.cardLocked {
+  opacity: 0.78;
+}
+
+.cardLocked:hover {
+  opacity: 0.95;
+}
+
+/* Card Content Styling */
+.cardHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.levelNum {
+  font-size: 11px;
+  font-weight: 800;
+  color: #9ca3af;
+  letter-spacing: 0.5px;
+}
+
+.statusCompletedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
   font-size: 10px;
   font-weight: 700;
-  padding: 3px 8px;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.14);
+  padding: 2px 7px;
   border-radius: 999px;
-  margin-top: 8px;
+}
+
+.statusCurrentBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #12131f;
+  background: #f5b041;
+  padding: 2px 8px;
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(245, 176, 65, 0.6);
+  animation: pulseTag 2s infinite ease-in-out;
+}
+
+@keyframes pulseTag {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(245, 176, 65, 0.5);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 14px rgba(245, 176, 65, 0.8);
+  }
+}
+
+.statusNextBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fcd34d;
+  background: rgba(245, 176, 65, 0.16);
+  border: 1px solid rgba(245, 176, 65, 0.35);
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.statusLockedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #6b7280;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.badgeContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0 10px 0;
+  transition: transform 0.2s ease;
+}
+
+.levelCard:hover .badgeContainer {
+  transform: scale(1.08);
+}
+
+.badgeHalo {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 176, 65, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tierName {
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px 0;
   letter-spacing: 0.3px;
 }
 
-.tagCompleted {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10b981;
+.cardCurrent .tierName {
+  color: #fcd34d;
+  text-shadow: 0 0 12px rgba(245, 176, 65, 0.4);
 }
 
-.tagCurrent {
-  background: rgba(245, 176, 65, 0.2);
-  color: #f5b041;
-  border: 1px solid rgba(245, 176, 65, 0.4);
+.xpBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 10px;
 }
 
-.tagLocked {
-  background: rgba(255, 255, 255, 0.06);
-  color: #9ca3af;
-}
-
-.rewardInfo {
-  margin-top: 8px;
-  font-size: 11px;
+.xpLabel {
+  font-size: 10px;
   font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.xpValue {
+  font-size: 12px;
+  font-weight: 700;
   color: #d1d5db;
+}
+
+.microProgressArea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.microTrack {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.microFill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #fcd34d);
+  border-radius: 999px;
+  box-shadow: 0 0 6px #fcd34d;
+}
+
+.microText {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #f5b041;
+  margin-top: 4px;
+}
+
+.rewardBox {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.rewardIcon {
+  color: #f5b041;
+  flex-shrink: 0;
+}
+
+.rewardText {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.rewardTextMuted {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.inspectHint {
   display: flex;
   align-items: center;
   gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #9ca3af;
+  margin-top: 10px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
+.levelCard:hover .inspectHint {
+  opacity: 1;
+  color: #f5b041;
+}
+
+/* Modal Inspection Popup */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 9, 16, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalCard {
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(180deg, #1a1d35 0%, #121424 100%);
+  border: 1px solid rgba(245, 176, 65, 0.35);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 176, 65, 0.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px) scale(0.96); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modalCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.modalTopRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.modalTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.modalLvlTag {
+  font-size: 11px;
+  font-weight: 800;
+  color: #f5b041;
+  letter-spacing: 1px;
+}
+
+.modalTierName {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.modalXPReq {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.modalRewardHighlight {
+  background: rgba(245, 176, 65, 0.08);
+  border: 1px solid rgba(245, 176, 65, 0.25);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modalAwardIcon {
+  color: #f5b041;
+  flex-shrink: 0;
+}
+
+.modalRewardInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalRewardHeading {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #f5b041;
+  letter-spacing: 0.5px;
+}
+
+.modalRewardValue {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.perksListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.perksTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #d1d5db;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.perksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.perkItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #e5e7eb;
+  line-height: 1.4;
+}
+
+.perkCheck {
+  color: #10b981;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.modalDoneBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: #252844;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.modalDoneBtn:hover {
+  background: #31365c;
+  border-color: rgba(255, 255, 255, 0.2);
+}
