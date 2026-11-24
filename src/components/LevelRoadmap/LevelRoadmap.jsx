@@ -147,8 +147,9 @@ export function LevelRoadmap({
             let nodePct = 0;
             if (isCompleted) nodePct = 100;
             else if (isCurrent) {
-              const prevReq = LEVEL_XP_REQUIREMENTS[lvlNum - 1] ?? 5000;
-              const range = Math.max(1, xpReq - prevReq);
+              const nextReq = LEVEL_XP_REQUIREMENTS[lvlNum + 1] ?? xpReq;
+              const prevReq = xpReq;
+              const range = Math.max(1, nextReq - prevReq);
               const progressInRange = Math.max(0, currentXP - prevReq);
               nodePct = Math.min(100, Math.round((progressInRange / range) * 100));
             }
