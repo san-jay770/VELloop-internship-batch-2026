@@ -97,24 +97,24 @@
 
 /* Level Rewards Card */
 .rewardCard {
-  background: linear-gradient(135deg, #20243d 0%, #161828 100%);
-  border: 1px solid rgba(245, 176, 65, 0.3);
+  background: linear-gradient(135deg, #1e1338 0%, #131427 100%);
+  border: 1.5px solid rgba(168, 85, 247, 0.35);
   border-radius: 20px;
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45), 0 0 16px rgba(168, 85, 247, 0.12);
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .rewardCard:hover {
-  border-color: rgba(245, 176, 65, 0.6);
+  border-color: rgba(245, 176, 65, 0.7);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 176, 65, 0.15);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), 0 0 24px rgba(168, 85, 247, 0.25), 0 0 14px rgba(245, 176, 65, 0.2);
 }
 
 .rewardCardContent {
@@ -145,13 +145,410 @@
   margin-top: 8px;
 }
 
-.rewardCardImg {
-  width: 90px;
-  height: 90px;
-  object-fit: contain;
-  filter: drop-shadow(0 6px 12px rgba(147, 51, 234, 0.35));
-  animation: floatBob 3s ease-in-out infinite;
+/* ======================================================== */
+/* PREMIUM MAGICAL TREASURE CHEST (Level 05 Exact Style)    */
+/* ======================================================== */
+.chestWrapper {
+  position: relative;
+  width: 140px;
+  height: 130px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 900px;
   z-index: 1;
+}
+
+/* Base Pedestal Platform with Concentric Glowing Rings */
+.pedestalContainer {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 118px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pedestalOuterRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #a855f7;
+  box-shadow: 0 0 12px #9333ea, 0 0 22px rgba(168, 85, 247, 0.5), inset 0 0 8px rgba(168, 85, 247, 0.6);
+  opacity: 0.85;
+  transition: all 0.35s ease;
+}
+
+.pedestalInnerDisc {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 10px;
+  right: 10px;
+  border-radius: 50%;
+  border: 1.5px solid #fbbf24;
+  background: radial-gradient(ellipse at center, rgba(251, 191, 36, 0.95) 0%, rgba(245, 158, 11, 0.55) 50%, rgba(147, 51, 234, 0.25) 80%, transparent 100%);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.85), inset 0 0 6px rgba(255, 255, 255, 0.7);
+  transition: all 0.35s ease;
+}
+
+.pedestalSpotlight {
+  position: absolute;
+  top: 2px;
+  left: 20%;
+  right: 20%;
+  bottom: 6px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #ffffff 0%, #fde047 50%, transparent 80%);
+  filter: blur(2px);
+  opacity: 0.75;
+  animation: pedestalPulse 3.8s ease-in-out infinite;
+  transition: all 0.35s ease;
+}
+
+@keyframes pedestalPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08);
+  }
+}
+
+/* Ambient Pulsing Golden Glow Behind Chest */
+.chestGlow {
+  position: absolute;
+  top: 8px;
+  width: 120px;
+  height: 105px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(245, 176, 65, 0.5) 0%, rgba(168, 85, 247, 0.22) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  animation: chestGlowPulse 3.8s ease-in-out infinite;
+  transition: all 0.35s ease;
+}
+
+@keyframes chestGlowPulse {
+  0%, 100% {
+    transform: scale(0.92);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.95;
+  }
+}
+
+/* 3D Rotating Magical Golden Light Rings Below/Around the Chest */
+.orbitRing {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.orbitRing1 {
+  width: 132px;
+  height: 52px;
+  bottom: 22px;
+  left: 4px;
+  border: 1.5px solid transparent;
+  border-top: 2.5px solid rgba(253, 224, 71, 0.9);
+  border-right: 1.5px solid rgba(245, 158, 11, 0.65);
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.85));
+  transform: rotate(-14deg) rotateX(62deg);
+  animation: orbitRotate1 8s linear infinite;
+}
+
+.orbitRing2 {
+  width: 126px;
+  height: 48px;
+  bottom: 28px;
+  left: 7px;
+  border: 1.5px solid transparent;
+  border-bottom: 2.5px solid rgba(252, 211, 77, 0.85);
+  border-left: 1.5px solid rgba(245, 158, 11, 0.6);
+  filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.8));
+  transform: rotate(20deg) rotateX(65deg);
+  animation: orbitRotate2 6.5s linear infinite;
+}
+
+@keyframes orbitRotate1 {
+  0% {
+    transform: rotate(-14deg) rotateX(62deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotate(-14deg) rotateX(62deg) rotateZ(360deg);
+  }
+}
+
+@keyframes orbitRotate2 {
+  0% {
+    transform: rotate(20deg) rotateX(65deg) rotateZ(360deg);
+  }
+  100% {
+    transform: rotate(20deg) rotateX(65deg) rotateZ(0deg);
+  }
+}
+
+/* Floating Chest Container */
+.chestFloatingContainer {
+  position: relative;
+  width: 110px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: chestFloat 3.8s ease-in-out infinite;
+  z-index: 3;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes chestFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* Soft Golden Light Ray from Inside Chest */
+.chestLidGleam {
+  position: absolute;
+  top: 26%;
+  left: 25%;
+  width: 50%;
+  height: 24px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(253, 224, 71, 0.75) 45%, rgba(245, 176, 65, 0.25) 75%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0.65;
+  transform: scaleY(0.6);
+  pointer-events: none;
+  z-index: 4;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.85));
+  animation: gleamPulse 3.8s ease-in-out infinite;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes gleamPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scaleY(0.55);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scaleY(0.75);
+  }
+}
+
+/* 4-Point Golden Star Sparkles */
+.sparkle {
+  position: absolute;
+  background: radial-gradient(circle, #ffffff 15%, #fde047 50%, #f59e0b 85%, transparent 100%);
+  clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+}
+
+.sparkle1 {
+  top: 14px;
+  right: 12px;
+  width: 14px;
+  height: 14px;
+  animation: sparkleFloat1 3.2s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.sparkle2 {
+  bottom: 28px;
+  left: 8px;
+  width: 13px;
+  height: 13px;
+  animation: sparkleFloat2 3.6s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.sparkle3 {
+  top: 26px;
+  left: 14px;
+  width: 10px;
+  height: 10px;
+  animation: sparkleFloat3 3.4s ease-in-out infinite;
+  animation-delay: 2.1s;
+}
+
+.sparkle4 {
+  bottom: 22px;
+  right: 18px;
+  width: 11px;
+  height: 11px;
+  animation: sparkleFloat1 3.5s ease-in-out infinite;
+  animation-delay: 1.8s;
+}
+
+.sparkle5 {
+  top: 10px;
+  left: 48%;
+  width: 8px;
+  height: 8px;
+  animation: sparkleFloat2 3.8s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+@keyframes sparkleFloat1 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3) rotate(0deg);
+  }
+  40%, 65% {
+    opacity: 1;
+    transform: translate(-3px, -8px) scale(1.15) rotate(45deg);
+    filter: drop-shadow(0 0 7px rgba(253, 224, 71, 0.95));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-6px, -16px) scale(0.2) rotate(90deg);
+  }
+}
+
+@keyframes sparkleFloat2 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3) rotate(0deg);
+  }
+  40%, 65% {
+    opacity: 1;
+    transform: translate(3px, -7px) scale(1.1) rotate(-45deg);
+    filter: drop-shadow(0 0 6px rgba(253, 224, 71, 0.9));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(7px, -15px) scale(0.2) rotate(-90deg);
+  }
+}
+
+@keyframes sparkleFloat3 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3) rotate(0deg);
+  }
+  45%, 70% {
+    opacity: 1;
+    transform: translate(2px, -7px) scale(1.2) rotate(45deg);
+    filter: drop-shadow(0 0 7px rgba(253, 224, 71, 0.95));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(5px, -14px) scale(0.2) rotate(90deg);
+  }
+}
+
+/* Treasure Chest Image */
+.rewardCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 8px 16px rgba(245, 176, 65, 0.4)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+  pointer-events: none;
+}
+
+/* Hover Interactions */
+.rewardCard:hover .chestFloatingContainer {
+  transform: translateY(-9px) scale(1.08) perspective(600px) rotateX(4deg) rotateY(-4deg);
+}
+
+.rewardCard:hover .rewardCardImg {
+  filter: drop-shadow(0 12px 26px rgba(245, 176, 65, 0.8)) drop-shadow(0 0 16px rgba(253, 224, 71, 0.95));
+}
+
+.rewardCard:hover .chestGlow {
+  transform: scale(1.3);
+  opacity: 1;
+  background: radial-gradient(ellipse at center, rgba(245, 176, 65, 0.65) 0%, rgba(168, 85, 247, 0.35) 55%, transparent 75%);
+}
+
+.rewardCard:hover .chestLidGleam {
+  opacity: 1;
+  transform: scaleY(1.4) translateY(-3px);
+  filter: drop-shadow(0 0 14px rgba(253, 224, 71, 1)) drop-shadow(0 -4px 16px rgba(245, 176, 65, 0.9));
+}
+
+.rewardCard:hover .pedestalOuterRing {
+  opacity: 1;
+  box-shadow: 0 0 18px #9333ea, 0 0 28px rgba(168, 85, 247, 0.7), inset 0 0 10px rgba(168, 85, 247, 0.8);
+}
+
+.rewardCard:hover .pedestalInnerDisc {
+  box-shadow: 0 0 22px rgba(245, 158, 11, 1), inset 0 0 8px #ffffff;
+}
+
+.rewardCard:hover .pedestalSpotlight {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Responsive Mobile Styles */
+@media (max-width: 480px) {
+  .rewardCard {
+    padding: 16px;
+    gap: 12px;
+  }
+  .chestWrapper {
+    width: 110px;
+    height: 105px;
+  }
+  .pedestalContainer {
+    width: 95px;
+    height: 26px;
+  }
+  .chestFloatingContainer {
+    width: 90px;
+    height: 82px;
+  }
+  .orbitRing1 {
+    width: 105px;
+    height: 42px;
+  }
+  .orbitRing2 {
+    width: 100px;
+    height: 38px;
+  }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .chestWrapper,
+  .chestFloatingContainer,
+  .chestGlow,
+  .chestLidGleam,
+  .pedestalSpotlight,
+  .orbitRing,
+  .orbitRing1,
+  .orbitRing2,
+  .sparkle {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .rewardCard:hover .chestFloatingContainer,
+  .rewardCard:hover .rewardCardImg,
+  .rewardCard:hover .chestLidGleam,
+  .rewardCard:hover .pedestalSpotlight {
+    transform: none !important;
+  }
 }
 
 /* Full "EARN & LEVEL UP" Modal / View (Screen 4) */

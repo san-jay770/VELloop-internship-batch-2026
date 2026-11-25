@@ -1,0 +1,587 @@
+/* LandingIntro.module.css - Premium 4-Second Animated Intro for VELOOP Rewards */
+
+/* 1. Full-screen Dark Purple Canvas */
+.introContainer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at center, #180a36 0%, #0d0520 45%, #05020c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s ease;
+  user-select: none;
+}
+
+/* 7. Smooth Fade-Out State */
+.fadeOut {
+  opacity: 0 !important;
+  transform: scale(1.04) !important;
+  pointer-events: none;
+}
+
+/* Ambient Purple and Gold Glows */
+.ambientPurpleGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 720px;
+  height: 520px;
+  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.32) 0%, rgba(147, 51, 234, 0.12) 50%, transparent 72%);
+  pointer-events: none;
+  filter: blur(50px);
+  animation: ambientBreathe 4s ease-in-out infinite;
+}
+
+.ambientGoldGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, rgba(245, 176, 65, 0.25) 0%, rgba(217, 119, 6, 0.08) 50%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+  animation: goldPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes ambientBreathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes goldPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* Center Stage */
+.centerStage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
+  padding: 20px;
+  max-width: 580px;
+  width: 100%;
+}
+
+/* 3. Glowing Purple and Golden Energy Rings Around the Logo */
+.energyRingsWrapper {
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  height: 250px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.outerPurpleNeonRing {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top: 2.5px solid #c084fc;
+  border-right: 2px solid rgba(168, 85, 247, 0.7);
+  border-bottom: 2px solid rgba(147, 51, 234, 0.35);
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.65), inset 0 0 16px rgba(147, 51, 234, 0.45);
+  animation: ringEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both, spinCounter 9s linear infinite;
+}
+
+.innerGoldEnergyRing {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top: 2.5px solid #fef08a;
+  border-left: 2px solid rgba(251, 191, 36, 0.85);
+  border-bottom: 1.5px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.85), inset 0 0 14px rgba(253, 224, 71, 0.5);
+  animation: ringEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both, spinClockwise 6.5s linear infinite;
+}
+
+.pulseShockwave {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(245, 176, 65, 0.6);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.5);
+  animation: shockwavePulse 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  animation-delay: 0.8s;
+  opacity: 0;
+}
+
+@keyframes ringEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spinClockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinCounter {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes shockwavePulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.85;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* 2. VELOOP Logo with Golden & Purple Neon Glow */
+.logoContainer {
+  position: relative;
+  width: 105px;
+  height: 105px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.logoBacklight {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 176, 65, 0.55) 0%, rgba(168, 85, 247, 0.35) 45%, transparent 75%);
+  filter: blur(12px);
+  animation: logoBacklightPulse 2.4s ease-in-out infinite;
+}
+
+.veloopLogo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(245, 176, 65, 0.95)) drop-shadow(0 0 45px rgba(168, 85, 247, 0.75));
+  animation: logoBreathe 3s ease-in-out infinite;
+}
+
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.65) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes logoBacklightPulse {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes logoBreathe {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Brand Title */
+.brandContainer {
+  animation: brandReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.0s both;
+  margin-bottom: 12px;
+}
+
+.brandTitle {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.brandTitleBadge {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: #f5b041;
+  background: rgba(245, 176, 65, 0.15);
+  border: 1.5px solid rgba(245, 176, 65, 0.4);
+  padding: 3px 12px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  box-shadow: 0 0 14px rgba(245, 176, 65, 0.3);
+}
+
+@keyframes brandReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 5. Tagline "PLAY • EARN • WIN" with Smooth Fade-in */
+.taglineContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  animation: taglineSlideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.7s both;
+}
+
+.taglineLineLeft,
+.taglineLineRight {
+  width: 44px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(245, 176, 65, 0.7));
+  border-radius: 999px;
+}
+
+.taglineLineRight {
+  background: linear-gradient(90deg, rgba(245, 176, 65, 0.7), transparent);
+}
+
+.taglineText {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 4.5px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #f59e0b 0%, #fde047 25%, #ffffff 50%, #fde047 75%, #f59e0b 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 3s linear infinite;
+  filter: drop-shadow(0 2px 8px rgba(245, 176, 65, 0.4));
+}
+
+@keyframes taglineSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    letter-spacing: 2px;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 4.5px;
+  }
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* 4. Floating Golden Particles and Sparkling Star Effects */
+.particlesContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 4-Point Golden Stars */
+.sparkle {
+  position: absolute;
+  background: radial-gradient(circle, #ffffff 15%, #fde047 50%, #f59e0b 85%, transparent 100%);
+  clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sparkle1 {
+  top: 26%;
+  left: 28%;
+  width: 14px;
+  height: 14px;
+  animation: sparkleTwinkle 2.8s ease-in-out 0.8s infinite;
+}
+
+.sparkle2 {
+  top: 22%;
+  right: 28%;
+  width: 16px;
+  height: 16px;
+  animation: sparkleTwinkle 3.2s ease-in-out 1.2s infinite;
+}
+
+.sparkle3 {
+  bottom: 34%;
+  left: 32%;
+  width: 12px;
+  height: 12px;
+  animation: sparkleTwinkle 2.6s ease-in-out 1.5s infinite;
+}
+
+.sparkle4 {
+  bottom: 32%;
+  right: 30%;
+  width: 14px;
+  height: 14px;
+  animation: sparkleTwinkle 3s ease-in-out 0.6s infinite;
+}
+
+.sparkle5 {
+  top: 42%;
+  left: 20%;
+  width: 10px;
+  height: 10px;
+  animation: sparkleTwinkle 2.4s ease-in-out 1.8s infinite;
+}
+
+.sparkle6 {
+  top: 44%;
+  right: 22%;
+  width: 11px;
+  height: 11px;
+  animation: sparkleTwinkle 2.9s ease-in-out 1.0s infinite;
+}
+
+@keyframes sparkleTwinkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  45%, 65% {
+    opacity: 1;
+    transform: scale(1.15) rotate(45deg);
+    filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.95));
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(90deg);
+  }
+}
+
+/* Warm Golden Floating Embers */
+.particle {
+  position: absolute;
+  background: radial-gradient(circle, #ffffff 20%, #fcd34d 60%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.particle1 {
+  bottom: 25%;
+  left: 42%;
+  width: 5px;
+  height: 5px;
+  animation: particleFloatUp 3.2s ease-out 1.0s infinite;
+}
+
+.particle2 {
+  bottom: 22%;
+  right: 44%;
+  width: 4px;
+  height: 4px;
+  animation: particleFloatUp 3.6s ease-out 1.4s infinite;
+}
+
+.particle3 {
+  bottom: 30%;
+  left: 48%;
+  width: 6px;
+  height: 6px;
+  animation: particleFloatUp 3.8s ease-out 0.7s infinite;
+}
+
+.particle4 {
+  bottom: 28%;
+  left: 36%;
+  width: 4px;
+  height: 4px;
+  animation: particleFloatUp 3.4s ease-out 1.9s infinite;
+}
+
+.particle5 {
+  bottom: 26%;
+  right: 38%;
+  width: 5px;
+  height: 5px;
+  animation: particleFloatUp 3.5s ease-out 1.1s infinite;
+}
+
+@keyframes particleFloatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.4);
+  }
+  30%, 70% {
+    opacity: 0.9;
+    transform: translateY(-30px) scale(1);
+    box-shadow: 0 0 10px rgba(245, 176, 65, 0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-70px) scale(0.2);
+  }
+}
+
+/* Skip Button */
+.skipButton {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #9ca3af;
+  border-radius: 999px;
+  padding: 6px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.skipButton:hover {
+  background: rgba(245, 176, 65, 0.16);
+  border-color: rgba(245, 176, 65, 0.45);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+  .logoContainer {
+    width: 85px;
+    height: 85px;
+    margin-top: 10px;
+    margin-bottom: 18px;
+  }
+
+  .energyRingsWrapper {
+    width: 210px;
+    height: 210px;
+    top: 36px;
+  }
+
+  .outerPurpleNeonRing {
+    width: 195px;
+    height: 195px;
+  }
+
+  .innerGoldEnergyRing {
+    width: 150px;
+    height: 150px;
+  }
+
+  .brandTitle {
+    font-size: 24px;
+    gap: 8px;
+  }
+
+  .brandTitleBadge {
+    font-size: 11px;
+    padding: 2px 10px;
+    letter-spacing: 2px;
+  }
+
+  .taglineText {
+    font-size: 13px;
+    letter-spacing: 3.5px;
+  }
+
+  .taglineLineLeft,
+  .taglineLineRight {
+    width: 26px;
+  }
+
+  .skipButton {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .introContainer,
+  .ambientPurpleGlow,
+  .ambientGoldGlow,
+  .outerPurpleNeonRing,
+  .innerGoldEnergyRing,
+  .pulseShockwave,
+  .logoContainer,
+  .logoBacklight,
+  .veloopLogo,
+  .brandContainer,
+  .taglineContainer,
+  .taglineText,
+  .sparkle,
+  .particle {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -25,11 +25,21 @@ import {
   Clock3
 } from 'lucide-react';
 import styles from './LandingPage.module.css';
+import { LandingIntro, hasCompletedIntro, markIntroCompleted } from '../../components/Common/LandingIntro';
 
 export function LandingPage() {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+
+  // In-memory state: plays on every page refresh / load, but persists across tab navigation
+  const [introSeen, setIntroSeen] = useState(() => hasCompletedIntro());
+
+  const handleIntroComplete = () => {
+    markIntroCompleted();
+    setIntroSeen(true);
+    navigate('/Lvl-Dashboard');
+  };
 
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
@@ -39,6 +49,11 @@ export function LandingPage() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Play landing intro animation first on initial load before transitioning to dashboard
+  if (!introSeen) {
+    return <LandingIntro onComplete={handleIntroComplete} />;
+  }
 
   return (
     <div className={styles.landingPage} id="top">

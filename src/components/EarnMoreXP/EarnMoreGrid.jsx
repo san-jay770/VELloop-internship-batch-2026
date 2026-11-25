@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { 
-  ArrowRight, 
-  Play, 
-  ClipboardCheck, 
-  Users, 
-  Magnet, 
-  Gamepad2, 
-  Flame, 
-  ChevronRight 
+import {
+  ArrowRight,
+  Play,
+  ClipboardCheck,
+  Users,
+  Magnet,
+  Gamepad2,
+  Flame,
+  ChevronRight
 } from 'lucide-react';
 import { EarnAndLevelUpModal } from './EarnAndLevelUpModal';
 import styles from './EarnMore.module.css';
 
-export function EarnMoreGrid({ 
-  onLaunchGame, 
-  onViewRewards, 
+export function EarnMoreGrid({
+  onLaunchGame,
+  onViewRewards,
   onClaimFeature,
   currentLevel = 5,
   nextLevel = currentLevel + 1,
@@ -72,7 +72,7 @@ export function EarnMoreGrid({
     <section className={styles.earnMoreSection} aria-label="Earn More Activities">
       <div className={styles.headerRow}>
         <h2 className={styles.sectionTitle}>EARN MORE</h2>
-        <button 
+        <button
           className={styles.arrowBtn}
           aria-label="View all earning opportunities"
           onClick={() => setShowFullEarnModal(true)}
@@ -90,8 +90,8 @@ export function EarnMoreGrid({
         {activities.map(item => {
           const IconComponent = item.icon;
           return (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className={styles.gridItem}
               onClick={item.action}
               role="button"
@@ -113,8 +113,8 @@ export function EarnMoreGrid({
       </div>
 
       {/* Level 05 Rewards Card with Exact Treasure Chest Illustration */}
-      <div 
-        className={styles.rewardCard} 
+      <div
+        className={styles.rewardCard}
         onClick={onViewRewards}
         role="button"
         tabIndex={0}
@@ -143,19 +143,48 @@ export function EarnMoreGrid({
           </div>
         </div>
 
-        <img 
-          src="/assets/ref_treasure_chest.png" 
-          alt="Level Rewards Treasure Chest"
-          className={styles.rewardCardImg}
-          onError={(e) => {
-            e.currentTarget.src = '/assets/safe-1.svg';
-          }}
-        />
+        <div className={styles.chestWrapper}>
+          {/* Glowing Pedestal Platform at Base */}
+          <div className={styles.pedestalContainer} aria-hidden="true">
+            <div className={styles.pedestalOuterRing} />
+            <div className={styles.pedestalInnerDisc} />
+            <div className={styles.pedestalSpotlight} />
+          </div>
+
+          {/* Golden Ambient Glow Behind Chest */}
+          <div className={styles.chestGlow} aria-hidden="true" />
+
+          {/* 3D Rotating Magical Golden Light Rings Below/Around Chest */}
+          <div className={`${styles.orbitRing} ${styles.orbitRing1}`} aria-hidden="true" />
+          <div className={`${styles.orbitRing} ${styles.orbitRing2}`} aria-hidden="true" />
+
+          {/* Inner Golden Light Ray Beam */}
+          <div className={styles.chestLidGleam} aria-hidden="true" />
+
+          {/* Floating Sparkling 4-Point Golden Stars */}
+          <span className={`${styles.sparkle} ${styles.sparkle1}`} aria-hidden="true" />
+          <span className={`${styles.sparkle} ${styles.sparkle2}`} aria-hidden="true" />
+          <span className={`${styles.sparkle} ${styles.sparkle3}`} aria-hidden="true" />
+          <span className={`${styles.sparkle} ${styles.sparkle4}`} aria-hidden="true" />
+          <span className={`${styles.sparkle} ${styles.sparkle5}`} aria-hidden="true" />
+
+          {/* Floating 3D Treasure Chest */}
+          <div className={styles.chestFloatingContainer}>
+            <img
+              src="/assets/ref_treasure_chest.png"
+              alt="Level 05 Rewards Treasure Chest"
+              className={styles.rewardCardImg}
+              onError={(e) => {
+                e.currentTarget.src = '/assets/safe-1.svg';
+              }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Screen 4 Full Earn & Level Up Modal */}
       {showFullEarnModal && (
-        <EarnAndLevelUpModal 
+        <EarnAndLevelUpModal
           onClose={() => setShowFullEarnModal(false)}
           onLaunchGame={() => {
             setShowFullEarnModal(false);

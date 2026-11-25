@@ -9,6 +9,22 @@
   animation: pageEnter 0.5s ease-out both;
 }
 
+/* Dashboard Reveal Animation (Fade-in and Slide-up) */
+.dashboardReveal {
+  animation: dashboardFadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes dashboardFadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes pageEnter {
   from {
     opacity: 0;
@@ -21,8 +37,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dashboardPage {
-    animation: none;
+  .dashboardPage,
+  .dashboardReveal {
+    animation: none !important;
   }
 }
 

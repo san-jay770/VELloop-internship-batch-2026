@@ -14,11 +14,20 @@ import { ChallengeComplete } from '../../components/PlayAndEarn/ChallengeComplet
 import { EarnAndLevelUpModal } from '../../components/EarnMoreXP/EarnAndLevelUpModal';
 import { LevelUpModal } from '../../components/LevelUpModal/LevelUpModal';
 import { Skeleton, ErrorState } from '../../components/Common/CommonComponents';
+import { LandingIntro, hasCompletedIntro, markIntroCompleted } from '../../components/Common/LandingIntro';
 import { useLevelData } from '../../hooks/useLevelData';
 import styles from './LevelDashboard.module.css';
 
 export function LevelDashboard() {
   const navigate = useNavigate();
+
+  // In-memory state: plays on every page refresh / load, but persists across tab navigation
+  const [introSeen, setIntroSeen] = useState(() => hasCompletedIntro());
+
+  const handleIntroComplete = () => {
+    markIntroCompleted();
+    setIntroSeen(true);
+  };
 
   const {
     profile,
@@ -51,6 +60,11 @@ export function LevelDashboard() {
       navigate('/Lvl-Dashboard/profile');
     }
   };
+
+  // Keep main dashboard content completely hidden while landing intro animation is playing
+  if (!introSeen) {
+    return <LandingIntro onComplete={handleIntroComplete} />;
+  }
 
   if (isLoading) {
     return (
@@ -98,7 +112,7 @@ export function LevelDashboard() {
   const nextLevelReward = nextLevelData?.reward ?? { type: "Spins", amount: 2 };
 
   return (
-    <div className={styles.dashboardPage}>
+    <div className={`${styles.dashboardPage} ${styles.dashboardReveal}`}>
       {/* Screen 2: XP Catcher Mini-Game */}
       {activeScreen === 'game' && (
         <XpCatcherGame
