@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { 
-  Check, 
-  Lock, 
-  ChevronLeft, 
-  ChevronRight, 
-  Sparkles, 
-  Target, 
-  Award, 
-  Gift, 
-  Info, 
+import {
+  Check,
+  Lock,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  Target,
+  Award,
+  Gift,
+  Info,
   X,
   TrendingUp
 } from 'lucide-react';
@@ -29,10 +29,10 @@ const TIER_PERKS = {
   10: ["+1,000 VEs Mythic drop", "Permanent 1.5X XP boost", "Exclusive Mythic Hall of Fame title"]
 };
 
-export function LevelRoadmap({ 
-  levels = [], 
-  currentLevel = 5, 
-  currentXP = 6420 
+export function LevelRoadmap({
+  levels = [],
+  currentLevel = 5,
+  currentXP = 6420
 }) {
   const scrollContainerRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -76,26 +76,26 @@ export function LevelRoadmap({
   };
 
   return (
-    <section className={styles.roadmapSection} aria-label="Level Progression Journey">
+    <section id="level-journey-section" className={styles.roadmapSection} aria-label="Level Progression Journey">
       {/* Header with Title and Scroll Controls */}
       <div className={styles.header}>
         <div className={styles.titleArea}>
           <div className={styles.badgeRow}>
             <span className={styles.sectionBadge}>
               <TrendingUp size={12} />
-              PRESTIGE TIERS
+              SOVEREIGN TIERS
             </span>
-            <span className={styles.tierCount}>10 Progression Milestones</span>
+            <span className={styles.tierCount}>10 Royal Milestones</span>
           </div>
-          <h2 className={styles.title}>LEVEL JOURNEY & MILESTONES</h2>
+          <h2 className={styles.title}>LEVEL PROGRESSION & ROYAL MILESTONES</h2>
           <p className={styles.subtitle}>
-            Scroll horizontally to track your path from Starter to Mythic. Click any tier to inspect unlocked rewards and benefits.
+            Scroll horizontally to track your journey from Novice to Sovereign Mythic. Click any tier to inspect unlocked rewards and benefits.
           </p>
         </div>
 
         <div className={styles.controlsGroup}>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className={styles.jumpBtn}
             onClick={scrollToCurrentLevel}
             title="Jump to current level"
@@ -129,8 +129,8 @@ export function LevelRoadmap({
 
       {/* Horizontal Scroll Journey */}
       <div className={styles.scrollWrapper}>
-        <div 
-          className={styles.trackScroll} 
+        <div
+          className={styles.trackScroll}
           ref={scrollContainerRef}
           role="region"
           aria-label="Level cards carousel"
@@ -160,7 +160,7 @@ export function LevelRoadmap({
             if (isNext) cardStatusClass = styles.cardNextMilestone;
 
             return (
-              <div 
+              <div
                 key={lvlNum}
                 data-level={lvlNum}
                 className={`${styles.levelCard} ${cardStatusClass}`}
@@ -179,11 +179,11 @@ export function LevelRoadmap({
                 <div className={styles.pipelineNode}>
                   <div className={styles.nodePoint} />
                   {idx < levels.length - 1 && (
-                    <div 
+                    <div
                       className={`${styles.nodeConnectorLine} ${
-                        lvlNum < currentLevel ? styles.lineCompleted : 
+                        lvlNum < currentLevel ? styles.lineCompleted :
                         lvlNum === currentLevel ? styles.lineCurrent : styles.lineLocked
-                      }`} 
+                      }`}
                     />
                   )}
                 </div>
@@ -217,9 +217,16 @@ export function LevelRoadmap({
                   )}
                 </div>
 
-                {/* Unique Badge */}
+                {/* Unique 3D Collectible Rank Badge */}
                 <div className={styles.badgeContainer}>
-                  <LevelBadge level={lvlNum} size={64} />
+                  <LevelBadge
+                    level={lvlNum}
+                    size={80}
+                    isLocked={isLocked}
+                    isCurrent={isCurrent}
+                    showGlow={isCurrent || isCompleted}
+                    animated={!isLocked || isCurrent}
+                  />
                   {isCurrent && <div className={styles.badgeHalo} />}
                 </div>
 
@@ -267,19 +274,19 @@ export function LevelRoadmap({
 
       {/* Level Detail Inspection Modal */}
       {selectedLevel && (
-        <div 
+        <div
           className={styles.modalOverlay}
           onClick={() => setSelectedLevel(null)}
           role="dialog"
           aria-modal="true"
           aria-labelledby="perk-modal-title"
         >
-          <div 
+          <div
             className={styles.modalCard}
             onClick={(e) => e.stopPropagation()}
           >
-            <button 
-              type="button" 
+            <button
+              type="button"
               className={styles.modalCloseBtn}
               onClick={() => setSelectedLevel(null)}
               aria-label="Close details"
@@ -288,7 +295,14 @@ export function LevelRoadmap({
             </button>
 
             <div className={styles.modalTopRow}>
-              <LevelBadge level={Number(selectedLevel.level)} size={80} />
+              <LevelBadge
+                level={Number(selectedLevel.level)}
+                size={96}
+                isCurrent={Number(selectedLevel.level) === currentLevel}
+                isLocked={Number(selectedLevel.level) > currentLevel}
+                showGlow
+                animated
+              />
               <div className={styles.modalTitleBlock}>
                 <span className={styles.modalLvlTag}>
                   LEVEL {String(selectedLevel.level).padStart(2, '0')}
@@ -307,8 +321,8 @@ export function LevelRoadmap({
               <div className={styles.modalRewardInfo}>
                 <span className={styles.modalRewardHeading}>Milestone Reward</span>
                 <span className={styles.modalRewardValue}>
-                  {selectedLevel.reward 
-                    ? `+${selectedLevel.reward.amount} ${selectedLevel.reward.type}` 
+                  {selectedLevel.reward
+                    ? `+${selectedLevel.reward.amount} ${selectedLevel.reward.type}`
                     : 'Initial Starter Access'}
                 </span>
               </div>
@@ -330,8 +344,8 @@ export function LevelRoadmap({
               </ul>
             </div>
 
-            <button 
-              type="button" 
+            <button
+              type="button"
               className={styles.modalDoneBtn}
               onClick={() => setSelectedLevel(null)}
             >

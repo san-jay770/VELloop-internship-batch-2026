@@ -1,0 +1,312 @@
+/* =========================================================================
+   ChronoXpRail.module.css - 12-RANK CHRONO PROGRESSION RAIL
+   ========================================================================= */
+
+.railContainer {
+  background: linear-gradient(180deg, #16181F 0%, #0D0F14 100%);
+  border: 1px solid rgba(200, 169, 107, 0.25);
+  border-radius: 20px;
+  padding: 30px 36px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.railHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eyebrowTag {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: #C8A96B;
+  text-transform: uppercase;
+}
+
+.railTitle {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #F5F3EE;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.xpReadout {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+}
+
+.xpCurrent {
+  font-size: 20px;
+  font-weight: 800;
+  color: #C8A96B;
+}
+
+.xpSep {
+  font-size: 14px;
+  color: #5A606D;
+}
+
+.xpTarget {
+  font-size: 14px;
+  font-weight: 700;
+  color: #AEB5BE;
+}
+
+.percentagePill {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #08090B;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(200, 169, 107, 0.4);
+}
+
+/* -------------------------------------------------------------
+   TRACK
+   ------------------------------------------------------------- */
+.trackWrapper {
+  position: relative;
+  margin: 16px 0 24px 0;
+}
+
+.trackBezel {
+  height: 14px;
+  background: #060709;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 2px;
+  position: relative;
+  overflow: visible;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.trackFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #A98545 0%, #C8A96B 50%, #F0DBA5 100%);
+  position: relative;
+  box-shadow: 0 0 16px rgba(200, 169, 107, 0.5);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shimmerHighlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, transparent 100%);
+}
+
+.leadingPin {
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #08090B;
+  border: 2px solid #F0DBA5;
+  box-shadow: 0 0 14px rgba(200, 169, 107, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pinGlow {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C8A96B;
+}
+
+/* -------------------------------------------------------------
+   12 MILESTONES GRID
+   ------------------------------------------------------------- */
+.milestonesTrack {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.milestoneMarker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.markerPinCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+}
+
+.miniMarkerBadge {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  opacity: 0.88;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.85));
+  transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+}
+
+.markerPinCircle:hover .miniMarkerBadge,
+.markerCurrent .miniMarkerBadge {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 12px rgba(200, 169, 107, 0.6));
+}
+
+.pinNumber {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 9px;
+  font-weight: 800;
+  color: #C8A96B;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.markerRankTitle {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 9px;
+  font-weight: 800;
+  color: #D6D9DF;
+  white-space: nowrap;
+}
+
+.markerRange {
+  font-size: 8px;
+  color: #6C727F;
+  white-space: nowrap;
+}
+
+/* States */
+.markerCurrent .markerPinCircle {
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  border-color: #F5E5C9;
+  box-shadow: 0 0 14px rgba(200, 169, 107, 0.5);
+  transform: translateY(-2px);
+}
+
+.markerCurrent .pinNumber {
+  color: #08090B;
+}
+
+.markerCurrent .markerRankTitle {
+  color: #C8A96B;
+}
+
+.markerCompleted .markerPinCircle {
+  background: rgba(77, 187, 135, 0.12);
+  border-color: rgba(77, 187, 135, 0.4);
+}
+
+.markerCompleted .pinNumber {
+  color: #4DBB87;
+}
+
+.markerLocked {
+  opacity: 0.65;
+}
+
+/* -------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------- */
+.railFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footerNote {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #AEB5BE;
+}
+
+.goldDiamond {
+  color: #C8A96B;
+  font-size: 10px;
+}
+
+.classificationTag {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #7B808B;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .milestonesTrack {
+    grid-template-columns: repeat(6, 1fr);
+    row-gap: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .railContainer {
+    padding: 22px 16px;
+  }
+
+  .milestonesTrack {
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 12px;
+  }
+
+  .railFooter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

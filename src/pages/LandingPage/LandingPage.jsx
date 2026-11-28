@@ -1,45 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.svg';
-import levelFiveBadge from '../../assets/ref_badge_level_05.png';
-import gameBasket from '../../assets/golden_basket.svg';
-import { 
-  Sparkles, 
-  Gamepad2, 
-  CheckCircle2, 
-  Trophy, 
-  Zap, 
-  ShieldCheck, 
-  ArrowRight, 
-  Coins, 
-  Flame, 
-  Gift, 
-  Wallet, 
-  Users, 
-  Menu, 
-  X, 
-  TrendingUp, 
-  Play, 
+import {
+  Play,
+  ArrowRight,
+  Check,
+  ShieldCheck,
+  Zap,
+  Globe,
+  Menu,
+  X,
   Star,
-  Layers,
-  Clock3
+  Activity,
+  Award,
+  Lock,
+  Sparkles,
+  ChevronRight
 } from 'lucide-react';
 import styles from './LandingPage.module.css';
-import { LandingIntro, hasCompletedIntro, markIntroCompleted } from '../../components/Common/LandingIntro';
 
 export function LandingPage() {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  // In-memory state: plays on every page refresh / load, but persists across tab navigation
-  const [introSeen, setIntroSeen] = useState(() => hasCompletedIntro());
-
-  const handleIntroComplete = () => {
-    markIntroCompleted();
-    setIntroSeen(true);
-    navigate('/Lvl-Dashboard');
-  };
 
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
@@ -50,668 +32,705 @@ export function LandingPage() {
     }
   };
 
-  // Play landing intro animation first on initial load before transitioning to dashboard
-  if (!introSeen) {
-    return <LandingIntro onComplete={handleIntroComplete} />;
-  }
-
   return (
     <div className={styles.landingPage} id="top">
+
+      {/* Background Scientific Telemetry Grid */}
+      <div className={styles.ambientTelemetryGrid} aria-hidden="true" />
+      <div className={styles.cyanEnergyGlowTop} aria-hidden="true" />
+      <div className={styles.goldEnergyGlowRight} aria-hidden="true" />
+
       {/* -------------------------------------------------------------
-         A. NAVIGATION HEADER
+         1. NAVBAR
       ------------------------------------------------------------- */}
-      <header className={styles.header}>
+      <header className={styles.navbarHeader}>
         <div className={styles.container}>
-          <div className={styles.headerInner}>
-            {/* Branding */}
-            <a href="#top" className={styles.brand} onClick={(e) => handleNavClick(e, 'top')}>
-              <img 
-                src={logo}
-                alt="VELOOP Rewards Logo" 
-                className={styles.brandLogo}
+          <div className={styles.navRow}>
+            {/* Logo */}
+            <a href="#top" className={styles.brandLogoGroup} onClick={(e) => handleNavClick(e, 'top')}>
+              <img
+                src="/assets/logo.svg"
+                alt="VELOOP Logo"
+                className={styles.brandLogoImg}
+                onError={(e) => { e.currentTarget.src = '/assets/premium/svg/veloop_logo.svg'; }}
               />
-              <span className={styles.brandName}>VELOOP</span>
-              <span className={styles.brandBadge}>Rewards</span>
+              <div className={styles.brandTitleGroup}>
+                <span className={styles.brandTitle}>VELOOP</span>
+                <span className={styles.quantumBadge}>SCIENTIFIC PROTOCOL</span>
+              </div>
             </a>
 
-            {/* Desktop Navigation Links */}
-            <nav aria-label="Main Navigation">
-              <ul className={styles.navLinks}>
-                <li>
-                  <a href="#top" className={styles.navLink} onClick={(e) => handleNavClick(e, 'top')}>
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#how-it-works" className={styles.navLink} onClick={(e) => handleNavClick(e, 'how-it-works')}>
-                    How It Works
-                  </a>
-                </li>
-                <li>
-                  <a href="#features" className={styles.navLink} onClick={(e) => handleNavClick(e, 'features')}>
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a href="#rewards" className={styles.navLink} onClick={(e) => handleNavClick(e, 'rewards')}>
-                    Rewards
-                  </a>
-                </li>
-                <li>
-                  <a href="#why-veloop" className={styles.navLink} onClick={(e) => handleNavClick(e, 'why-veloop')}>
-                    About
-                  </a>
-                </li>
-              </ul>
+            {/* Center Navigation Links */}
+            <nav className={styles.desktopNav}>
+              <a href="#top" className={`${styles.navItem} ${styles.navActive}`} onClick={(e) => handleNavClick(e, 'top')}>
+                Overview
+              </a>
+              <a href="#how-it-works" className={styles.navItem} onClick={(e) => handleNavClick(e, 'how-it-works')}>
+                Architecture
+              </a>
+              <a href="#journey" className={styles.navItem} onClick={(e) => handleNavClick(e, 'journey')}>
+                Tier Progression
+              </a>
+              <a href="#rewards" className={styles.navItem} onClick={(e) => handleNavClick(e, 'rewards')}>
+                Reward Protocol
+              </a>
+              <a href="#why-veloop" className={styles.navItem} onClick={(e) => handleNavClick(e, 'why-veloop')}>
+                Telemetry
+              </a>
             </nav>
 
-            {/* Header Action Buttons */}
-            <div className={styles.headerActions}>
-              <button 
-                className={styles.loginBtn}
+            {/* Right Buttons */}
+            <div className={styles.navActions}>
+              <button
+                type="button"
+                className={styles.loginPillBtn}
                 onClick={() => setShowLoginModal(true)}
-                aria-label="Account Login"
               >
-                Login
+                Access Portal
               </button>
-              <button 
-                className={styles.getStartedBtn}
+              <button
+                type="button"
+                className={styles.joinNowCyberBtn}
                 onClick={() => navigate('/Lvl-Dashboard')}
-                aria-label="Get Started with VELOOP Dashboard"
               >
-                <span>Get Started</span>
-                <ArrowRight size={16} />
+                <span>Initialize</span>
+                <ArrowRight size={13} className={styles.btnArrow} />
               </button>
-              <button 
-                className={styles.hamburgerBtn}
+              <button
+                type="button"
+                className={styles.mobileHamburger}
                 onClick={() => setMobileMenuOpen(prev => !prev)}
-                aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+                aria-label="Toggle Navigation"
               >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Navigation Dropdown */}
+        {/* Mobile Nav Drawer */}
         {mobileMenuOpen && (
-          <>
-            <div 
-              className={styles.mobileMenuOverlay} 
-              onClick={() => setMobileMenuOpen(false)} 
-            />
-            <div className={styles.mobileMenu}>
-              <a href="#top" className={styles.mobileNavLink} onClick={(e) => handleNavClick(e, 'top')}>
-                Home
-              </a>
-              <a href="#how-it-works" className={styles.mobileNavLink} onClick={(e) => handleNavClick(e, 'how-it-works')}>
-                How It Works
-              </a>
-              <a href="#features" className={styles.mobileNavLink} onClick={(e) => handleNavClick(e, 'features')}>
-                Features
-              </a>
-              <a href="#rewards" className={styles.mobileNavLink} onClick={(e) => handleNavClick(e, 'rewards')}>
-                Rewards
-              </a>
-              <a href="#why-veloop" className={styles.mobileNavLink} onClick={(e) => handleNavClick(e, 'why-veloop')}>
-                About
-              </a>
-              <div className={styles.mobileActions}>
-                <button 
-                  className={styles.loginBtn} 
-                  style={{ width: '100%', textAlign: 'center' }}
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setShowLoginModal(true);
-                  }}
-                >
-                  Login
-                </button>
-                <button 
-                  className={styles.getStartedBtn} 
-                  style={{ width: '100%', justifyContent: 'center' }}
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    navigate('/Lvl-Dashboard');
-                  }}
-                >
-                  <span>Get Started</span>
-                  <ArrowRight size={16} />
-                </button>
-              </div>
+          <div className={styles.mobileDrawer}>
+            <a href="#top" className={styles.mobileItem} onClick={(e) => handleNavClick(e, 'top')}>Overview</a>
+            <a href="#how-it-works" className={styles.mobileItem} onClick={(e) => handleNavClick(e, 'how-it-works')}>Architecture</a>
+            <a href="#journey" className={styles.mobileItem} onClick={(e) => handleNavClick(e, 'journey')}>Tier Progression</a>
+            <a href="#rewards" className={styles.mobileItem} onClick={(e) => handleNavClick(e, 'rewards')}>Reward Protocol</a>
+            <a href="#why-veloop" className={styles.mobileItem} onClick={(e) => handleNavClick(e, 'why-veloop')}>Telemetry</a>
+            <div className={styles.mobileBtnRow}>
+              <button type="button" className={styles.loginPillBtn} style={{ width: '100%' }} onClick={() => { setMobileMenuOpen(false); setShowLoginModal(true); }}>
+                Access Portal
+              </button>
+              <button type="button" className={styles.joinNowCyberBtn} style={{ width: '100%', justifyContent: 'center' }} onClick={() => { setMobileMenuOpen(false); navigate('/Lvl-Dashboard'); }}>
+                <span>Initialize</span>
+                <ArrowRight size={13} />
+              </button>
             </div>
-          </>
+          </div>
         )}
       </header>
 
       {/* -------------------------------------------------------------
-         B. HERO SECTION
+         2. HERO SECTION – SCIENTIFIC ENERGY CORE & TELEMETRY
       ------------------------------------------------------------- */}
       <section className={styles.heroSection}>
-        <img
-          src={gameBasket}
-          alt=""
-          aria-hidden="true"
-          className={styles.heroGameShadow}
-        />
         <div className={styles.container}>
-          <div className={styles.heroGrid}>
-            <div className={styles.heroContent}>
-              <div className={styles.heroPill}>
-                <Sparkles size={14} />
-                <span>Next-Generation Gamified Rewards</span>
+          <div className={styles.heroLayoutGrid}>
+
+            {/* Left Content */}
+            <div className={styles.heroLeftCol}>
+
+              {/* Badge: QUANTUM REWARD ECOSYSTEM */}
+              <div className={styles.ecosystemBadge}>
+                <span className={styles.cyanPulseDot} />
+                <span className={styles.badgeText}>QUANTUM ASSET PROTOCOL · V4.8 ONLINE</span>
               </div>
 
-              <h1 className={styles.heroTitle}>
-                Level Up Your Journey. <br />
-                <span className={styles.heroTitleGradient}>Unlock Epic Rewards.</span>
+              {/* Headline */}
+              <h1 className={styles.heroMainHeadline}>
+                <span className={styles.headlineLine1}>LEVEL UP YOUR</span>
+                <span className={styles.headlineLine2}>QUANTUM LEGACY.</span>
               </h1>
 
-              <p className={styles.heroDesc}>
-                Experience a premium fintech-inspired rewards ecosystem. Complete daily missions, test your skills in the XP Catcher arcade, climb through 10 prestige tiers, and unlock exclusive digital milestone perks.
+              {/* Sub-headline */}
+              <div className={styles.heroSubHeadline}>
+                ANALYZE. PROGRESS. TRANSCEND.
+              </div>
+
+              {/* Description */}
+              <p className={styles.heroDescription}>
+                Welcome to VELOOP — an ultra-premium scientific rewards ecosystem where calibrated gaming interactions
+                generate measurable digital assets, physical-grade 3D rank medallions, and sovereign blockchain-grade privileges.
               </p>
 
-              <div className={styles.heroCtas}>
-                <button 
-                  className={styles.primaryCta}
+              {/* CTA Action Buttons */}
+              <div className={styles.heroButtonRow}>
+                <button
+                  type="button"
+                  className={styles.enterCtaCyberBtn}
                   onClick={() => navigate('/Lvl-Dashboard')}
                 >
-                  <span>Get Started</span>
-                  <ArrowRight size={18} />
+                  <span>ENTER MISSION CONTROL</span>
+                  <ArrowRight size={14} className={styles.btnArrow} />
                 </button>
-                <a 
-                  href="#rewards" 
-                  className={styles.secondaryCta}
-                  onClick={(e) => handleNavClick(e, 'rewards')}
+                <button
+                  type="button"
+                  className={styles.exploreTiersGlassBtn}
+                  onClick={(e) => handleNavClick(e, 'journey')}
                 >
-                  <span>Explore Rewards</span>
-                </a>
+                  <Play size={13} className={styles.playIcon} />
+                  <span>EXPLORE 12 TIERS</span>
+                </button>
               </div>
 
-              <div className={styles.heroStatsRow}>
-                <div className={styles.statItem}>
-                  <span className={styles.statNumber}>10</span>
-                  <span className={styles.statLabel}>Prestige Levels</span>
+              {/* 3 Telemetry Trust Indicators */}
+              <div className={styles.heroTrustRow}>
+                <div className={styles.trustItem}>
+                  <ShieldCheck size={14} color="#19D5E8" />
+                  <span>Quantum Encrypted</span>
                 </div>
-                <div className={styles.statDivider} />
-                <div className={styles.statItem}>
-                  <span className={styles.statNumber}>60 FPS</span>
-                  <span className={styles.statLabel}>Mini-Game Engine</span>
+                <div className={styles.trustItem}>
+                  <Zap size={14} color="#E5C98D" />
+                  <span>Zero Latency Sync</span>
                 </div>
-                <div className={styles.statDivider} />
-                <div className={styles.statItem}>
-                  <span className={styles.statNumber}>100%</span>
-                  <span className={styles.statLabel}>Live Connected</span>
+                <div className={styles.trustItem}>
+                  <Globe size={14} color="#94A3B8" />
+                  <span>50K+ Active Operatives</span>
                 </div>
               </div>
+
             </div>
 
-            {/* Interactive Hero Visual Showcase */}
-            <div className={styles.heroVisual}>
-              <div className={styles.showcaseCard}>
-                <div className={styles.showcaseBadgeRow}>
-                  <img 
-                    src={levelFiveBadge}
-                    alt="Level 05 Ascendant Badge" 
-                    className={styles.showcaseBadgeImg}
+            {/* Right Hero Stage: Animated Scientific Energy Core */}
+            <div className={styles.heroRightCol}>
+              <div className={styles.energyCoreStage}>
+
+                {/* Orbital Gyroscopic Rings */}
+                <div className={styles.orbitalRingOuter} aria-hidden="true" />
+                <div className={styles.orbitalRingMiddle} aria-hidden="true" />
+                <div className={styles.orbitalRingInner} aria-hidden="true" />
+
+                {/* Central Concentric Light Beam */}
+                <div className={styles.coreReactorGlow} aria-hidden="true" />
+
+                {/* Central 3D Centerpiece Emblem */}
+                <div className={styles.coreCenterpieceWrap}>
+                  <img
+                    src="/assets/black_label/rank_04_champion.png"
+                    alt="VELOOP Sovereign Champion Medallion"
+                    className={styles.coreEmblemImg}
                   />
-                  <div className={styles.showcaseBadgeMeta}>
-                    <span className={styles.showcaseLevelName}>Tier 05 · Ascendant</span>
-                    <span className={styles.showcaseXpBig}>6,420 XP</span>
-                    <span className={styles.showcaseXpSub}>1,580 XP to Level 06</span>
-                  </div>
+                  <div className={styles.specularShimmer} aria-hidden="true" />
                 </div>
 
-                <div className={styles.showcaseProgressTrack}>
-                  <div className={styles.showcaseProgressFill} />
-                </div>
-                <div className={styles.showcaseProgressMeta}>
-                  <span>6,420 / 8,000 XP</span>
-                  <span style={{ color: '#f5b041' }}>80% Progress</span>
+                {/* Floating Telemetry HUD Readouts */}
+                <div className={styles.hudTelemetryLeft}>
+                  <span className={styles.hudLabel}>CONTAINMENT</span>
+                  <span className={styles.hudValue}>99.98% OPTIMAL</span>
                 </div>
 
-                <div className={styles.showcaseFeaturePills}>
-                  <div className={styles.featurePillMini}>
-                    <Gamepad2 size={16} color="#9333ea" />
-                    <span>XP Catcher</span>
-                  </div>
-                  <div className={styles.featurePillMini}>
-                    <Trophy size={16} color="#f5b041" />
-                    <span>500 VEs Reward</span>
-                  </div>
+                <div className={styles.hudTelemetryRight}>
+                  <span className={styles.hudLabel}>TELEMETRY RATE</span>
+                  <span className={styles.hudValueGold}>432.8 THz SYNC</span>
                 </div>
 
-                {/* Live Floating Badge */}
-                <div className={styles.floatingBadge}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
-                  <span>Live Backend Connected</span>
+                <div className={styles.hudTelemetryBottom}>
+                  <span className={styles.hudStatusDot} />
+                  <span>TIER 04 • CHAMPION CLEARANCE</span>
                 </div>
+
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
       {/* -------------------------------------------------------------
-         C. HOW IT WORKS
+         3. STATS STRIP SECTION (Scientific Telemetry Metrics)
       ------------------------------------------------------------- */}
-      <section className={styles.sectionBlock} id="how-it-works">
+      <section className={styles.statsSection}>
         <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Progression Loop</span>
-            <h2 className={styles.sectionHeading}>How VELOOP Rewards Works</h2>
-            <p className={styles.sectionLead}>
-              A seamless, motivation-driven progression framework designed to reward your daily engagement without hidden mechanics.
-            </p>
-          </div>
+          <div className={styles.statsFiligreeFrame}>
 
-          <div className={styles.stepsGrid}>
-            {/* Step 1 */}
-            <div className={styles.stepCard}>
-              <span className={styles.stepNumber}>STEP 01</span>
-              <div className={styles.stepIconBox} style={{ background: 'rgba(147, 51, 234, 0.15)', color: '#c084fc' }}>
-                <Zap size={28} />
+            <div className={styles.statCell}>
+              <div className={styles.statIconWrapper}>
+                <Award size={20} color="#19D5E8" />
               </div>
-              <h3 className={styles.stepTitle}>Complete Activities</h3>
-              <p className={styles.stepDesc}>
-                Engage in daily tasks, referral bonuses, media tasks, or jump straight into the skill-based XP Catcher mini-game.
-              </p>
+              <div className={styles.statTextGroup}>
+                <span className={styles.statNumber}>12 TIERS</span>
+                <span className={styles.statLabel}>Sovereign Milestones</span>
+              </div>
             </div>
 
-            {/* Step 2 */}
-            <div className={styles.stepCard}>
-              <span className={styles.stepNumber}>STEP 02</span>
-              <div className={styles.stepIconBox} style={{ background: 'rgba(245, 176, 65, 0.15)', color: '#f5b041' }}>
-                <TrendingUp size={28} />
+            <div className={styles.statSeparator} />
+
+            <div className={styles.statCell}>
+              <div className={styles.statIconWrapper}>
+                <Sparkles size={20} color="#E5C98D" />
               </div>
-              <h3 className={styles.stepTitle}>Earn XP & Level Up</h3>
-              <p className={styles.stepDesc}>
-                Every activity grants verified experience points that fill your level gauge and advance you along the 10-tier roadmap.
-              </p>
+              <div className={styles.statTextGroup}>
+                <span className={styles.statNumber}>100+</span>
+                <span className={styles.statLabel}>Protocol Rewards</span>
+              </div>
             </div>
 
-            {/* Step 3 */}
-            <div className={styles.stepCard}>
-              <span className={styles.stepNumber}>STEP 03</span>
-              <div className={styles.stepIconBox} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>
-                <Gift size={28} />
+            <div className={styles.statSeparator} />
+
+            <div className={styles.statCell}>
+              <div className={styles.statIconWrapper}>
+                <Zap size={20} color="#19D5E8" />
               </div>
-              <h3 className={styles.stepTitle}>Unlock Tier Rewards</h3>
-              <p className={styles.stepDesc}>
-                Unlock milestone treasure chests, VE tokens, sparkling gems, game spins, and elevated daily earning limits.
-              </p>
+              <div className={styles.statTextGroup}>
+                <span className={styles.statNumber}>REAL-TIME</span>
+                <span className={styles.statLabel}>XP Synchronization</span>
+              </div>
             </div>
+
+            <div className={styles.statSeparator} />
+
+            <div className={styles.statCell}>
+              <div className={styles.statIconWrapper}>
+                <Globe size={20} color="#94A3B8" />
+              </div>
+              <div className={styles.statTextGroup}>
+                <span className={styles.statNumber}>50,000+</span>
+                <span className={styles.statLabel}>Verified Operatives</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* -------------------------------------------------------------
-         D. FEATURES SECTION
+         4. HOW VELOOP WORKS (3-Step Scientific Pipeline)
       ------------------------------------------------------------- */}
-      <section className={styles.sectionBlock} id="features" style={{ background: '#07080e' }}>
+      <section className={styles.howItWorksSection} id="how-it-works">
         <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>Core Capabilities</span>
-            <h2 className={styles.sectionHeading}>Engineered for Gamified Progression</h2>
-            <p className={styles.sectionLead}>
-              Explore the full suite of interactive tools built into the VELOOP Level-Up Dashboard.
-            </p>
+
+          <div className={styles.sectionTitleBlock}>
+            <div className={styles.flourishHeadingRow}>
+              <span className={styles.cyanLineLeft} />
+              <h2 className={styles.cyberHeading}>HOW VELOOP OPERATES</h2>
+              <span className={styles.cyanLineRight} />
+            </div>
+            <p className={styles.sectionSubtitle}>Calibrated Architecture. Quantum Milestones. Guaranteed Assets.</p>
           </div>
 
-          <div className={styles.featuresGrid}>
-            {/* Feature 1 */}
-            <div className={styles.featureCard}>
-              <div className={styles.featureIconWrapper} style={{ background: 'rgba(147, 51, 234, 0.15)', color: '#c084fc' }}>
-                <Play size={24} />
+          <div className={styles.stepsCardsRow}>
+
+            {/* Step 1: INITIALIZE & PLAY */}
+            <div className={styles.stepCardExact}>
+              <div className={styles.stepIconLeft}>
+                <div className={styles.stepNumPill}>01</div>
+                <Activity size={24} color="#19D5E8" />
               </div>
-              <h3 className={styles.featureCardTitle}>Earn More XP</h3>
-              <p className={styles.featureCardDesc}>
-                Six distinct earning modules including Watch & Earn, Daily Missions, and Refer & Earn to accelerate your tier growth.
-              </p>
-              <div className={styles.featureCardMeta}>
-                <span>+15 to +50 XP per activity</span>
+              <div className={styles.stepContentRight}>
+                <h3 className={styles.stepTitle}>INITIALIZE & COMPETE</h3>
+                <p className={styles.stepDesc}>Engage in interactive trials and telemetry activities within the VELOOP network.</p>
               </div>
             </div>
 
-            {/* Feature 2 */}
-            <div className={styles.featureCard}>
-              <div className={styles.featureIconWrapper} style={{ background: 'rgba(245, 176, 65, 0.15)', color: '#f5b041' }}>
-                <Layers size={24} />
+            <div className={styles.chevronDivider} aria-hidden="true">
+              <span>›</span>
+            </div>
+
+            {/* Step 2: QUANTUM LEVEL PROGRESSION */}
+            <div className={styles.stepCardExact}>
+              <div className={styles.stepIconLeft}>
+                <div className={styles.stepNumPill}>02</div>
+                <Zap size={24} color="#E5C98D" />
               </div>
-              <h3 className={styles.featureCardTitle}>10-Tier Level Roadmap</h3>
-              <p className={styles.featureCardDesc}>
-                A clear visual hierarchy from Starter (Lvl 01) to Mythic (Lvl 10) with completed, current, and locked state badges.
-              </p>
-              <div className={styles.featureCardMeta}>
-                <span>Horizontal scroll track</span>
+              <div className={styles.stepContentRight}>
+                <h3 className={styles.stepTitle}>QUANTUM LEVEL UP</h3>
+                <p className={styles.stepDesc}>Progress through 12 aerospace tiers and unlock physical-grade 3D collectible medals.</p>
               </div>
             </div>
 
-            {/* Feature 3 */}
-            <div className={styles.featureCard}>
-              <div className={styles.featureIconWrapper} style={{ background: 'rgba(2, 132, 199, 0.15)', color: '#38bdf8' }}>
-                <Gamepad2 size={24} />
+            <div className={styles.chevronDivider} aria-hidden="true">
+              <span>›</span>
+            </div>
+
+            {/* Step 3: ASSET EXTRACTION */}
+            <div className={styles.stepCardExact}>
+              <div className={styles.stepIconLeft}>
+                <div className={styles.stepNumPill}>03</div>
+                <Award size={24} color="#19D5E8" />
               </div>
-              <h3 className={styles.featureCardTitle}>XP Catcher Mini-Game</h3>
-              <p className={styles.featureCardDesc}>
-                A smooth 60 FPS Canvas arcade challenge featuring the 3D golden basket, falling orbs, timer, and score multipliers.
-              </p>
-              <div className={styles.featureCardMeta}>
-                <span>Keyboard, touch & mouse</span>
+              <div className={styles.stepContentRight}>
+                <h3 className={styles.stepTitle}>EXTRACT ASSETS</h3>
+                <p className={styles.stepDesc}>Claim verified VES digital currency, sapphire canisters, and rare cosmetic frames.</p>
               </div>
             </div>
 
-            {/* Feature 4 */}
-            <div className={styles.featureCard}>
-              <div className={styles.featureIconWrapper} style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#f87171' }}>
-                <Flame size={24} />
-              </div>
-              <h3 className={styles.featureCardTitle}>Daily Tasks & Streaks</h3>
-              <p className={styles.featureCardDesc}>
-                Build your daily streak, complete mission checklists, and maintain momentum to earn loyalty bonus multipliers.
-              </p>
-              <div className={styles.featureCardMeta}>
-                <span>Streak tracking & bonus</span>
-              </div>
-            </div>
-
-            {/* Feature 5 */}
-            <div className={styles.featureCard}>
-              <div className={styles.featureIconWrapper} style={{ background: 'rgba(245, 176, 65, 0.15)', color: '#fcd34d' }}>
-                <Trophy size={24} />
-              </div>
-              <h3 className={styles.featureCardTitle}>Rewards & Celebrations</h3>
-              <p className={styles.featureCardDesc}>
-                Milestone treasure chests, celebration modals with 3D pedestal, confetti effects, and transparent perk previews.
-              </p>
-              <div className={styles.featureCardMeta}>
-                <span>VEs, Gems & Spins</span>
-              </div>
-            </div>
-
-            {/* Feature 6 */}
-            <div className={styles.featureCard}>
-              <div className={styles.featureIconWrapper} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>
-                <Wallet size={24} />
-              </div>
-              <h3 className={styles.featureCardTitle}>Smart Wallet & Profile</h3>
-              <p className={styles.featureCardDesc}>
-                Dedicated balance overview, photo upload preview, profile editor with validation, and comprehensive activity history.
-              </p>
-              <div className={styles.featureCardMeta}>
-                <span>Instant profile updates</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* -------------------------------------------------------------
-         E. REWARDS SECTION
+         5. YOUR LEVEL JOURNEY (Precision Telemetry Rail Lv.1 to Lv.6)
       ------------------------------------------------------------- */}
-      <section className={styles.sectionBlock} id="rewards">
+      <section className={styles.journeySection} id="journey">
         <div className={styles.container}>
-          <div className={styles.rewardsShowcase}>
-            <div className={styles.sectionHeader} style={{ marginBottom: '32px' }}>
-              <span className={styles.sectionEyebrow}>Milestone Rewards</span>
-              <h2 className={styles.sectionHeading}>Tier Rewards Overview</h2>
-              <p className={styles.sectionLead}>
-                Every level you achieve unlocks tangible platform perks. Progress through tiers to multiply your rewards.
-              </p>
+          <div className={styles.journeyFlexGrid}>
+
+            {/* Left Column: Title & CTA Button */}
+            <div className={styles.journeyLeftPanel}>
+              <div className={styles.panelEyebrow}>TIER TELEMETRY</div>
+              <h2 className={styles.journeyMainHeading}>
+                <span>CALIBRATED</span>
+                <span>PROGRESSION RAIL</span>
+              </h2>
+              <p className={styles.journeySub}>12 Sovereign Tiers. Micro-centered 512px 3D Medallions.</p>
+              <button
+                type="button"
+                className={styles.viewAllLevelsBtn}
+                onClick={() => navigate('/Lvl-Dashboard')}
+              >
+                <span>VIEW ALL 12 TIERS</span>
+                <ArrowRight size={13} />
+              </button>
             </div>
 
-            <div className={styles.rewardTiersGrid}>
-              {/* Tier 02 */}
-              <div className={styles.tierCard}>
-                <img src="/assets/lvl-2.svg" alt="Level 02 Badge" className={styles.tierBadgeImg} />
-                <span className={styles.tierLevelTag}>Level 02</span>
-                <h4 className={styles.tierName}>Explorer</h4>
-                <div className={styles.tierRewardPill}>
-                  <Coins size={14} />
-                  <span>100 VEs</span>
-                </div>
-              </div>
+            {/* Right Column: 6 Level Nodes on Cyan Track */}
+            <div className={styles.journeyRightPanel}>
+              <div className={styles.nodesTrackContainer}>
 
-              {/* Tier 04 */}
-              <div className={styles.tierCard}>
-                <img src="/assets/lvl-4.svg" alt="Level 04 Badge" className={styles.tierBadgeImg} />
-                <span className={styles.tierLevelTag}>Level 04</span>
-                <h4 className={styles.tierName}>Momentum</h4>
-                <div className={styles.tierRewardPill}>
-                  <Coins size={14} />
-                  <span>250 VEs</span>
-                </div>
-              </div>
+                {/* Horizontal Cyan Telemetry Line */}
+                <div className={styles.trackConnectorLine} aria-hidden="true" />
 
-              {/* Tier 05 (Active) */}
-              <div className={`${styles.tierCard} ${styles.tierCardActive}`}>
-                <img 
-                  src="/assets/ref_badge_level_05.png" 
-                  alt="Level 05 Badge" 
-                  className={styles.tierBadgeImg}
-                  onError={(e) => { e.currentTarget.src = '/assets/lvl-5.svg'; }}
+                {/* Node 1: Lv.1 Completed */}
+                <div className={styles.nodeItem}>
+                  <div className={styles.badgeWrap}>
+                    <img
+                      src="/assets/black_label/rank_01_novice.png"
+                      alt="Novice Badge"
+                      className={styles.badgeImgSmall}
+                    />
+                  </div>
+                  <span className={styles.nodeLevelTag}>Lv.1</span>
+                  <span className={styles.statusCompleted}>
+                    <Check size={11} />
+                    <span>Unlocked</span>
+                  </span>
+                </div>
+
+                {/* Node 2: Lv.2 Completed */}
+                <div className={styles.nodeItem}>
+                  <div className={styles.badgeWrap}>
+                    <img
+                      src="/assets/black_label/rank_02_apprentice.png"
+                      alt="Apprentice Badge"
+                      className={styles.badgeImgSmall}
+                    />
+                  </div>
+                  <span className={styles.nodeLevelTag}>Lv.2</span>
+                  <span className={styles.statusCompleted}>
+                    <Check size={11} />
+                    <span>Unlocked</span>
+                  </span>
+                </div>
+
+                {/* Node 3: Lv.3 Completed */}
+                <div className={styles.nodeItem}>
+                  <div className={styles.badgeWrap}>
+                    <img
+                      src="/assets/black_label/rank_03_warrior.png"
+                      alt="Warrior Badge"
+                      className={styles.badgeImgSmall}
+                    />
+                  </div>
+                  <span className={styles.nodeLevelTag}>Lv.3</span>
+                  <span className={styles.statusCompleted}>
+                    <Check size={11} />
+                    <span>Unlocked</span>
+                  </span>
+                </div>
+
+                {/* Node 4: Lv.4 CURRENT (Champion) */}
+                <div className={`${styles.nodeItem} ${styles.nodeItemCurrent}`}>
+                  <div className={styles.currentRadiantHalo} aria-hidden="true" />
+                  <div className={styles.badgeWrapCurrent}>
+                    <img
+                      src="/assets/black_label/rank_04_champion.png"
+                      alt="Champion Badge"
+                      className={styles.badgeImgCurrent}
+                    />
+                  </div>
+                  <span className={styles.nodeLevelTagCurrent}>Lv.4</span>
+                  <span className={styles.statusCurrentPill}>Active Tier</span>
+                </div>
+
+                {/* Node 5: Lv.5 Locked */}
+                <div className={`${styles.nodeItem} ${styles.nodeItemLocked}`}>
+                  <div className={styles.badgeWrap}>
+                    <img
+                      src="/assets/black_label/rank_05_legend.png"
+                      alt="Legend Badge"
+                      className={styles.badgeImgSmall}
+                    />
+                  </div>
+                  <span className={styles.nodeLevelTag}>Lv.5</span>
+                  <span className={styles.statusLocked}>
+                    <Lock size={10} />
+                    <span>Encrypted</span>
+                  </span>
+                </div>
+
+                {/* Node 6: Lv.6 Locked */}
+                <div className={`${styles.nodeItem} ${styles.nodeItemLocked}`}>
+                  <div className={styles.badgeWrap}>
+                    <img
+                      src="/assets/black_label/rank_06_elite.png"
+                      alt="Elite Badge"
+                      className={styles.badgeImgSmall}
+                    />
+                  </div>
+                  <span className={styles.nodeLevelTag}>Lv.6</span>
+                  <span className={styles.statusLocked}>
+                    <Lock size={10} />
+                    <span>Encrypted</span>
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------------
+         6. REWARDS SHOWCASE (Futuristic Vault Artifacts)
+      ------------------------------------------------------------- */}
+      <section className={styles.rewardsSection} id="rewards">
+        <div className={styles.container}>
+
+          <div className={styles.sectionTitleBlock}>
+            <div className={styles.flourishHeadingRow}>
+              <span className={styles.cyanLineLeft} />
+              <h2 className={styles.cyberHeading}>PROTOCOL REWARDS VAULT</h2>
+              <span className={styles.cyanLineRight} />
+            </div>
+            <p className={styles.sectionSubtitle}>Verified physical and digital rewards disbursed through the telemetry chain.</p>
+          </div>
+
+          <div className={styles.rewardsGrid}>
+
+            {/* Reward 1: Quantum Chest */}
+            <div className={styles.rewardCardExact}>
+              <div className={styles.rewardImgWrap}>
+                <img
+                  src="/assets/premium/png/reward_premium_chest@4x.png"
+                  alt="Quantum Chest"
+                  className={styles.rewardThumbnail}
+                  onError={(e) => { e.currentTarget.src = '/assets/reference/reward_chest.png'; }}
                 />
-                <span className={styles.tierLevelTag} style={{ color: '#f5b041' }}>Level 05 (Current)</span>
-                <h4 className={styles.tierName}>Ascendant</h4>
-                <div className={styles.tierRewardPill} style={{ background: '#f5b041', color: '#090a12' }}>
-                  <Gift size={14} />
-                  <span>500 VEs + 25 Gems</span>
-                </div>
               </div>
+              <h4 className={styles.rewardCardTitle}>Quantum Chest</h4>
+              <span className={styles.rewardTierReq}>Tier 01+ Clearance</span>
+            </div>
 
-              {/* Tier 06 */}
-              <div className={styles.tierCard}>
-                <img src="/assets/lvl-6.svg" alt="Level 06 Badge" className={styles.tierBadgeImg} />
-                <span className={styles.tierLevelTag}>Level 06</span>
-                <h4 className={styles.tierName}>Vanguard</h4>
-                <div className={styles.tierRewardPill}>
-                  <Star size={14} />
-                  <span>2 Lucky Spins</span>
-                </div>
+            {/* Reward 2: Exclusive Avatar */}
+            <div className={styles.rewardCardExact}>
+              <div className={styles.rewardImgWrap}>
+                <img
+                  src="/assets/premium/png/reward_exclusive_avatar@4x.png"
+                  alt="Cybernetic Avatar"
+                  className={styles.rewardThumbnail}
+                  onError={(e) => { e.currentTarget.src = '/assets/reference/reward_avatar.png'; }}
+                />
+              </div>
+              <h4 className={styles.rewardCardTitle}>Cybernetic Frame</h4>
+              <span className={styles.rewardTierReq}>Tier 05+ Clearance</span>
+            </div>
+
+            {/* Reward 3: Sovereign Badge */}
+            <div className={styles.rewardCardExact}>
+              <div className={styles.rewardImgWrap}>
+                <img
+                  src="/assets/black_label/rank_12_supreme.png"
+                  alt="Sovereign Crest"
+                  className={styles.rewardThumbnail}
+                />
+              </div>
+              <h4 className={styles.rewardCardTitle}>Apex Medallion</h4>
+              <span className={styles.rewardTierReq}>Tier 10+ Clearance</span>
+            </div>
+
+            {/* Reward 4: Dark Energy Gems */}
+            <div className={styles.rewardCardExact}>
+              <div className={styles.rewardImgWrap}>
+                <img
+                  src="/assets/premium/png/reward_gems@4x.png"
+                  alt="Sapphire Canisters"
+                  className={styles.rewardThumbnail}
+                  onError={(e) => { e.currentTarget.src = '/assets/reference/reward_gems.png'; }}
+                />
+              </div>
+              <h4 className={styles.rewardCardTitle}>Sapphire Core</h4>
+              <span className={styles.rewardTierReq}>Tier 03+ Clearance</span>
+            </div>
+
+            {/* Reward 5: Relic Skin */}
+            <div className={styles.rewardCardExact}>
+              <div className={styles.rewardImgWrap}>
+                <img
+                  src="/assets/premium/png/reward_epic_skin@4x.png"
+                  alt="Exotic Relic"
+                  className={styles.rewardThumbnail}
+                  onError={(e) => { e.currentTarget.src = '/assets/reference/reward_skin.png'; }}
+                />
+              </div>
+              <h4 className={styles.rewardCardTitle}>Exotic Relic</h4>
+              <span className={styles.rewardTierReq}>Tier 07+ Clearance</span>
+            </div>
+
+            {/* Reward 6: Vault Showcase CTA Card */}
+            <div className={`${styles.rewardCardExact} ${styles.rewardCtaBanner}`}>
+              <div className={styles.vaultCtaContent}>
+                <h4 className={styles.vaultTitle}>Access The Master Vault</h4>
+                <p className={styles.vaultSub}>Claim daily protocol boosts and milestone crates.</p>
+                <button
+                  type="button"
+                  className={styles.vaultExploreBtn}
+                  onClick={() => navigate('/Lvl-Dashboard')}
+                >
+                  <span>ENTER VAULT</span>
+                  <ArrowRight size={13} />
+                </button>
               </div>
             </div>
 
-            <p className={styles.rewardsDisclaimer}>
-              *Displayed rewards represent the current platform tier configurations. Progression rewards are unlocked sequentially upon attaining the required XP threshold.
-            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------------
+         7. CALL TO ACTION BANNER (Futuristic Mission Launch)
+      ------------------------------------------------------------- */}
+      <section className={styles.ctaArmySection} id="why-veloop">
+        <div className={styles.container}>
+          <div className={styles.ctaMilitaryCard}>
+            <div className={styles.ctaInnerContent}>
+              <div className={styles.ctaTag}>TRANSMISSION REVEALED</div>
+              <h2 className={styles.ctaHeading}>INITIALIZE YOUR REWARDS TELEMETRY</h2>
+              <p className={styles.ctaSub}>Join over 50,000 verified operatives climbing the sovereign tier ladder.</p>
+              <button
+                type="button"
+                className={styles.ctaGoldLaunchBtn}
+                onClick={() => navigate('/Lvl-Dashboard')}
+              >
+                <span>COMMENCE MISSION NOW</span>
+                <ArrowRight size={14} />
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* -------------------------------------------------------------
-         F. WHY VELOOP
+         8. SCIENTIFIC RESPONSIVE FOOTER (100% SVG-Free)
       ------------------------------------------------------------- */}
-      <section className={styles.sectionBlock} id="why-veloop">
+      <footer className={styles.footerSection}>
         <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionEyebrow}>The VELOOP Advantage</span>
-            <h2 className={styles.sectionHeading}>Why Choose VELOOP Rewards?</h2>
-            <p className={styles.sectionLead}>
-              Designed from the ground up to unite fintech discipline with rewarding gamification mechanics.
-            </p>
-          </div>
+          <div className={styles.footerInner}>
 
-          <div className={styles.whyGrid}>
-            <div className={styles.whyCard}>
-              <div className={styles.whyIconBox}>
-                <ShieldCheck size={26} />
-              </div>
-              <div className={styles.whyCardContent}>
-                <h3>Fintech-Grade Integrity</h3>
-                <p>
-                  No casino or gambling styling. We deliver clean, trustworthy, and transparent reward mechanics with verifiable progress tracking.
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.whyCard}>
-              <div className={styles.whyIconBox}>
-                <Gamepad2 size={26} />
-              </div>
-              <div className={styles.whyCardContent}>
-                <h3>Interactive Skill Arcade</h3>
-                <p>
-                  Instead of passive waiting, test your reflexes in the 60 FPS XP Catcher mini-game with custom 3D basket physics and live scoring.
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.whyCard}>
-              <div className={styles.whyIconBox}>
-                <TrendingUp size={26} />
-              </div>
-              <div className={styles.whyCardContent}>
-                <h3>Action-Driven Progress</h3>
-                <p>
-                  Never guess what comes next. The dashboard clearly exposes your current XP, remaining XP needed, next level, and unlockable rewards.
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.whyCard}>
-              <div className={styles.whyIconBox}>
-                <Zap size={26} />
-              </div>
-              <div className={styles.whyCardContent}>
-                <h3>Real-Time Synchronization</h3>
-                <p>
-                  Connected directly to the live VELOOP backend, your session scores, completed tasks, and tier advancements are updated instantly.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------
-         G. FINAL CALL TO ACTION
-      ------------------------------------------------------------- */}
-      <section className={styles.finalCtaSection}>
-        <div className={styles.container}>
-          <div className={styles.finalCtaCard}>
-            <h2 className={styles.finalCtaHeading}>
-              Ready to Level Up Your Rewards Journey?
-            </h2>
-            <p className={styles.finalCtaSub}>
-              Step into the full VELOOP Level-Up Dashboard now. Play the mini-game, complete missions, and claim your milestone rewards.
-            </p>
-            <button 
-              className={styles.finalCtaBtn}
-              onClick={() => navigate('/Lvl-Dashboard')}
-            >
-              <span>Launch Dashboard Now</span>
-              <ArrowRight size={20} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------
-         H. FOOTER
-      ------------------------------------------------------------- */}
-      <footer className={styles.footer}>
-        <div className={styles.container}>
-          <div className={styles.footerTop}>
+            {/* Left: Brand */}
             <div className={styles.footerBrandCol}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <img 
-                  src="/assets/logo.svg" 
-                  alt="VELOOP Logo" 
-                  style={{ width: '30px', height: '30px', borderRadius: '8px' }}
-                  onError={(e) => { e.currentTarget.src = '/assets/lvl-5.svg'; }}
+              <div className={styles.footerLogoRow}>
+                <img
+                  src="/assets/premium/png/veloop_logo@4x.png"
+                  alt="VELOOP"
+                  className={styles.footerLogoImg}
                 />
-                <span style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff' }}>VELOOP</span>
+                <span className={styles.footerBrandText}>VELOOP</span>
               </div>
-              <p className={styles.footerBrandDesc}>
-                Gamified Level Progression, Rewards & Engagement Hub built for modern digital platforms.
-              </p>
-              <div className={styles.footerBackendPill}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
-                <span>Backend: veloop-5zm4.onrender.com</span>
+              <span className={styles.footerCopyright}>
+                © 2026 VELOOP NETWORK. ALL RIGHTS RESERVED. ZERO-SVG QUANTUM PLATFORM.
+              </span>
+            </div>
+
+            {/* Center: Legal Links */}
+            <div className={styles.footerNavLinks}>
+              <a href="#top" onClick={(e) => handleNavClick(e, 'top')}>Overview</a>
+              <a href="#how-it-works" onClick={(e) => handleNavClick(e, 'how-it-works')}>Architecture</a>
+              <a href="#journey" onClick={(e) => handleNavClick(e, 'journey')}>Tiers</a>
+              <a href="#rewards" onClick={(e) => handleNavClick(e, 'rewards')}>Vault</a>
+              <a href="#privacy" onClick={(e) => e.preventDefault()}>Privacy Protocol</a>
+              <a href="#terms" onClick={(e) => e.preventDefault()}>Terms of Service</a>
+            </div>
+
+            {/* Right: Scientific Status Badges (Zero SVG) */}
+            <div className={styles.footerStatusCol}>
+              <div className={styles.systemStatusChip}>
+                <span className={styles.systemDot} />
+                <span>ALL NODES OPERATIONAL</span>
+              </div>
+              <div className={styles.footerSocialIcons}>
+                <span className={styles.socialCircle} title="Discord Comms">💬</span>
+                <span className={styles.socialCircle} title="YouTube Channel">▶</span>
+                <span className={styles.socialCircle} title="X Telemetry">𝕏</span>
               </div>
             </div>
 
-            {/* Column 2: Dashboard Navigation */}
-            <div>
-              <h4 className={styles.footerColTitle}>Navigation</h4>
-              <ul className={styles.footerNavList}>
-                <li><a href="#top" className={styles.footerLink} onClick={(e) => handleNavClick(e, 'top')}>Home</a></li>
-                <li><a href="#how-it-works" className={styles.footerLink} onClick={(e) => handleNavClick(e, 'how-it-works')}>How It Works</a></li>
-                <li><a href="#features" className={styles.footerLink} onClick={(e) => handleNavClick(e, 'features')}>Features</a></li>
-                <li><a href="#rewards" className={styles.footerLink} onClick={(e) => handleNavClick(e, 'rewards')}>Rewards</a></li>
-                <li><a href="#why-veloop" className={styles.footerLink} onClick={(e) => handleNavClick(e, 'why-veloop')}>About</a></li>
-              </ul>
-            </div>
-
-            {/* Column 3: Platform Routes */}
-            <div>
-              <h4 className={styles.footerColTitle}>Platform Hub</h4>
-              <ul className={styles.footerNavList}>
-                <li><a href="/Lvl-Dashboard" className={styles.footerLink} onClick={(e) => { e.preventDefault(); navigate('/Lvl-Dashboard'); }}>Level Dashboard</a></li>
-                <li><a href="/Lvl-Dashboard/activity" className={styles.footerLink} onClick={(e) => { e.preventDefault(); navigate('/Lvl-Dashboard/activity'); }}>Recent Activity</a></li>
-                <li><a href="/Lvl-Dashboard/wallet" className={styles.footerLink} onClick={(e) => { e.preventDefault(); navigate('/Lvl-Dashboard/wallet'); }}>My Wallet</a></li>
-                <li><a href="/Lvl-Dashboard/profile" className={styles.footerLink} onClick={(e) => { e.preventDefault(); navigate('/Lvl-Dashboard/profile'); }}>User Profile</a></li>
-              </ul>
-            </div>
-
-            {/* Column 4: Project Info */}
-            <div>
-              <h4 className={styles.footerColTitle}>Task 16 Info</h4>
-              <p style={{ fontSize: '13px', color: '#9ca3af', lineHeight: '1.6' }}>
-                VELOOP Rewards Internship 2026<br />
-                Stack: React 18 · Vite · CSS Modules<br />
-                Status: Production Verified
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.footerBottom}>
-            <span>&copy; {new Date().getFullYear()} VELOOP Rewards. All rights reserved.</span>
-            <span>Task 16 Level-Up Dashboard Implementation</span>
           </div>
         </div>
       </footer>
 
-      {/* -------------------------------------------------------------
-         DEMO AUTH MODAL (Safe authentication handler)
-      ------------------------------------------------------------- */}
+      {/* Login Portal Modal */}
       {showLoginModal && (
-        <div className={styles.modalOverlay} role="dialog" aria-modal="true">
-          <div className={styles.modalContent}>
-            <button 
-              className={styles.modalCloseBtn}
-              onClick={() => setShowLoginModal(false)}
-              aria-label="Close modal"
-            >
-              <X size={20} />
-            </button>
-
-            <div style={{ display: 'inline-flex', padding: '14px', borderRadius: '50%', background: 'rgba(245, 176, 65, 0.15)', color: '#f5b041', marginBottom: '16px' }}>
-              <ShieldCheck size={36} />
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowLoginModal(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.modalHeader}>
+              <h3 className={styles.modalTitle}>OPERATIVE ACCESS PORTAL</h3>
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setShowLoginModal(false)}
+              >
+                <X size={18} />
+              </button>
             </div>
-
-            <h3 style={{ fontSize: '22px', fontWeight: '800', color: '#ffffff', marginBottom: '8px' }}>
-              Active Demo Session
-            </h3>
-
-            <p style={{ fontSize: '14px', color: '#9ca3af', lineHeight: '1.5', marginBottom: '24px' }}>
-              You are currently authenticated as demo member <strong>VeLooper</strong> (Level 05 · Ascendant) connected to the live backend.
-            </p>
-
-            <button 
-              className={styles.primaryCta}
-              style={{ width: '100%', justifyContent: 'center' }}
-              onClick={() => {
-                setShowLoginModal(false);
-                navigate('/Lvl-Dashboard');
-              }}
-            >
-              <span>Enter Level Dashboard</span>
-              <ArrowRight size={18} />
-            </button>
+            <p className={styles.modalSub}>Enter your neural credentials to synchronize with VELOOP telemetry.</p>
+            <form onSubmit={(e) => { e.preventDefault(); setShowLoginModal(false); navigate('/Lvl-Dashboard'); }}>
+              <div className={styles.formGroup}>
+                <label className={styles.inputLabel}>OPERATIVE IDENTIFIER</label>
+                <input
+                  type="text"
+                  className={styles.textInput}
+                  placeholder="agent@veloop.network"
+                  defaultValue="operative_07@veloop.network"
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.inputLabel}>ENCRYPTION KEY</label>
+                <input
+                  type="password"
+                  className={styles.textInput}
+                  placeholder="••••••••••••"
+                  defaultValue="cyberquantum2026"
+                  required
+                />
+              </div>
+              <button type="submit" className={styles.modalSubmitBtn}>
+                AUTHENTICATE & ENTER
+              </button>
+            </form>
           </div>
         </div>
       )}
+
     </div>
   );
 }

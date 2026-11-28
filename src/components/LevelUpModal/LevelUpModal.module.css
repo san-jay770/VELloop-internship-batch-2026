@@ -1,7 +1,9 @@
+/* LevelUpModal.module.css - Obsidian Gold Luxury Theme */
+
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(10, 11, 20, 0.94);
+  background-color: rgba(9, 11, 16, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 500;
@@ -15,14 +17,14 @@
 .modalCard {
   width: 100%;
   max-width: 420px;
-  background: radial-gradient(120% 120% at 50% 0%, #20243d 0%, #131525 100%);
-  border: 1px solid rgba(245, 176, 65, 0.4);
+  background: radial-gradient(120% 120% at 50% 0%, var(--bg-elevated, #1B222D) 0%, var(--bg-card, #151A23) 100%);
+  border: 1px solid rgba(197, 166, 106, 0.4);
   border-radius: 28px;
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(245, 176, 65, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(197, 166, 106, 0.2);
   position: relative;
   max-height: 90vh;
   overflow-y: auto;
@@ -36,16 +38,16 @@
 .levelUpTitle {
   font-size: 28px;
   font-weight: 900;
-  color: #f5b041;
+  color: var(--champagne-gold, #C5A66A);
   letter-spacing: 1px;
   text-transform: uppercase;
-  text-shadow: 0 0 15px rgba(245, 176, 65, 0.5);
+  text-shadow: 0 0 15px rgba(197, 166, 106, 0.5);
   line-height: 1.1;
 }
 
 .levelUpSub {
   font-size: 14px;
-  color: #9ca3af;
+  color: var(--text-secondary, #A5A8B0);
   margin-top: 4px;
 }
 
@@ -71,9 +73,9 @@
 .pedestalBase3D {
   width: 180px;
   height: 38px;
-  background: linear-gradient(180deg, #d97706 0%, #78350f 100%);
+  background: linear-gradient(180deg, var(--champagne-gold, #C5A66A) 0%, #876d3b 100%);
   border-radius: 50%;
-  box-shadow: 0 12px 25px rgba(245, 176, 65, 0.4);
+  box-shadow: 0 12px 25px rgba(197, 166, 106, 0.4);
   margin-top: -16px;
 }
 
@@ -87,8 +89,8 @@
 }
 
 .rewardItem {
-  background: #1c1e32;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-elevated, #1B222D);
+  border: 1px solid var(--border-subtle, #30333B);
   border-radius: 18px;
   padding: 16px 12px;
   display: flex;
@@ -103,7 +105,7 @@
 .rewardAmount {
   font-size: 17px;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text-primary, #F5F3EE);
 }
 
 .rewardImg {
@@ -128,35 +130,33 @@
   gap: 10px;
   font-size: 13px;
   font-weight: 500;
-  color: #d1d5db;
+  color: var(--text-primary, #F5F3EE);
 }
 
 .perkIcon {
-  color: #f5b041;
+  color: var(--champagne-gold, #C5A66A);
 }
 
 /* Claim Button */
 .claimBtn {
   width: 100%;
-  background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
-  color: #12131f;
+  background: linear-gradient(135deg, var(--champagne-gold, #C5A66A) 0%, var(--gold-highlight, #E2C891) 100%);
+  color: #090B10;
   font-weight: 800;
   font-size: 16px;
   padding: 16px;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 10px 24px rgba(245, 176, 65, 0.4);
+  box-shadow: 0 10px 24px rgba(197, 166, 106, 0.4);
   transition: all 0.2s ease;
 }
 
 .claimBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(245, 176, 65, 0.6);
+  box-shadow: 0 14px 30px rgba(197, 166, 106, 0.6);
 }
 
-
 /* Level-up celebration animations */
-
 .modalCard {
   animation: levelCardEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both,
     goldenGlow 2.5s ease-in-out 0.65s infinite alternate;
@@ -177,8 +177,8 @@
 
 .rewardItem:hover {
   transform: translateY(-5px);
-  border-color: rgba(245, 176, 65, 0.5);
-  box-shadow: 0 8px 22px rgba(245, 176, 65, 0.15);
+  border-color: rgba(197, 166, 106, 0.5);
+  box-shadow: 0 8px 22px rgba(197, 166, 106, 0.2);
 }
 
 @keyframes levelCardEnter {
@@ -194,10 +194,10 @@
 
 @keyframes goldenGlow {
   from {
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 176, 65, 0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px rgba(197, 166, 106, 0.15);
   }
   to {
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 38px rgba(245, 176, 65, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 38px rgba(197, 166, 106, 0.4);
   }
 }
 
@@ -220,6 +220,19 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 420px) {
+  .modalOverlay {
+    padding: 12px;
+  }
+  .modalCard {
+    padding: 22px 16px;
+    border-radius: 22px;
+  }
+  .levelUpTitle {
+    font-size: 22px;
   }
 }
 

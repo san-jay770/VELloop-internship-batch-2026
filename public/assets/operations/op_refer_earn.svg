@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="bgGrad3" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#1F293D" />
+      <stop offset="70%" stop-color="#121824" />
+      <stop offset="100%" stop-color="#090D14" />
+    </radialGradient>
+    <linearGradient id="goldRim3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2D6" />
+      <stop offset="25%" stop-color="#E5C98D" />
+      <stop offset="60%" stop-color="#B88A36" />
+      <stop offset="90%" stop-color="#F2D79E" />
+      <stop offset="100%" stop-color="#805915" />
+    </linearGradient>
+    <linearGradient id="vaultGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9EA" />
+      <stop offset="35%" stop-color="#FCE1A9" />
+      <stop offset="75%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#8A6715" />
+    </linearGradient>
+    <filter id="goldGlow3" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.8" />
+    </filter>
+  </defs>
+
+  <circle cx="128" cy="128" r="120" fill="none" stroke="#C5A66A" stroke-width="2" stroke-opacity="0.4" />
+  <circle cx="128" cy="128" r="115" fill="none" stroke="url(#goldRim3)" stroke-width="6" filter="url(#shadow3)" />
+  <circle cx="128" cy="128" r="109" fill="none" stroke="#FCE1A9" stroke-width="1.5" stroke-opacity="0.7" />
+  <circle cx="128" cy="128" r="106" fill="url(#bgGrad3)" />
+  <circle cx="128" cy="128" r="82" fill="none" stroke="#C5A66A" stroke-width="1.5" stroke-dasharray="6,4" stroke-opacity="0.35" />
+
+  <!-- Royal Gift Vault / Chest -->
+  <g filter="url(#goldGlow3)">
+    <!-- Chest Base -->
+    <rect x="88" y="116" width="80" height="52" rx="8" fill="url(#vaultGold)" filter="url(#shadow3)" stroke="#FFF8E0" stroke-width="2" />
+    <!-- Chest Lid -->
+    <path d="M84,116 Q128,94 172,116 Z" fill="url(#vaultGold)" stroke="#FFF8E0" stroke-width="2" />
+    <!-- Lock Clasp -->
+    <rect x="120" y="112" width="16" height="20" rx="3" fill="#151C28" stroke="#FFF2D6" stroke-width="1.5" />
+    <circle cx="128" cy="120" r="3" fill="#FCE1A9" />
+    <!-- Ribbon Vertical -->
+    <rect x="123" y="99" width="10" height="69" fill="#E5C98D" opacity="0.6" />
+    <!-- Golden Coins Spilling -->
+    <ellipse cx="98" cy="168" rx="10" ry="5" fill="#FCE1A9" stroke="#9A7B20" stroke-width="1" />
+    <ellipse cx="158" cy="168" rx="10" ry="5" fill="#FCE1A9" stroke="#9A7B20" stroke-width="1" />
+  </g>
+
+  <!-- Sparkles -->
+  <polygon points="128,70 131,77 138,80 131,83 128,90 125,83 118,80 125,77" fill="#FFF2D6" opacity="0.95" />
+</svg>

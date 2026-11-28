@@ -1,0 +1,152 @@
+/* =========================================================================
+   LuxuryStatsBar.module.css - HOROLOGY-INSPIRED METRIC PILLARS
+   ========================================================================= */
+
+.statsBarContainer {
+  background: linear-gradient(180deg, #15181E 0%, #0E1015 100%);
+  border: 1px solid rgba(200, 169, 107, 0.22);
+  border-radius: 16px;
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.statPillar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.pillarIconWrap {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pillarBadgeImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+}
+
+.pillarContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pillarLabel {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #7B808B;
+  text-transform: uppercase;
+}
+
+.pillarValue {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 16px;
+  font-weight: 800;
+  color: #F5F3EE;
+}
+
+.pillarValueGold {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #C8A96B;
+}
+
+.pillarValueReward {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 16px;
+  font-weight: 800;
+  color: #F0DBA5;
+}
+
+.valWithTag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.boostPill {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #4DBB87;
+  background: rgba(77, 187, 135, 0.12);
+  border: 1px solid rgba(77, 187, 135, 0.3);
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.pillarSub {
+  font-size: 11px;
+  color: #6C727F;
+}
+
+.pillarSubGold {
+  font-size: 11px;
+  color: #C8A96B;
+  font-weight: 600;
+}
+
+.previewBtn {
+  background: none;
+  border: none;
+  color: #C8A96B;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 2px;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.previewBtn:hover {
+  color: #F5E5C9;
+}
+
+.pillarDivider {
+  width: 1px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 16px;
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------
+   RESPONSIVE DESIGN
+   ------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .statsBarContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .pillarDivider {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .statsBarContainer {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px 14px;
+  }
+}

@@ -1,0 +1,207 @@
+/* =========================================================================
+   LuxuryArcadeBanner.module.css - TITANIUM ARCADE XP TRIAL CASING
+   ========================================================================= */
+
+.arcadeCasing {
+  background: radial-gradient(circle at 85% 50%, rgba(200, 169, 107, 0.12) 0%, rgba(23, 25, 29, 0.95) 45%, #08090B 100%);
+  border: 1px solid rgba(200, 169, 107, 0.28);
+  border-radius: 20px;
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  margin-bottom: 40px;
+}
+
+.casingLighting {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 107, 0.5), transparent);
+  pointer-events: none;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 36px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.liveTag {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #08090B;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  padding: 3px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(200, 169, 107, 0.4);
+}
+
+.multiplierTag {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #4DBB87;
+  background: rgba(77, 187, 135, 0.12);
+  border: 1px solid rgba(77, 187, 135, 0.35);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.title {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #F5F3EE;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.desc {
+  font-size: 13.5px;
+  color: #A5A8B0;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 540px;
+}
+
+.buttonRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.primaryTrialBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 50%, #9B7D42 100%);
+  color: #08090B;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  border: 1px solid #F5E5C9;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(200, 169, 107, 0.4);
+  transition: all 0.25s ease;
+}
+
+.primaryTrialBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 169, 107, 0.6);
+}
+
+.btnArrow {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.primaryTrialBtn:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+.secondaryPreviewBtn {
+  background: rgba(23, 25, 29, 0.85);
+  color: #C9CDD3;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondaryPreviewBtn:hover {
+  border-color: #C8A96B;
+  color: #C8A96B;
+  background: rgba(200, 169, 107, 0.1);
+}
+
+.artworkCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.artworkHalo {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 169, 107, 0.3) 0%, transparent 70%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+.basketImg {
+  max-width: 170px;
+  max-height: 160px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.85));
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s ease;
+}
+
+.arcadeCasing:hover .basketImg {
+  transform: scale(1.04) rotate(-2deg);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .artworkCol {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .arcadeCasing {
+    padding: 24px 18px;
+  }
+
+  .buttonRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryTrialBtn,
+  .secondaryPreviewBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

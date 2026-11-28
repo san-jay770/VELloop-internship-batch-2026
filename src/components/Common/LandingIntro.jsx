@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import logo from '../../assets/logo.svg';
+import logo from '/assets/premium/svg/veloop_logo.svg';
 import styles from './LandingIntro.module.css';
 
 // In-memory flag that resets on every browser page refresh (F5 / reload)

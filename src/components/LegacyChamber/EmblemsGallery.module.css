@@ -1,0 +1,516 @@
+/* =========================================================================
+   EmblemsGallery.module.css - 12 COLLECTIBLE 3D EMBLEMS MUSEUM GALLERY
+   ========================================================================= */
+
+.gallerySection {
+  margin-bottom: 48px;
+}
+
+/* Header */
+.galleryHeader {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.headerEyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.goldLine {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 107, 0.7));
+}
+
+.goldLine:last-child {
+  background: linear-gradient(90deg, rgba(200, 169, 107, 0.7), transparent);
+}
+
+.eyebrowText {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #C8A96B;
+  text-transform: uppercase;
+}
+
+.galleryHeading {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: clamp(24px, 2.8vw, 34px);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #F5F3EE;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.gallerySubtext {
+  font-size: 14px;
+  color: #AEB5BE;
+  margin: 8px auto 0 auto;
+  max-width: 620px;
+  line-height: 1.6;
+}
+
+/* 12-Card Grid */
+.emblemsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.emblemCard {
+  background: linear-gradient(180deg, #171920 0%, #0E1015 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
+  outline: none;
+}
+
+.emblemCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(200, 169, 107, 0.5);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 20px rgba(200, 169, 107, 0.15);
+}
+
+/* Active Card Spotlight */
+.cardCurrent {
+  background: linear-gradient(180deg, #1E222D 0%, #11141D 100%);
+  border-color: rgba(200, 169, 107, 0.65);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 25px rgba(200, 169, 107, 0.22);
+}
+
+.activeAura {
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 30%, rgba(200, 169, 107, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cardCompleted {
+  border-color: rgba(77, 187, 135, 0.25);
+}
+
+.cardLocked {
+  opacity: 0.72;
+}
+
+.cardLocked:hover {
+  opacity: 0.95;
+}
+
+/* Card Header */
+.cardTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tierTag {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #C8A96B;
+}
+
+.statusChip {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #7B808B;
+}
+
+.cardCurrent .statusChip {
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  color: #08090B;
+  box-shadow: 0 2px 8px rgba(200, 169, 107, 0.4);
+}
+
+.cardCompleted .statusChip {
+  background: rgba(77, 187, 135, 0.12);
+  color: #4DBB87;
+  border: 1px solid rgba(77, 187, 135, 0.3);
+}
+
+/* Artwork */
+.emblemArtContainer {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px auto 14px auto;
+  padding: 0;
+  overflow: visible;
+  position: relative;
+}
+
+.emblemThumbnail {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.85));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+}
+
+.emblemCard:hover .emblemThumbnail {
+  transform: scale(1.08);
+  filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(200, 169, 107, 0.45));
+}
+
+.emblemCard:hover .emblemThumbnail {
+  transform: scale(1.08);
+}
+
+.cardCurrent .emblemArtContainer {
+  border-color: #F0DBA5;
+  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.25), 0 10px 28px rgba(0, 0, 0, 0.9), 0 0 24px rgba(200, 169, 107, 0.45);
+}
+
+/* Details */
+.cardDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.rankHeading {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #F5F3EE;
+  margin: 0;
+}
+
+.levelRangeTag {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #C8A96B;
+}
+
+.materialSpec {
+  font-size: 10.5px;
+  color: #AEB5BE;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.cardDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 12px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.thresholdCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.thresholdLabel {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #7B808B;
+  text-transform: uppercase;
+}
+
+.thresholdVal {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  color: #D6D9DF;
+}
+
+.inspectHint {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #C8A96B;
+  transition: transform 0.2s ease;
+}
+
+.emblemCard:hover .inspectHint {
+  transform: translateX(3px);
+}
+
+/* -------------------------------------------------------------
+   INSPECTION MODAL
+   ------------------------------------------------------------- */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modalContainer {
+  background: linear-gradient(180deg, #171920 0%, #0E1015 100%);
+  border: 1px solid rgba(200, 169, 107, 0.45);
+  border-radius: 24px;
+  max-width: 820px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(200, 169, 107, 0.15);
+  padding: 36px 40px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #AEB5BE;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(200, 169, 107, 0.15);
+  color: #F5F3EE;
+  border-color: #C8A96B;
+}
+
+.modalGrid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.modalDisplaySide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.displayAura {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.modalEmblemLarge {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  border: none;
+  box-shadow: none;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(200, 169, 107, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.modalPedestalPlaque {
+  margin-top: 14px;
+  background: #111318;
+  border: 1px solid rgba(200, 169, 107, 0.4);
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #C8A96B;
+}
+
+.modalInfoSide {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modalEyebrow {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #7B808B;
+  text-transform: uppercase;
+}
+
+.modalTitle {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #F5F3EE;
+  margin: 0;
+}
+
+.modalMaterial {
+  font-size: 13px;
+  color: #C8A96B;
+  font-weight: 600;
+}
+
+.modalDesc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #AEB5BE;
+  margin: 0;
+}
+
+.specsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.specBox {
+  background: #12141B;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.specBoxLabel {
+  font-size: 9px;
+  font-weight: 800;
+  color: #6C727F;
+  letter-spacing: 0.8px;
+}
+
+.specBoxVal {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #D6D9DF;
+}
+
+.perksBox {
+  background: #12141B;
+  border: 1px solid rgba(200, 169, 107, 0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.perksBoxTitle {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #C8A96B;
+}
+
+.perksBoxText {
+  font-size: 12px;
+  color: #D6D9DF;
+  line-height: 1.5;
+}
+
+.dismissBtn {
+  margin-top: 6px;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  color: #08090B;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 11px;
+  border-radius: 999px;
+  border: 1px solid #F5E5C9;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dismissBtn:hover {
+  filter: brightness(1.08);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .emblemsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .emblemsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .modalGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .modalEmblemLarge {
+    width: 180px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 500px) {
+  .emblemsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modalContainer {
+    padding: 24px 18px;
+  }
+}

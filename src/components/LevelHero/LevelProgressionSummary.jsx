@@ -1,13 +1,14 @@
 import React from 'react';
-import { 
-  CheckCircle2, 
-  Lock, 
-  Target, 
-  Sparkles, 
-  Gift, 
+import {
+  CheckCircle2,
+  Lock,
+  Target,
+  Sparkles,
+  Gift,
   Flame,
   ArrowUpRight
 } from 'lucide-react';
+import { LevelBadge } from './LevelBadge';
 import styles from './LevelProgressionSummary.module.css';
 
 export function LevelProgressionSummary({
@@ -33,7 +34,7 @@ export function LevelProgressionSummary({
         <div className={styles.metricCard}>
           <div className={styles.metricHeader}>
             <span className={styles.metricIconWrapGold}>
-              <Sparkles size={16} />
+              <LevelBadge level={currentLevel} size={32} showGlow={false} animated={false} />
             </span>
             <span className={styles.metricLabel}>CURRENT STATUS</span>
           </div>
@@ -50,7 +51,7 @@ export function LevelProgressionSummary({
         <div className={styles.metricCard}>
           <div className={styles.metricHeader}>
             <span className={styles.metricIconWrapGreen}>
-              <CheckCircle2 size={16} />
+              <LevelBadge level={1} size={30} showGlow={false} animated={false} />
             </span>
             <span className={styles.metricLabel}>COMPLETED TIERS</span>
           </div>
@@ -67,7 +68,7 @@ export function LevelProgressionSummary({
         <div className={styles.metricCard}>
           <div className={styles.metricHeader}>
             <span className={styles.metricIconWrapAmber}>
-              <Target size={16} />
+              <LevelBadge level={nextLevel} size={32} isLocked showGlow={false} animated={false} />
             </span>
             <span className={styles.metricLabel}>NEXT MILESTONE</span>
           </div>
@@ -84,7 +85,12 @@ export function LevelProgressionSummary({
         <div className={styles.metricCard}>
           <div className={styles.metricHeader}>
             <span className={styles.metricIconWrapPurple}>
-              <Gift size={16} />
+              <img
+                src="/assets/premium/png/reward_premium_chest@4x.png"
+                alt="Reward"
+                className={styles.summaryThumb}
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              />
             </span>
             <span className={styles.metricLabel}>NEXT UNLOCK REWARD</span>
           </div>

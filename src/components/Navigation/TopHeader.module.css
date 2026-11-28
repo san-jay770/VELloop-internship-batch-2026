@@ -1,0 +1,497 @@
+/* ======================================================== */
+/* ULTRA PREMIUM LUXURY GAMING TOP HEADER - OBSIDIAN GOLD   */
+/* ======================================================== */
+
+.topHeader {
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(9, 11, 16, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle, #30333B);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  transition: all 0.2s ease;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Mobile Menu Toggle Button */
+.menuToggleBtn {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(197, 166, 106, 0.08);
+  border: 1px solid rgba(197, 166, 106, 0.25);
+  color: #C5A66A;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.menuToggleBtn:hover {
+  background: rgba(197, 166, 106, 0.18);
+  box-shadow: 0 0 12px rgba(197, 166, 106, 0.35);
+  color: #F5F3EE;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 13px;
+}
+
+.breadcrumbRoot {
+  font-weight: 900;
+  color: #D4AF37;
+  letter-spacing: 1px;
+}
+
+.breadcrumbSeparator {
+  color: #C5A66A;
+}
+
+.breadcrumbCurrent {
+  font-weight: 800;
+  color: #F8E7B2;
+  letter-spacing: 0.8px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Backend Live Sync Pill - Emerald Accent */
+.syncBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(77, 187, 135, 0.08);
+  border: 1px solid rgba(77, 187, 135, 0.25);
+  padding: 3px 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(77, 187, 135, 0.12);
+}
+
+.syncDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4DBB87;
+  box-shadow: 0 0 6px #4DBB87;
+}
+
+.syncLabel {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #4DBB87;
+  letter-spacing: 0.4px;
+}
+
+/* Header Right */
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Arcade Quick Action Pill - Champagne Gold Luxury */
+.arcadeQuickBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #E2C891 0%, #C5A66A 100%);
+  border: 1px solid rgba(226, 200, 145, 0.5);
+  color: #090B10;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 16px rgba(197, 166, 106, 0.35);
+}
+
+.arcadeQuickBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(197, 166, 106, 0.55);
+  filter: brightness(1.08);
+}
+
+.quickMultiplier {
+  font-size: 9px;
+  font-weight: 900;
+  background: #090B10;
+  color: #C5A66A;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid rgba(197, 166, 106, 0.4);
+}
+
+/* Notifications Button & Dropdown */
+.notifWrapper {
+  position: relative;
+}
+
+.iconBtn {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle, #30333B);
+  color: #A5A8B0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.iconBtn:hover,
+.iconBtnActive {
+  background: rgba(197, 166, 106, 0.1);
+  border-color: rgba(197, 166, 106, 0.35);
+  color: #C5A66A;
+  box-shadow: 0 0 12px rgba(197, 166, 106, 0.2);
+}
+
+.notifBadge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background: #f43f5e;
+  color: #ffffff;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9px;
+  font-weight: 800;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #090B10;
+  box-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+}
+
+.notifDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 340px;
+  background: var(--bg-card, #151A23);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle, #30333B);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(197, 166, 106, 0.12);
+  z-index: 1000;
+  overflow: hidden;
+  animation: dropIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.notifHeader {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-subtle, #30333B);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notifHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notifTitle {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #F5F3EE;
+}
+
+.notifCount {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  color: #C5A66A;
+  background: rgba(197, 166, 106, 0.12);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.notifClose {
+  color: #A5A8B0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.notifClose:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F5F3EE;
+}
+
+.notifList {
+  max-height: 290px;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.notifItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  transition: background 0.15s ease;
+}
+
+.notifItem:hover {
+  background: rgba(197, 166, 106, 0.06);
+}
+
+.notifIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(197, 166, 106, 0.12);
+  color: #C5A66A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notifBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.notifItemLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #F5F3EE;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notifTime {
+  font-size: 10px;
+  color: #6B7280;
+}
+
+.notifXP {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  color: #C5A66A;
+  flex-shrink: 0;
+}
+
+.emptyNotifs {
+  padding: 28px 16px;
+  text-align: center;
+  font-size: 12.5px;
+  color: #6B7280;
+}
+
+.notifFooter {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border-subtle, #30333B);
+  background: rgba(9, 11, 16, 0.5);
+}
+
+.viewAllHistoryBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #C5A66A;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.viewAllHistoryBtn:hover {
+  color: #F5F3EE;
+  background: rgba(197, 166, 106, 0.12);
+}
+
+/* User Profile Capsule */
+.profileCapsule {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 12px 4px 4px;
+  background: var(--bg-card, #151A23);
+  border: 1px solid var(--border-subtle, #30333B);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profileCapsule:hover {
+  background: var(--bg-elevated, #1B222D);
+  border-color: rgba(197, 166, 106, 0.4);
+  box-shadow: 0 0 14px rgba(197, 166, 106, 0.2);
+}
+
+.capsuleAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+}
+
+.headerAvatarImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.capsuleText {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.capsuleName {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #F5F3EE;
+  letter-spacing: 0.4px;
+}
+
+.capsuleTier {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #C5A66A;
+  background: rgba(197, 166, 106, 0.12);
+  border: 1px solid rgba(197, 166, 106, 0.35);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .menuToggleBtn {
+    display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .topHeader {
+    padding: 0 14px;
+    height: 60px;
+  }
+
+  .syncBadge {
+    display: none;
+  }
+
+  .arcadeQuickBtn span:not(.quickMultiplier) {
+    display: none;
+  }
+
+  .capsuleText {
+    display: none;
+  }
+
+  .notifDropdown {
+    position: fixed;
+    top: 64px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-width: calc(100vw - 24px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95);
+  }
+}
+
+@media (max-width: 480px) {
+  .topHeader {
+    padding: 0 10px;
+  }
+
+  .headerLeft {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .breadcrumbs {
+    font-size: 11px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .headerRight {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .breadcrumbRoot,
+  .breadcrumbSeparator {
+    display: none;
+  }
+
+  .breadcrumbs {
+    max-width: 110px;
+  }
+
+  .arcadeQuickBtn {
+    padding: 6px 8px;
+  }
+}

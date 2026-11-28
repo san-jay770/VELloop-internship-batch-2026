@@ -14,16 +14,26 @@ export function TodaysBoost({ xpEarned = 215, tasksDone = "4 / 8", streakDays = 
         {/* XP Earned */}
         <div className={styles.boostCard}>
           <div className={`${styles.iconCircle} ${styles.purpleCircle}`}>
-            <Award size={20} />
+            <img
+              src="/assets/premium/png/how_it_works_earn_rewards@4x.png"
+              alt="XP Earned"
+              className={styles.boost3DImg}
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
           </div>
           <span className={styles.cardLabel}>XP Earned</span>
-          <span className={styles.cardValue}>{xpEarned} XP</span>
+          <span className={styles.cardValue}>+{xpEarned} XP</span>
         </div>
 
         {/* Tasks Done */}
         <div className={styles.boostCard}>
           <div className={`${styles.iconCircle} ${styles.goldCircle}`}>
-            <ClipboardCheck size={20} />
+            <img
+              src="/assets/premium/png/how_it_works_level_up@4x.png"
+              alt="Tasks Done"
+              className={styles.boost3DImg}
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
           </div>
           <span className={styles.cardLabel}>Tasks Done</span>
           <span className={styles.cardValue}>{tasksDone}</span>
@@ -32,9 +42,14 @@ export function TodaysBoost({ xpEarned = 215, tasksDone = "4 / 8", streakDays = 
         {/* Streak */}
         <div className={styles.boostCard}>
           <div className={`${styles.iconCircle} ${styles.flameCircle}`}>
-            <Flame size={20} fill="#f97316" />
+            <img
+              src="/assets/premium/png/reward_gems@4x.png"
+              alt="Streak"
+              className={styles.boost3DImg}
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
           </div>
-          <span className={styles.cardLabel}>Streak</span>
+          <span className={styles.cardLabel}>Allegiance Streak</span>
           <span className={styles.cardValue}>{streakDays} Days</span>
         </div>
       </div>

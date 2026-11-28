@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { 
-  Filter, 
-  Users, 
-  ClipboardCheck, 
-  Gamepad2, 
-  Flame, 
-  Coins, 
-  ChevronRight 
+import {
+  Filter,
+  Users,
+  ClipboardCheck,
+  Gamepad2,
+  Flame,
+  Coins,
+  ChevronRight
 } from 'lucide-react';
 import { EmptyState } from '../Common/CommonComponents';
 import styles from './XPActivity.module.css';
@@ -28,7 +28,7 @@ export function XPActivity({
       case 'daily_tasks':
         return { icon: ClipboardCheck, bg: 'rgba(16, 185, 129, 0.15)', color: '#10b981' };
       case 'game':
-        return { icon: Gamepad2, bg: 'rgba(147, 51, 234, 0.15)', color: '#a855f7' };
+        return { icon: Gamepad2, bg: 'rgba(197, 166, 106, 0.15)', color: '#C5A66A' };
       case 'xp_catcher':
         return { icon: Coins, bg: 'rgba(245, 176, 65, 0.15)', color: '#f5b041' };
       case 'streak':
@@ -39,14 +39,17 @@ export function XPActivity({
     }
   };
 
-  const filtered = filterType === 'all' 
-    ? activities 
+  const filtered = filterType === 'all'
+    ? activities
     : activities.filter(a => a.type === filterType);
 
   return (
     <section className={styles.activitySection} aria-label="Recent Activity">
       <div className={styles.headerRow}>
-        <h2 className={styles.title}>RECENT ACTIVITY</h2>
+        <div className={styles.titleWrap}>
+          <span className={styles.gamingBadge}>SESSION TELEMETRY</span>
+          <h2 className={styles.title}>RECENT ACTIVITY</h2>
+        </div>
         <div className={styles.headerActions}>
           {onViewAll && (
             <button className={styles.viewAllBtn} onClick={onViewAll}>
@@ -69,6 +72,10 @@ export function XPActivity({
         </div>
       </div>
 
+      <p className={styles.sectionSub}>
+        Live audit feed of completed mission milestones and earned reward tokens.
+      </p>
+
       <div className={styles.activityList}>
         {(showAll ? filtered : filtered.slice(0, 5)).map(item => {
           const conf = getIconForType(item.type);
@@ -79,7 +86,7 @@ export function XPActivity({
           return (
             <div key={item.id} className={styles.activityRow}>
               <div className={styles.rowLeft}>
-                <div 
+                <div
                   className={styles.iconCircle}
                   style={{ backgroundColor: conf.bg, color: conf.color }}
                 >
@@ -92,7 +99,7 @@ export function XPActivity({
                 </div>
               </div>
 
-              <ChevronRight size={18} color="#4b5563" />
+              <ChevronRight size={18} className={styles.rowChevron} />
             </div>
           );
         })}
@@ -111,7 +118,7 @@ export function XPActivity({
             <div className={styles.summaryItem}>
               <div
                 className={styles.summaryBadgeIcon}
-                style={{ background: 'rgba(147, 51, 234, 0.2)', color: '#c084fc', border: '1px solid rgba(147, 51, 234, 0.3)' }}
+                style={{ background: 'rgba(197, 166, 106, 0.2)', color: '#C5A66A', border: '1px solid rgba(197, 166, 106, 0.3)' }}
               >
                 XP
               </div>

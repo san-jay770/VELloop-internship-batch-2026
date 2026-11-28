@@ -1,45 +1,75 @@
 @import 'bootstrap/dist/css/bootstrap-reboot.min.css';
 
 :root {
-  --bg-body: #161827;
-  --bg-card: #1c1e32;
-  --bg-card-secondary: #22263d;
-  --bg-surface: #12131f;
-  --bg-elevated: #282c47;
-  
-  --gold-primary: #f5b041;
-  --gold-light: #fcd34d;
-  --gold-dark: #d97706;
-  --gold-gradient: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
-  --gold-gradient-glow: linear-gradient(135deg, #ffe082 0%, #f5a623 50%, #e65100 100%);
-  --gold-border: rgba(245, 176, 65, 0.35);
+  /* =========================================================================
+     VELOP SCIENTIFIC FUTURISTIC & LUXURY GAMING DESIGN SYSTEM
+     50% Scientific Futuristic · 35% Luxury Premium · 15% Gaming Identity
+     ========================================================================= */
 
-  --purple-primary: #9333ea;
-  --purple-light: #a855f7;
-  --purple-dark: #6b21a8;
-  --purple-gradient: linear-gradient(135deg, #c084fc 0%, #9333ea 100%);
+  /* CORE PALETTE */
+  --bg-primary: #070B14;
+  --bg-secondary: #0D1422;
+  --bg-card: #111B2B;
+  --bg-elevated: #172438;
+  --bg-surface: #0D1422;
+  --bg-body: #070B14;
 
-  --emerald-primary: #10b981;
-  --emerald-light: #34d399;
-  
-  --text-primary: #ffffff;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --text-gold: #f5b041;
+  /* ACCENTS */
+  --accent-cyan: #19D5E8;
+  --accent-cyan-rgb: 25, 213, 232;
+  --accent-cyan-soft: rgba(25, 213, 232, 0.12);
+  --accent-cyan-border: rgba(25, 213, 232, 0.35);
+  --accent-cyan-glow: 0 0 20px rgba(25, 213, 232, 0.35);
 
+  --accent-gold: #B9A16B;
+  --accent-gold-rgb: 185, 161, 107;
+  --gold-highlight: #E5C98D;
+  --gold-soft: rgba(185, 161, 107, 0.14);
+  --gold-border: rgba(185, 161, 107, 0.38);
+  --gold-glow: 0 0 20px rgba(229, 201, 141, 0.32);
+
+  /* TYPOGRAPHY COLORS */
+  --text-primary: #F4F7FB;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-cyan: #19D5E8;
+  --text-gold: #E5C98D;
+
+  /* BORDERS & SURFACES */
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-card: rgba(255, 255, 255, 0.12);
-  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
-  --glow-gold: 0 0 20px rgba(245, 176, 65, 0.3);
-  --glow-purple: 0 0 20px rgba(147, 51, 234, 0.3);
-  
+  --border-card: rgba(255, 255, 255, 0.08);
+  --border-cyan: rgba(25, 213, 232, 0.32);
+  --border-gold: rgba(185, 161, 107, 0.32);
+
+  --card-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.85);
+  --glass-card: linear-gradient(180deg, rgba(17, 27, 43, 0.92) 0%, rgba(13, 20, 34, 0.96) 100%);
+  --elevated-surface: linear-gradient(180deg, #172438 0%, #111B2B 100%);
+
+  /* TYPOGRAPHY */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Sora', 'Manrope', -apple-system, sans-serif;
+  --font-tech: 'Manrope', 'Inter', monospace;
+  --font-regal: 'Sora', 'Manrope', sans-serif;
+  --font-gaming: 'Sora', 'Space Grotesk', sans-serif;
+
+  /* RADIUS */
   --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
-  
-  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* BACKWARD COMPATIBILITY VARIABLES */
+  --obsidian-black: #070B14;
+  --deep-graphite: #0D1422;
+  --black-titanium: #111B2B;
+  --champagne-gold: #B9A16B;
+  --antique-gold: #B9A16B;
+  --gold-primary: #B9A16B;
+  --platinum-silver: #F4F7FB;
+  --brushed-titanium: #94A3B8;
+  --emerald-accent: #10B981;
+  --emerald-primary: #10B981;
 }
 
 * {
@@ -50,83 +80,132 @@
 }
 
 html, body {
-  width: 100%;
-  min-height: 100%;
-  background-color: var(--bg-body);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.5;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-button {
-  font-family: inherit;
+/* Scientific Background Grid Mesh Pattern (Pure CSS) */
+.scientific-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(25, 213, 232, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(25, 213, 232, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glassmorphism Card Style */
+.sci-card {
+  background: var(--glass-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--card-shadow);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sci-card:hover {
+  border-color: rgba(25, 213, 232, 0.25);
+  box-shadow: 0 20px 48px -6px rgba(0, 0, 0, 0.9), 0 0 24px rgba(25, 213, 232, 0.1);
+}
+
+/* Scientific Primary Button (Cyan Cyber Border & Glow) */
+.btn-sci-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #19D5E8 0%, #0EB2C4 100%);
+  color: #05080E;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  border: 1px solid #74E9F5;
   cursor: pointer;
-  border: none;
-  background: none;
-  color: inherit;
-}
-
-a {
-  color: inherit;
+  box-shadow: 0 4px 18px rgba(25, 213, 232, 0.4);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
 }
 
-/* Custom Scrollbar */
+.btn-sci-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(25, 213, 232, 0.6);
+  color: #000000;
+}
+
+/* Scientific Secondary Button (Dark Glass Surface) */
+.btn-sci-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(17, 27, 43, 0.85);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-sci-secondary:hover {
+  background: rgba(23, 36, 56, 0.95);
+  border-color: rgba(25, 213, 232, 0.4);
+  color: var(--accent-cyan);
+}
+
+/* Gold Reward Button */
+.btn-sci-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #E5C98D 0%, #B9A16B 100%);
+  color: #070B14;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  border: 1px solid #F3DFC0;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(185, 161, 107, 0.35);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-sci-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(185, 161, 107, 0.55);
+}
+
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--bg-surface);
+  background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #374151;
-  border-radius: 4px;
+  background: #172438;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #4b5563;
+  background: rgba(25, 213, 232, 0.4);
 }
-
-/* Utility keyframes */
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(245, 176, 65, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(245, 176, 65, 0.5);
-  }
-}
-
-@keyframes floatBob {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-@keyframes shine {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes popIn {
-  from {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-

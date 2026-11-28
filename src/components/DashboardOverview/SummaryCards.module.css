@@ -1,0 +1,316 @@
+/* ======================================================== */
+/* ULTRA PREMIUM LUXURY GAMING SUMMARY CARDS - OBSIDIAN GOLD*/
+/* ======================================================== */
+
+.summarySection {
+  width: 100%;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+/* Card Base */
+.card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(27, 34, 45, 0.8) 0%, rgba(21, 26, 35, 0.98) 100%);
+  border: 1px solid var(--border-subtle, #30333B);
+  border-radius: 14px;
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(197, 166, 106, 0.5) 50%, transparent 100%);
+  opacity: 0.6;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(197, 166, 106, 0.45);
+  box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.8), 0 0 18px rgba(197, 166, 106, 0.15);
+}
+
+.cardInteractive {
+  cursor: pointer;
+}
+
+.cardInteractive:hover {
+  border-color: rgba(197, 166, 106, 0.55);
+  box-shadow: 0 12px 32px -6px rgba(197, 166, 106, 0.25);
+}
+
+/* Card Top Row */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cardTag {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #A5A8B0;
+  text-transform: uppercase;
+}
+
+/* Icon Wrappers */
+.iconWrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.card:hover .iconWrap {
+  transform: scale(1.12);
+}
+
+.summary3DIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+}
+
+.iconWrapGold {
+  background: rgba(197, 166, 106, 0.12);
+  color: #C5A66A;
+  border: 1px solid rgba(197, 166, 106, 0.35);
+  box-shadow: 0 0 10px rgba(197, 166, 106, 0.2);
+}
+
+.iconWrapAmber {
+  background: rgba(226, 200, 145, 0.12);
+  color: #E2C891;
+  border: 1px solid rgba(226, 200, 145, 0.35);
+  box-shadow: 0 0 12px rgba(226, 200, 145, 0.2);
+}
+
+.iconWrapViolet {
+  background: rgba(232, 228, 218, 0.1);
+  color: #E8E4DA;
+  border: 1px solid rgba(232, 228, 218, 0.25);
+  box-shadow: 0 0 12px rgba(232, 228, 218, 0.15);
+}
+
+.iconWrapCyan {
+  background: rgba(197, 166, 106, 0.12);
+  color: #C5A66A;
+  border: 1px solid rgba(197, 166, 106, 0.35);
+  box-shadow: 0 0 12px rgba(197, 166, 106, 0.2);
+}
+
+.iconWrapPurple {
+  background: rgba(77, 187, 135, 0.12);
+  color: #4DBB87;
+  border: 1px solid rgba(77, 187, 135, 0.35);
+  box-shadow: 0 0 12px rgba(77, 187, 135, 0.2);
+}
+
+/* Card Specific Border Highlights */
+.cardGold:hover { border-color: rgba(197, 166, 106, 0.5); }
+.cardAmber:hover { border-color: rgba(226, 200, 145, 0.5); }
+.cardViolet:hover { border-color: rgba(232, 228, 218, 0.4); }
+.cardCyan:hover { border-color: rgba(197, 166, 106, 0.5); }
+.cardPurple:hover { border-color: rgba(77, 187, 135, 0.5); }
+
+/* Card Main Typography */
+.cardMain {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metricRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.metricValue {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 22px;
+  font-weight: 900;
+  color: #F5F3EE;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metricValueHighlight {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 18px;
+  font-weight: 900;
+  color: #E2C891;
+  letter-spacing: 0.4px;
+  line-height: 1.1;
+  text-shadow: 0 0 12px rgba(226, 200, 145, 0.3);
+}
+
+.metricUnit {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: #C5A66A;
+}
+
+.metricSub {
+  font-size: 12px;
+  font-weight: 500;
+  color: #A5A8B0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metricDeltaRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.deltaBadge {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  color: #4DBB87;
+  background: rgba(77, 187, 135, 0.12);
+  border: 1px solid rgba(77, 187, 135, 0.25);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* Progress Gauge inside Card */
+.gaugeTrack {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.gaugeFill {
+  height: 100%;
+  background: linear-gradient(90deg, #C5A66A, #E2C891);
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(197, 166, 106, 0.5);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Card Footer */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle, #30333B);
+  font-size: 11px;
+}
+
+.footerPill {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #A5A8B0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle, #30333B);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.footerPillGreen {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #4DBB87;
+  background: rgba(77, 187, 135, 0.1);
+  border: 1px solid rgba(77, 187, 135, 0.25);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.footerNote {
+  color: #6B7280;
+  font-size: 10.5px;
+}
+
+/* Card Footer Interactive Action */
+.cardFooterAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle, #30333B);
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  color: #C5A66A;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.cardInteractive:hover .cardFooterAction {
+  color: #E2C891;
+}
+
+.actionArrow {
+  transition: transform 0.2s ease;
+}
+
+.cardInteractive:hover .actionArrow {
+  transform: translateX(3px);
+}
+
+/* ======================================================== */
+/* RESPONSIVE BREAKPOINTS                                   */
+/* ======================================================== */
+
+@media (max-width: 1439px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1023px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 580px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+}

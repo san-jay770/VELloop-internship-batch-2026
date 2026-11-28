@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="bgGrad2" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#1F293D" />
+      <stop offset="70%" stop-color="#121824" />
+      <stop offset="100%" stop-color="#090D14" />
+    </radialGradient>
+    <linearGradient id="goldRim2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2D6" />
+      <stop offset="25%" stop-color="#E5C98D" />
+      <stop offset="60%" stop-color="#B88A36" />
+      <stop offset="90%" stop-color="#F2D79E" />
+      <stop offset="100%" stop-color="#805915" />
+    </linearGradient>
+    <linearGradient id="shieldGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9EA" />
+      <stop offset="30%" stop-color="#FCE1A9" />
+      <stop offset="70%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#8A6715" />
+    </linearGradient>
+    <filter id="goldGlow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.8" />
+    </filter>
+  </defs>
+
+  <!-- Outer Ambient Glow Ring -->
+  <circle cx="128" cy="128" r="120" fill="none" stroke="#C5A66A" stroke-width="2" stroke-opacity="0.4" />
+
+  <!-- Outer Gold Bezel -->
+  <circle cx="128" cy="128" r="115" fill="none" stroke="url(#goldRim2)" stroke-width="6" filter="url(#shadow2)" />
+  <circle cx="128" cy="128" r="109" fill="none" stroke="#FCE1A9" stroke-width="1.5" stroke-opacity="0.7" />
+
+  <!-- Obsidian Disc Core -->
+  <circle cx="128" cy="128" r="106" fill="url(#bgGrad2)" />
+  <circle cx="128" cy="128" r="82" fill="none" stroke="#C5A66A" stroke-width="1.5" stroke-dasharray="6,4" stroke-opacity="0.35" />
+
+  <!-- Tactical Sovereign Shield -->
+  <g filter="url(#goldGlow2)">
+    <path d="M128,74 L168,88 C168,134 148,162 128,178 C108,162 88,134 88,88 Z" fill="url(#shieldGold)" filter="url(#shadow2)" stroke="#FFF8E0" stroke-width="2.5" />
+    <!-- Inner Star -->
+    <polygon points="128,102 133,118 149,118 136,128 141,144 128,134 115,144 120,128 107,118 123,118" fill="#151C28" stroke="#FFF2D6" stroke-width="1.5" />
+    <!-- Checkmark Overlay -->
+    <path d="M120,128 L126,134 L138,120" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Sparkles -->
+  <polygon points="76,86 78,92 84,94 78,96 76,102 74,96 68,94 74,92" fill="#FFF2D6" opacity="0.85" />
+  <polygon points="178,160 180,165 186,167 180,169 178,174 176,169 170,167 176,165" fill="#E5C98D" opacity="0.8" />
+</svg>

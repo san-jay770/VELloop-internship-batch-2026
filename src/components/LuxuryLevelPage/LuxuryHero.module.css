@@ -1,0 +1,453 @@
+/* =========================================================================
+   LuxuryHero.module.css - ULTRA LUXURY 3D METALLIC PROGRESSION HERO
+   Theme: Swiss Horology, Supercar Titanium, Champagne Gold & Obsidian
+   ========================================================================= */
+
+.heroSection {
+  position: relative;
+  background: radial-gradient(circle at 75% 35%, rgba(200, 169, 107, 0.08) 0%, rgba(23, 25, 29, 0.95) 50%, #08090B 100%);
+  border: 1px solid rgba(200, 169, 107, 0.22);
+  border-radius: 24px;
+  padding: 48px 44px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  margin-bottom: 32px;
+}
+
+.studioLightingBackdrop {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(200, 169, 107, 0.12) 0%, rgba(200, 169, 107, 0.02) 50%, transparent 70%);
+  pointer-events: none;
+  filter: blur(50px);
+}
+
+.spotlightBeam {
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(200, 169, 107, 0.45) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* -------------------------------------------------------------
+   LEFT COLUMN - TYPOGRAPHY & STANDING
+   ------------------------------------------------------------- */
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.eyebrowTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(23, 25, 29, 0.85);
+  border: 1px solid rgba(200, 169, 107, 0.35);
+  border-radius: 999px;
+  padding: 5px 14px;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C8A96B;
+  box-shadow: 0 0 8px #C8A96B;
+}
+
+.eyebrowText {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: #C8A96B;
+  text-transform: uppercase;
+}
+
+.headline {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: clamp(34px, 3.8vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin: 0;
+  background: linear-gradient(180deg, #FFFFFF 0%, #E8EBF0 35%, #C8A96B 80%, #8E7341 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.7));
+}
+
+.rankStandingRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.levelPill {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #08090B;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  padding: 5px 14px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(200, 169, 107, 0.4);
+}
+
+.rankName {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #F5F3EE;
+}
+
+.statusBadge {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #4DBB87;
+  background: rgba(77, 187, 135, 0.12);
+  border: 1px solid rgba(77, 187, 135, 0.35);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.supportingText {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #A5A8B0;
+  margin: 0;
+  max-width: 520px;
+}
+
+/* Quick Metrics Strip */
+.heroMetricsStrip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(17, 20, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  flex-wrap: wrap;
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metricLabel {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #7B808B;
+  text-transform: uppercase;
+}
+
+.metricValue {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 15px;
+  font-weight: 800;
+  color: #F5F3EE;
+}
+
+.metricValueGold {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8A96B;
+}
+
+.metricValueAccent {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 15px;
+  font-weight: 800;
+  color: #4DBB87;
+}
+
+.metricSep {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Buttons */
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.primaryGoldBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 50%, #9B7D42 100%);
+  color: #08090B;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid #F5E5C9;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(200, 169, 107, 0.45);
+  transition: all 0.25s ease;
+}
+
+.primaryGoldBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200, 169, 107, 0.65);
+}
+
+.btnArrow {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.primaryGoldBtn:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+.secondaryTitaniumBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(23, 25, 29, 0.85);
+  color: #C9CDD3;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 169, 107, 0.35);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondaryTitaniumBtn:hover {
+  background: rgba(200, 169, 107, 0.12);
+  border-color: #C8A96B;
+  color: #F5F3EE;
+}
+
+.rewardChip {
+  font-size: 11px;
+  font-weight: 800;
+  color: #C8A96B;
+  background: rgba(200, 169, 107, 0.15);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* -------------------------------------------------------------
+   RIGHT COLUMN - ENORMOUS 3D METALLIC MEDALLION ON DISPLAY PEDESTAL
+   ------------------------------------------------------------- */
+.rightColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.medallionStage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotlightAura {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 169, 107, 0.35) 0%, rgba(200, 169, 107, 0.08) 50%, transparent 70%);
+  pointer-events: none;
+  filter: blur(35px);
+  animation: stagePulse 4s ease-in-out infinite;
+}
+
+@keyframes stagePulse {
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.96); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+}
+
+.medallionFrame {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(200, 169, 107, 0.25));
+  animation: medallionFloat 6s ease-in-out infinite;
+}
+
+@keyframes medallionFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.medallionImage {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: contain;
+}
+
+.pedestalReflection {
+  position: absolute;
+  bottom: 12px;
+  width: 240px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(200, 169, 107, 0.3) 0%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.pedestalPlaque {
+  position: relative;
+  z-index: 3;
+  margin-top: -10px;
+  background: linear-gradient(180deg, #1E222A 0%, #101217 100%);
+  border: 1px solid rgba(200, 169, 107, 0.45);
+  border-radius: 6px;
+  padding: 6px 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.plaqueInner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.plaqueLevel {
+  color: #C8A96B;
+}
+
+.plaqueSep {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.plaqueRank {
+  color: #F5F3EE;
+}
+
+.plaqueMaterial {
+  color: #8C929D;
+  font-size: 9.5px;
+}
+
+/* -------------------------------------------------------------
+   RESPONSIVE DESIGN (320px - 1024px)
+   ------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .medallionStage {
+    max-width: 320px;
+  }
+
+  .medallionFrame {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 32px 20px;
+    border-radius: 18px;
+  }
+
+  .headline {
+    font-size: 30px;
+  }
+
+  .heroMetricsStrip {
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .metricSep {
+    display: none;
+  }
+
+  .metricItem {
+    flex: 1 1 40%;
+  }
+
+  .actionsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryGoldBtn,
+  .secondaryTitaniumBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 24px 16px;
+  }
+
+  .headline {
+    font-size: 25px;
+  }
+
+  .medallionFrame {
+    max-width: 220px;
+  }
+
+  .plaqueInner {
+    font-size: 9px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

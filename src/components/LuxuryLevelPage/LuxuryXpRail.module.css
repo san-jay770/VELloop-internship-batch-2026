@@ -1,0 +1,314 @@
+/* =========================================================================
+   LuxuryXpRail.module.css - SUPERCAR & LUXURY HOROLOGY PROGRESSION RAIL
+   ========================================================================= */
+
+.railContainer {
+  background: linear-gradient(180deg, #12141A 0%, #0B0D12 100%);
+  border: 1px solid rgba(200, 169, 107, 0.25);
+  border-radius: 20px;
+  padding: 30px 36px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.railHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.railTag {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: #C8A96B;
+  text-transform: uppercase;
+}
+
+.railTitle {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #F5F3EE;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.xpReadout {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+}
+
+.xpCurrent {
+  font-size: 20px;
+  font-weight: 800;
+  color: #C8A96B;
+}
+
+.xpSep {
+  font-size: 14px;
+  color: #5A606D;
+}
+
+.xpTarget {
+  font-size: 14px;
+  font-weight: 700;
+  color: #A5A8B0;
+}
+
+.percentagePill {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #08090B;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(200, 169, 107, 0.4);
+}
+
+/* -------------------------------------------------------------
+   PHYSICAL METALLIC TRACK
+   ------------------------------------------------------------- */
+.trackWrapper {
+  position: relative;
+  margin: 16px 0 24px 0;
+}
+
+.trackBezel {
+  height: 14px;
+  background: #060709;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 2px;
+  position: relative;
+  overflow: visible;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.trackFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #9B7D42 0%, #C8A96B 50%, #F5E5C9 100%);
+  position: relative;
+  box-shadow: 0 0 16px rgba(200, 169, 107, 0.5);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.specularShimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, transparent 100%);
+}
+
+.leadingIndicator {
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #08090B;
+  border: 2px solid #F5E5C9;
+  box-shadow: 0 0 12px rgba(200, 169, 107, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.indicatorCore {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C8A96B;
+}
+
+/* -------------------------------------------------------------
+   10 MILESTONE MARKERS
+   ------------------------------------------------------------- */
+.milestonesGrid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.milestoneNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.markerPin {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #17191D;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.pinNumber {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  color: #7B808B;
+}
+
+.markerLabel {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #5A606D;
+  text-transform: uppercase;
+}
+
+/* Node States */
+.nodeCompleted .markerPin {
+  background: rgba(77, 187, 135, 0.12);
+  border-color: rgba(77, 187, 135, 0.4);
+}
+
+.nodeCompleted .pinNumber {
+  color: #4DBB87;
+}
+
+.nodeCompleted .markerLabel {
+  color: #4DBB87;
+}
+
+.nodeCurrent .markerPin {
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  border-color: #F5E5C9;
+  box-shadow: 0 0 14px rgba(200, 169, 107, 0.5);
+  transform: translateY(-2px);
+}
+
+.nodeCurrent .pinNumber {
+  color: #08090B;
+}
+
+.nodeCurrent .markerLabel {
+  color: #C8A96B;
+}
+
+.nodeLocked .markerPin {
+  background: #0E1014;
+  border-color: rgba(255, 255, 255, 0.05);
+  opacity: 0.6;
+}
+
+/* -------------------------------------------------------------
+   RAIL FOOTER
+   ------------------------------------------------------------- */
+.railFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footerNote {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #A5A8B0;
+}
+
+.goldBullet {
+  color: #C8A96B;
+  font-size: 10px;
+}
+
+.tierStatus {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #7B808B;
+}
+
+/* -------------------------------------------------------------
+   RESPONSIVE DESIGN
+   ------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .milestonesGrid {
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .railContainer {
+    padding: 22px 18px;
+  }
+
+  .railHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headerRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .milestonesGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .markerPin {
+    width: 28px;
+    height: 28px;
+  }
+
+  .pinNumber {
+    font-size: 10px;
+  }
+
+  .markerLabel {
+    font-size: 8px;
+  }
+
+  .railFooter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

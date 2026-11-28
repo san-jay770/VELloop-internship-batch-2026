@@ -1,0 +1,422 @@
+/* =========================================================================
+   LegacyChamberHero.module.css - THE LEGACY CHAMBER HERO SHOWCASE
+   Theme: Executive Trophy Museum, 3D Medallions & Dark Pedestals
+   ========================================================================= */
+
+.heroSection {
+  position: relative;
+  background: radial-gradient(circle at 75% 30%, rgba(200, 169, 107, 0.08) 0%, rgba(25, 28, 34, 0.95) 45%, #08090B 100%);
+  border: 1px solid rgba(200, 169, 107, 0.25);
+  border-radius: 24px;
+  padding: 48px 44px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  margin-bottom: 32px;
+}
+
+.studioLighting {
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(200, 169, 107, 0.14) 0%, rgba(200, 169, 107, 0.02) 50%, transparent 70%);
+  pointer-events: none;
+  filter: blur(55px);
+}
+
+.lightBeam {
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(200, 169, 107, 0.5) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* -------------------------------------------------------------
+   LEFT COLUMN
+   ------------------------------------------------------------- */
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.eyebrowTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(25, 28, 34, 0.85);
+  border: 1px solid rgba(200, 169, 107, 0.35);
+  border-radius: 999px;
+  padding: 5px 14px;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.goldDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C8A96B;
+  box-shadow: 0 0 8px #C8A96B;
+}
+
+.eyebrowText {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: #C8A96B;
+  text-transform: uppercase;
+}
+
+.mainTitle {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: clamp(34px, 3.8vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin: 0;
+  background: linear-gradient(180deg, #FFFFFF 0%, #D6D9DF 35%, #C8A96B 80%, #A98545 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.8));
+}
+
+.rankBadgeRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.levelPill {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #08090B;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 100%);
+  padding: 5px 14px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(200, 169, 107, 0.4);
+}
+
+.rankName {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #F5F3EE;
+}
+
+.currentStatusPill {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #4DBB87;
+  background: rgba(77, 187, 135, 0.12);
+  border: 1px solid rgba(77, 187, 135, 0.35);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.editorialLead {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #AEB5BE;
+  margin: 0;
+  max-width: 520px;
+}
+
+/* Horology Metrics Strip */
+.horologyMetricsStrip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(17, 19, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  flex-wrap: wrap;
+}
+
+.metricCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cellLabel {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #7B808B;
+  text-transform: uppercase;
+}
+
+.cellValue {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 15px;
+  font-weight: 800;
+  color: #F5F3EE;
+}
+
+.cellValueGold {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8A96B;
+}
+
+.cellValueAccent {
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 15px;
+  font-weight: 800;
+  color: #4DBB87;
+}
+
+.cellSep {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Buttons */
+.actionButtonsRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.goldCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #F0DBA5 0%, #C8A96B 50%, #A98545 100%);
+  color: #08090B;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid #F5E5C9;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(200, 169, 107, 0.45);
+  transition: all 0.25s ease;
+}
+
+.goldCtaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200, 169, 107, 0.65);
+}
+
+.btnArrow {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.goldCtaBtn:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+.titaniumOutlineBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(25, 28, 34, 0.85);
+  color: #D6D9DF;
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 169, 107, 0.35);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.titaniumOutlineBtn:hover {
+  background: rgba(200, 169, 107, 0.12);
+  border-color: #C8A96B;
+  color: #F5F3EE;
+}
+
+.rewardChip {
+  font-size: 11px;
+  font-weight: 800;
+  color: #C8A96B;
+  background: rgba(200, 169, 107, 0.15);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* -------------------------------------------------------------
+   RIGHT COLUMN - ENORMOUS 3D METALLIC EMBLEM ON MUSEUM PEDESTAL
+   ------------------------------------------------------------- */
+.rightCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.pedestalStage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pedestalHalo {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 169, 107, 0.35) 0%, rgba(200, 169, 107, 0.08) 50%, transparent 70%);
+  pointer-events: none;
+  filter: blur(35px);
+  animation: stagePulse 4s ease-in-out infinite;
+}
+
+@keyframes stagePulse {
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.96); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+}
+
+.pedestalGleam {
+  position: absolute;
+  bottom: 12px;
+  width: 240px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(200, 169, 107, 0.3) 0%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.emblemArtWrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: emblemFloat 6s ease-in-out infinite;
+}
+
+@keyframes emblemFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.displayPedestalBase {
+  position: relative;
+  z-index: 3;
+  margin-top: -12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pedestalRim {
+  width: 180px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 107, 0.6), transparent);
+  margin-bottom: 6px;
+}
+
+.pedestalPlaque {
+  background: linear-gradient(180deg, #1C2028 0%, #0E1015 100%);
+  border: 1px solid rgba(200, 169, 107, 0.45);
+  border-radius: 6px;
+  padding: 6px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-family: var(--font-sans, 'Space Grotesk', sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.plaqueTier {
+  color: #C8A96B;
+}
+
+.plaqueDot {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.plaqueTitle {
+  color: #F5F3EE;
+}
+
+.plaqueRange {
+  color: #AEB5BE;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 32px 20px;
+  }
+
+  .mainTitle {
+    font-size: 30px;
+  }
+
+  .horologyMetricsStrip {
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .cellSep {
+    display: none;
+  }
+
+  .metricCell {
+    flex: 1 1 40%;
+  }
+
+  .actionButtonsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .goldCtaBtn,
+  .titaniumOutlineBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

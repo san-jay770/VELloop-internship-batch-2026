@@ -16,6 +16,9 @@ export function App() {
 
       {/* VELOOP Task 16 Dashboard Routes */}
       <Route path="/Lvl-Dashboard" element={<LevelDashboard />} />
+      <Route path="/lvl-dashboard" element={<Navigate to="/Lvl-Dashboard" replace />} />
+      <Route path="/dashboard" element={<Navigate to="/Lvl-Dashboard" replace />} />
+      <Route path="/level-dashboard" element={<Navigate to="/Lvl-Dashboard" replace />} />
       <Route path="/Lvl-Dashboard/activity" element={<ActivityPage />} />
       <Route path="/Lvl-Dashboard/wallet" element={<WalletPage />} />
       <Route path="/Lvl-Dashboard/profile" element={<ProfilePage />} />

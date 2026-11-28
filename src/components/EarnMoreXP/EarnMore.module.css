@@ -1,6 +1,11 @@
+/* ======================================================== */
+/* ULTRA PREMIUM LUXURY EARNING & REWARDS - OBSIDIAN GOLD   */
+/* ======================================================== */
+
 .earnMoreSection {
-  padding: 0 20px 24px 20px;
+  padding: 0 0 10px 0;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .headerRow {
@@ -10,10 +15,26 @@
   margin-bottom: 4px;
 }
 
+.titleWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gamingBadge {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #C5A66A;
+  text-transform: uppercase;
+}
+
 .sectionTitle {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 16px;
+  font-weight: 800;
+  color: #F5F3EE;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
@@ -22,9 +43,9 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(245, 176, 65, 0.4);
-  background: rgba(245, 176, 65, 0.08);
-  color: #f5b041;
+  border: 1px solid rgba(197, 166, 106, 0.4);
+  background: rgba(197, 166, 106, 0.08);
+  color: #C5A66A;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,15 +53,15 @@
 }
 
 .arrowBtn:hover {
-  background: #f5b041;
-  color: #161827;
+  background: #C5A66A;
+  color: #090B10;
   transform: translateX(2px);
 }
 
 .sectionSub {
   font-size: 12px;
   font-weight: 400;
-  color: #9ca3af;
+  color: #A5A8B0;
   margin-bottom: 16px;
 }
 
@@ -50,61 +71,116 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .gridItem {
-  background: #1c1e32;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--bg-card, #151A23);
+  border: 1px solid var(--border-subtle, #30333B);
   border-radius: 16px;
-  padding: 16px 8px;
+  padding: 14px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  gap: 10px;
-  transition: all 0.2s ease;
+  gap: 8px;
+  min-height: 124px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.22s ease;
   cursor: pointer;
 }
 
 .gridItem:hover {
-  background: #242944;
-  border-color: rgba(245, 176, 65, 0.3);
+  background: var(--bg-elevated, #1B222D);
+  border-color: rgba(197, 166, 106, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), 0 0 12px rgba(197, 166, 106, 0.1);
 }
 
 .iconBox {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease;
+  background: radial-gradient(circle at 35% 35%, rgba(35, 45, 60, 0.95) 0%, rgba(14, 19, 27, 0.98) 100%);
+  border: 1.5px solid rgba(226, 200, 145, 0.55);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), inset 0 0 8px rgba(197, 166, 106, 0.2), 0 0 10px rgba(197, 166, 106, 0.15);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
 }
 
 .gridItem:hover .iconBox {
   transform: scale(1.08);
+  border-color: rgba(245, 229, 201, 0.9);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), 0 0 16px rgba(197, 166, 106, 0.35), inset 0 0 10px rgba(226, 200, 145, 0.3);
+}
+
+.activity3DImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.75));
+  transition: transform 0.25s ease;
+}
+
+.gridItem:hover .activity3DImg {
+  transform: scale(1.06);
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
 }
 
 .itemLabel {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
-  color: #d1d5db;
-  line-height: 1.2;
+  color: #E8E4DA;
+  line-height: 1.25;
+  text-align: center;
+  word-break: break-word;
+  max-width: 100%;
 }
 
-/* Level Rewards Card */
+.itemXpTag {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #C5A66A;
+  background: rgba(197, 166, 106, 0.12);
+  border: 1px solid rgba(197, 166, 106, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* Level Rewards Card - Luxury Obsidian & Gold */
 .rewardCard {
-  background: linear-gradient(135deg, #1e1338 0%, #131427 100%);
-  border: 1.5px solid rgba(168, 85, 247, 0.35);
+  background: linear-gradient(135deg, #1B222D 0%, #10141C 100%);
+  border: 1.5px solid rgba(197, 166, 106, 0.4);
   border-radius: 20px;
-  padding: 20px;
+  padding: 22px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45), 0 0 16px rgba(168, 85, 247, 0.12);
+  gap: 16px;
+  min-height: 148px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.65), 0 0 18px rgba(197, 166, 106, 0.12);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -112,42 +188,50 @@
 }
 
 .rewardCard:hover {
-  border-color: rgba(245, 176, 65, 0.7);
+  border-color: rgba(226, 200, 145, 0.8);
   transform: translateY(-2px);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), 0 0 24px rgba(168, 85, 247, 0.25), 0 0 14px rgba(245, 176, 65, 0.2);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75), 0 0 24px rgba(197, 166, 106, 0.25);
 }
 
 .rewardCardContent {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   z-index: 1;
+  flex: 1;
+  min-width: 0;
 }
 
 .rewardCardTitle {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 16px;
-  font-weight: 700;
-  color: #ffffff;
+  font-weight: 800;
+  color: #F5F3EE;
+  letter-spacing: 0.5px;
+  margin: 0;
 }
 
 .rewardCardSub {
-  font-size: 12px;
-  color: #9ca3af;
+  font-size: 12.5px;
+  color: #A5A8B0;
+  line-height: 1.45;
+  margin: 0;
+  word-break: break-word;
 }
 
 .viewRewardsLink {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #f5b041;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: #C5A66A;
   margin-top: 8px;
+  letter-spacing: 0.5px;
 }
 
-/* ======================================================== */
-/* PREMIUM MAGICAL TREASURE CHEST (Level 05 Exact Style)    */
-/* ======================================================== */
+/* Base Pedestal Platform with Concentric Glowing Rings */
 .chestWrapper {
   position: relative;
   width: 140px;
@@ -160,7 +244,6 @@
   z-index: 1;
 }
 
-/* Base Pedestal Platform with Concentric Glowing Rings */
 .pedestalContainer {
   position: absolute;
   bottom: 2px;
@@ -176,8 +259,8 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 2px solid #a855f7;
-  box-shadow: 0 0 12px #9333ea, 0 0 22px rgba(168, 85, 247, 0.5), inset 0 0 8px rgba(168, 85, 247, 0.6);
+  border: 2px solid #C5A66A;
+  box-shadow: 0 0 12px rgba(197, 166, 106, 0.6), inset 0 0 8px rgba(197, 166, 106, 0.4);
   opacity: 0.85;
   transition: all 0.35s ease;
 }
@@ -189,9 +272,9 @@
   left: 10px;
   right: 10px;
   border-radius: 50%;
-  border: 1.5px solid #fbbf24;
-  background: radial-gradient(ellipse at center, rgba(251, 191, 36, 0.95) 0%, rgba(245, 158, 11, 0.55) 50%, rgba(147, 51, 234, 0.25) 80%, transparent 100%);
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.85), inset 0 0 6px rgba(255, 255, 255, 0.7);
+  border: 1.5px solid #E2C891;
+  background: radial-gradient(ellipse at center, rgba(226, 200, 145, 0.95) 0%, rgba(197, 166, 106, 0.55) 50%, transparent 100%);
+  box-shadow: 0 0 16px rgba(197, 166, 106, 0.7), inset 0 0 6px rgba(255, 255, 255, 0.7);
   transition: all 0.35s ease;
 }
 
@@ -202,7 +285,7 @@
   right: 20%;
   bottom: 6px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, #ffffff 0%, #fde047 50%, transparent 80%);
+  background: radial-gradient(ellipse at center, #FFFFFF 0%, #E2C891 50%, transparent 80%);
   filter: blur(2px);
   opacity: 0.75;
   animation: pedestalPulse 3.8s ease-in-out infinite;
@@ -220,14 +303,15 @@
   }
 }
 
-/* Ambient Pulsing Golden Glow Behind Chest */
 .chestGlow {
   position: absolute;
   top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 120px;
   height: 105px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(245, 176, 65, 0.5) 0%, rgba(168, 85, 247, 0.22) 50%, transparent 75%);
+  background: radial-gradient(ellipse at center, rgba(197, 166, 106, 0.45) 0%, rgba(226, 200, 145, 0.15) 50%, transparent 75%);
   pointer-events: none;
   z-index: 0;
   animation: chestGlowPulse 3.8s ease-in-out infinite;
@@ -236,16 +320,15 @@
 
 @keyframes chestGlowPulse {
   0%, 100% {
-    transform: scale(0.92);
+    transform: translateX(-50%) scale(0.92);
     opacity: 0.65;
   }
   50% {
-    transform: scale(1.15);
+    transform: translateX(-50%) scale(1.15);
     opacity: 0.95;
   }
 }
 
-/* 3D Rotating Magical Golden Light Rings Below/Around the Chest */
 .orbitRing {
   position: absolute;
   border-radius: 50%;
@@ -259,9 +342,9 @@
   bottom: 22px;
   left: 4px;
   border: 1.5px solid transparent;
-  border-top: 2.5px solid rgba(253, 224, 71, 0.9);
-  border-right: 1.5px solid rgba(245, 158, 11, 0.65);
-  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.85));
+  border-top: 2.5px solid rgba(226, 200, 145, 0.9);
+  border-right: 1.5px solid rgba(197, 166, 106, 0.65);
+  filter: drop-shadow(0 0 6px rgba(197, 166, 106, 0.85));
   transform: rotate(-14deg) rotateX(62deg);
   animation: orbitRotate1 8s linear infinite;
 }
@@ -272,32 +355,23 @@
   bottom: 28px;
   left: 7px;
   border: 1.5px solid transparent;
-  border-bottom: 2.5px solid rgba(252, 211, 77, 0.85);
-  border-left: 1.5px solid rgba(245, 158, 11, 0.6);
-  filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.8));
+  border-bottom: 2.5px solid rgba(226, 200, 145, 0.85);
+  border-left: 1.5px solid rgba(197, 166, 106, 0.6);
+  filter: drop-shadow(0 0 5px rgba(197, 166, 106, 0.8));
   transform: rotate(20deg) rotateX(65deg);
   animation: orbitRotate2 6.5s linear infinite;
 }
 
 @keyframes orbitRotate1 {
-  0% {
-    transform: rotate(-14deg) rotateX(62deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotate(-14deg) rotateX(62deg) rotateZ(360deg);
-  }
+  0% { transform: rotate(-14deg) rotateX(62deg) rotateZ(0deg); }
+  100% { transform: rotate(-14deg) rotateX(62deg) rotateZ(360deg); }
 }
 
 @keyframes orbitRotate2 {
-  0% {
-    transform: rotate(20deg) rotateX(65deg) rotateZ(360deg);
-  }
-  100% {
-    transform: rotate(20deg) rotateX(65deg) rotateZ(0deg);
-  }
+  0% { transform: rotate(20deg) rotateX(65deg) rotateZ(360deg); }
+  100% { transform: rotate(20deg) rotateX(65deg) rotateZ(0deg); }
 }
 
-/* Floating Chest Container */
 .chestFloatingContainer {
   position: relative;
   width: 110px;
@@ -311,48 +385,37 @@
 }
 
 @keyframes chestFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-7px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
 }
 
-/* Soft Golden Light Ray from Inside Chest */
 .chestLidGleam {
   position: absolute;
   top: 26%;
   left: 25%;
   width: 50%;
   height: 24px;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(253, 224, 71, 0.75) 45%, rgba(245, 176, 65, 0.25) 75%, transparent 100%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(226, 200, 145, 0.75) 45%, rgba(197, 166, 106, 0.25) 75%, transparent 100%);
   border-radius: 50%;
   opacity: 0.65;
   transform: scaleY(0.6);
   pointer-events: none;
   z-index: 4;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.85));
+  filter: drop-shadow(0 0 8px rgba(226, 200, 145, 0.85));
   animation: gleamPulse 3.8s ease-in-out infinite;
   transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes gleamPulse {
-  0%, 100% {
-    opacity: 0.55;
-    transform: scaleY(0.55);
-  }
-  50% {
-    opacity: 0.85;
-    transform: scaleY(0.75);
-  }
+  0%, 100% { opacity: 0.55; transform: scaleY(0.55); }
+  50% { opacity: 0.85; transform: scaleY(0.75); }
 }
 
 /* 4-Point Golden Star Sparkles */
 .sparkle {
   position: absolute;
-  background: radial-gradient(circle, #ffffff 15%, #fde047 50%, #f59e0b 85%, transparent 100%);
+  background: radial-gradient(circle, #FFFFFF 15%, #E2C891 50%, #C5A66A 85%, transparent 100%);
   clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
   pointer-events: none;
   z-index: 5;
@@ -405,54 +468,23 @@
 }
 
 @keyframes sparkleFloat1 {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0.3) rotate(0deg);
-  }
-  40%, 65% {
-    opacity: 1;
-    transform: translate(-3px, -8px) scale(1.15) rotate(45deg);
-    filter: drop-shadow(0 0 7px rgba(253, 224, 71, 0.95));
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-6px, -16px) scale(0.2) rotate(90deg);
-  }
+  0% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+  40%, 65% { opacity: 1; transform: translate(-3px, -8px) scale(1.15) rotate(45deg); filter: drop-shadow(0 0 7px rgba(226, 200, 145, 0.95)); }
+  100% { opacity: 0; transform: translate(-6px, -16px) scale(0.2) rotate(90deg); }
 }
 
 @keyframes sparkleFloat2 {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0.3) rotate(0deg);
-  }
-  40%, 65% {
-    opacity: 1;
-    transform: translate(3px, -7px) scale(1.1) rotate(-45deg);
-    filter: drop-shadow(0 0 6px rgba(253, 224, 71, 0.9));
-  }
-  100% {
-    opacity: 0;
-    transform: translate(7px, -15px) scale(0.2) rotate(-90deg);
-  }
+  0% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+  40%, 65% { opacity: 1; transform: translate(3px, -7px) scale(1.1) rotate(-45deg); filter: drop-shadow(0 0 6px rgba(226, 200, 145, 0.9)); }
+  100% { opacity: 0; transform: translate(7px, -15px) scale(0.2) rotate(-90deg); }
 }
 
 @keyframes sparkleFloat3 {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0.3) rotate(0deg);
-  }
-  45%, 70% {
-    opacity: 1;
-    transform: translate(2px, -7px) scale(1.2) rotate(45deg);
-    filter: drop-shadow(0 0 7px rgba(253, 224, 71, 0.95));
-  }
-  100% {
-    opacity: 0;
-    transform: translate(5px, -14px) scale(0.2) rotate(90deg);
-  }
+  0% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+  45%, 70% { opacity: 1; transform: translate(2px, -7px) scale(1.2) rotate(45deg); filter: drop-shadow(0 0 7px rgba(226, 200, 145, 0.95)); }
+  100% { opacity: 0; transform: translate(5px, -14px) scale(0.2) rotate(90deg); }
 }
 
-/* Treasure Chest Image */
 .rewardCardImg {
   width: 100%;
   height: 100%;
@@ -460,39 +492,36 @@
   object-position: center;
   position: relative;
   z-index: 3;
-  filter: drop-shadow(0 8px 16px rgba(245, 176, 65, 0.4)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 8px 16px rgba(197, 166, 106, 0.4)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
   pointer-events: none;
 }
 
-/* Hover Interactions */
 .rewardCard:hover .chestFloatingContainer {
   transform: translateY(-9px) scale(1.08) perspective(600px) rotateX(4deg) rotateY(-4deg);
 }
 
 .rewardCard:hover .rewardCardImg {
-  filter: drop-shadow(0 12px 26px rgba(245, 176, 65, 0.8)) drop-shadow(0 0 16px rgba(253, 224, 71, 0.95));
+  filter: drop-shadow(0 12px 26px rgba(197, 166, 106, 0.8)) drop-shadow(0 0 16px rgba(226, 200, 145, 0.95));
 }
 
 .rewardCard:hover .chestGlow {
   transform: scale(1.3);
   opacity: 1;
-  background: radial-gradient(ellipse at center, rgba(245, 176, 65, 0.65) 0%, rgba(168, 85, 247, 0.35) 55%, transparent 75%);
 }
 
 .rewardCard:hover .chestLidGleam {
   opacity: 1;
   transform: scaleY(1.4) translateY(-3px);
-  filter: drop-shadow(0 0 14px rgba(253, 224, 71, 1)) drop-shadow(0 -4px 16px rgba(245, 176, 65, 0.9));
 }
 
 .rewardCard:hover .pedestalOuterRing {
   opacity: 1;
-  box-shadow: 0 0 18px #9333ea, 0 0 28px rgba(168, 85, 247, 0.7), inset 0 0 10px rgba(168, 85, 247, 0.8);
+  box-shadow: 0 0 18px rgba(197, 166, 106, 0.7), inset 0 0 10px rgba(197, 166, 106, 0.8);
 }
 
 .rewardCard:hover .pedestalInnerDisc {
-  box-shadow: 0 0 22px rgba(245, 158, 11, 1), inset 0 0 8px #ffffff;
+  box-shadow: 0 0 22px rgba(197, 166, 106, 1), inset 0 0 8px #ffffff;
 }
 
 .rewardCard:hover .pedestalSpotlight {
@@ -500,62 +529,11 @@
   transform: scale(1.2);
 }
 
-/* Responsive Mobile Styles */
-@media (max-width: 480px) {
-  .rewardCard {
-    padding: 16px;
-    gap: 12px;
-  }
-  .chestWrapper {
-    width: 110px;
-    height: 105px;
-  }
-  .pedestalContainer {
-    width: 95px;
-    height: 26px;
-  }
-  .chestFloatingContainer {
-    width: 90px;
-    height: 82px;
-  }
-  .orbitRing1 {
-    width: 105px;
-    height: 42px;
-  }
-  .orbitRing2 {
-    width: 100px;
-    height: 38px;
-  }
-}
-
-/* Accessibility: Respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .chestWrapper,
-  .chestFloatingContainer,
-  .chestGlow,
-  .chestLidGleam,
-  .pedestalSpotlight,
-  .orbitRing,
-  .orbitRing1,
-  .orbitRing2,
-  .sparkle {
-    animation: none !important;
-    transition: none !important;
-  }
-
-  .rewardCard:hover .chestFloatingContainer,
-  .rewardCard:hover .rewardCardImg,
-  .rewardCard:hover .chestLidGleam,
-  .rewardCard:hover .pedestalSpotlight {
-    transform: none !important;
-  }
-}
-
-/* Full "EARN & LEVEL UP" Modal / View (Screen 4) */
+/* Full "EARN & LEVEL UP" Modal / View */
 .fullModalOverlay {
   position: fixed;
   inset: 0;
-  background-color: #161827;
+  background-color: var(--bg-body, #090B10);
   z-index: 200;
   overflow-y: auto;
   display: flex;
@@ -567,7 +545,8 @@
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-subtle, #30333B);
+  background: var(--bg-secondary, #10141C);
 }
 
 .backBtn {
@@ -577,20 +556,28 @@
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle, #30333B);
+  color: #F5F3EE;
   margin-right: 14px;
 }
 
+.backBtn:hover {
+  background: rgba(197, 166, 106, 0.12);
+  color: #C5A66A;
+  border-color: rgba(197, 166, 106, 0.4);
+}
+
 .modalTitle {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 17px;
-  font-weight: 700;
-  color: #ffffff;
+  font-weight: 800;
+  color: #F5F3EE;
 }
 
 .modalSub {
   font-size: 12px;
-  color: #9ca3af;
+  color: #A5A8B0;
 }
 
 .modalBody {
@@ -602,8 +589,8 @@
 }
 
 .earnListCard {
-  background: #1c1e32;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card, #151A23);
+  border: 1px solid var(--border-subtle, #30333B);
   border-radius: 16px;
   padding: 14px 16px;
   display: flex;
@@ -614,9 +601,10 @@
 }
 
 .earnListCard:hover {
-  background: #232742;
-  border-color: rgba(245, 176, 65, 0.35);
+  background: var(--bg-elevated, #1B222D);
+  border-color: rgba(197, 166, 106, 0.4);
   transform: translateX(2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 10px rgba(197, 166, 106, 0.1);
 }
 
 .cardLeft {
@@ -634,18 +622,19 @@
 .cardTitle {
   font-size: 15px;
   font-weight: 700;
-  color: #ffffff;
+  color: #F5F3EE;
 }
 
 .cardDesc {
   font-size: 12px;
-  color: #9ca3af;
+  color: #A5A8B0;
 }
 
 .cardXpBadge {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 13px;
-  font-weight: 700;
-  color: #f5b041;
+  font-weight: 800;
+  color: #C5A66A;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -654,8 +643,8 @@
 .motivationBanner {
   margin-top: 16px;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, rgba(245, 176, 65, 0.12) 0%, rgba(22, 24, 39, 0.6) 100%);
-  border: 1px solid rgba(245, 176, 65, 0.3);
+  background: linear-gradient(135deg, rgba(197, 166, 106, 0.12) 0%, rgba(27, 34, 45, 0.6) 100%);
+  border: 1px solid rgba(197, 166, 106, 0.35);
   border-radius: 16px;
   padding: 16px;
   display: flex;
@@ -666,5 +655,147 @@
 .motivationText {
   font-size: 14px;
   font-weight: 600;
-  color: #ffffff;
+  color: #F5F3EE;
+}
+
+/* ======================================================== */
+/* RESPONSIVE LAYOUT BREAKPOINTS                            */
+/* ======================================================== */
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .earnMoreSection {
+    padding: 0 0 16px 0;
+  }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .gridItem {
+    padding: 12px 6px;
+    min-height: 114px;
+  }
+  .iconBox {
+    width: 42px;
+    height: 42px;
+  }
+  .activity3DImg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rewardCard {
+    padding: 16px 14px;
+    gap: 12px;
+    border-radius: 16px;
+    min-height: unset;
+  }
+  .rewardCardTitle {
+    font-size: 14.5px;
+  }
+  .rewardCardSub {
+    font-size: 11.5px;
+  }
+  .chestWrapper {
+    width: 105px;
+    height: 98px;
+  }
+  .pedestalContainer {
+    width: 90px;
+    height: 24px;
+  }
+  .chestFloatingContainer {
+    width: 82px;
+    height: 75px;
+  }
+  .orbitRing1 {
+    width: 95px;
+    height: 38px;
+  }
+  .orbitRing2 {
+    width: 90px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 350px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .gridItem {
+    padding: 10px 4px;
+    min-height: 106px;
+    gap: 6px;
+  }
+  .iconBox {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+  .activity3DImg {
+    width: 24px;
+    height: 24px;
+  }
+  .itemLabel {
+    font-size: 10px;
+  }
+  .itemXpTag {
+    font-size: 8.5px;
+    padding: 1px 4px;
+  }
+  .rewardCard {
+    padding: 12px 10px;
+    gap: 8px;
+  }
+  .rewardCardTitle {
+    font-size: 13.5px;
+  }
+  .rewardCardSub {
+    font-size: 10.5px;
+  }
+  .chestWrapper {
+    width: 85px;
+    height: 80px;
+  }
+  .chestFloatingContainer {
+    width: 68px;
+    height: 62px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chestWrapper,
+  .chestFloatingContainer,
+  .chestGlow,
+  .chestLidGleam,
+  .pedestalSpotlight,
+  .orbitRing,
+  .orbitRing1,
+  .orbitRing2,
+  .sparkle {
+    animation: none !important;
+    transition: none !important;
+  }
+  .rewardCard:hover .chestFloatingContainer,
+  .rewardCard:hover .rewardCardImg,
+  .rewardCard:hover .chestLidGleam,
+  .rewardCard:hover .pedestalSpotlight {
+    transform: none !important;
+  }
 }

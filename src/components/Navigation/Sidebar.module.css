@@ -1,0 +1,497 @@
+/* ======================================================== */
+/* ULTRA PREMIUM LUXURY GAMING SIDEBAR - OBSIDIAN GOLD      */
+/* ======================================================== */
+
+.sidebar {
+  width: 270px;
+  min-width: 270px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(16, 20, 28, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid var(--border-subtle, #30333B);
+  box-shadow: 6px 0 35px rgba(0, 0, 0, 0.8), inset -1px 0 0 rgba(197, 166, 106, 0.08);
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(197, 166, 106, 0.25);
+  border-radius: 4px;
+}
+
+/* Mobile backdrop */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 11, 16, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 99;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Brand Header */
+.brandContainer {
+  padding: 22px 20px 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoBadge {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, rgba(27, 34, 45, 0.95), rgba(21, 26, 35, 0.98));
+  border: 1.5px solid rgba(197, 166, 106, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(197, 166, 106, 0.25), inset 0 0 8px rgba(197, 166, 106, 0.15);
+  flex-shrink: 0;
+}
+
+.brandLogo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(197, 166, 106, 0.6));
+}
+
+.logoHalo {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197, 166, 106, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.brandTitles {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brandName {
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #F8E7B2;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 30%, #D4AF37 70%, #9A7B20 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+}
+
+.brandBadge {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #C5A66A;
+  background: rgba(197, 166, 106, 0.12);
+  border: 1px solid rgba(197, 166, 106, 0.35);
+  padding: 2px 6px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(197, 166, 106, 0.15);
+}
+
+.closeDrawerBtn {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle, #30333B);
+  color: #A5A8B0;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.closeDrawerBtn:hover {
+  background: rgba(197, 166, 106, 0.12);
+  color: #F5F3EE;
+}
+
+/* Status Pill - Emerald Accent for Online Health */
+.statusPillWrap {
+  padding: 0 20px 16px 20px;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(77, 187, 135, 0.08);
+  border: 1px solid rgba(77, 187, 135, 0.25);
+  padding: 4px 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(77, 187, 135, 0.1);
+}
+
+.statusPulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4DBB87;
+  box-shadow: 0 0 8px #4DBB87;
+  animation: pulseDot 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.45;
+    transform: scale(1.2);
+  }
+}
+
+.statusText {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  color: #4DBB87;
+  letter-spacing: 0.6px;
+}
+
+/* Navigation Sections */
+.navSections {
+  flex: 1;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.groupLabel {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #6B7280;
+  padding: 6px 12px 4px 12px;
+  text-transform: uppercase;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.navItem {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #A5A8B0;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+}
+
+.navItem:hover {
+  color: #F5F3EE;
+  background: rgba(197, 166, 106, 0.08);
+  border-color: rgba(197, 166, 106, 0.22);
+}
+
+.navItemActive {
+  color: #F5F3EE !important;
+  background: linear-gradient(90deg, rgba(197, 166, 106, 0.18) 0%, rgba(27, 34, 45, 0.75) 100%) !important;
+  border-color: rgba(197, 166, 106, 0.4) !important;
+  box-shadow: inset 0 0 16px rgba(197, 166, 106, 0.1);
+}
+
+.navIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.navItem:hover .navIcon {
+  transform: translateX(2px);
+  color: #C5A66A;
+}
+
+.navItemActive .navIcon {
+  color: #C5A66A;
+  filter: drop-shadow(0 0 6px rgba(197, 166, 106, 0.6));
+}
+
+.navLabel {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.2px;
+}
+
+.navItemBadge {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #E2C891, #C5A66A);
+  color: #090B10;
+  padding: 2px 6px;
+  border-radius: 5px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 8px rgba(197, 166, 106, 0.3);
+}
+
+.activeIndicator {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #C5A66A;
+  box-shadow: 0 0 12px #C5A66A, 0 0 4px #E2C891;
+}
+
+/* Sidebar Footer / User Snapshot Widget */
+.sidebarFooter {
+  padding: 16px 14px 20px 14px;
+  border-top: 1px solid var(--border-subtle, #30333B);
+  background: rgba(9, 11, 16, 0.85);
+}
+
+.userCard {
+  background: var(--bg-card, #151A23);
+  border: 1px solid var(--border-subtle, #30333B);
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.userCard:hover {
+  background: var(--bg-elevated, #1B222D);
+  border-color: rgba(197, 166, 106, 0.4);
+  box-shadow: 0 0 18px rgba(197, 166, 106, 0.2);
+  transform: translateY(-1px);
+}
+
+.userCardTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatarWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarAvatarBadge {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.7));
+}
+
+.avatarInitials {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #C5A66A, #9E7D3B);
+  color: #090B10;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 14px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(197, 166, 106, 0.35);
+}
+
+.onlineDot {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #4DBB87;
+  border: 2px solid #090B10;
+  box-shadow: 0 0 6px #4DBB87;
+}
+
+.userInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 12px;
+  font-weight: 800;
+  color: #F5F3EE;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.4px;
+}
+
+.userRankTier {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  color: #C5A66A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.3px;
+}
+
+.userArrow {
+  color: #6B7280;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.userCard:hover .userArrow {
+  color: #C5A66A;
+  transform: translateX(2px);
+}
+
+/* Mini Progress Bar */
+.miniProgressWrap {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.miniProgressLabels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #A5A8B0;
+  letter-spacing: 0.5px;
+}
+
+.miniProgressPct {
+  color: #C5A66A;
+  font-weight: 800;
+}
+
+.miniProgressBarTrack {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.miniProgressBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #C5A66A, #E2C891);
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(197, 166, 106, 0.5);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(285px, 86vw);
+    min-width: unset;
+    height: 100vh;
+    height: 100dvh;
+    transform: translateX(-100%);
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    padding-bottom: 30px;
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .backdrop {
+    z-index: 999;
+  }
+
+  .closeDrawerBtn {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    cursor: pointer;
+  }
+}

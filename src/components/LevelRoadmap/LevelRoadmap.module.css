@@ -1,3 +1,7 @@
+/* ======================================================== */
+/* ULTRA PREMIUM LUXURY LEVEL ROADMAP - OBSIDIAN GOLD       */
+/* ======================================================== */
+
 .roadmapSection {
   width: 100%;
   padding: 0 0 24px 0;
@@ -8,7 +12,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   padding: 0 20px;
 }
 
@@ -35,36 +39,44 @@
 .sectionBadge {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.8px;
-  color: #f5b041;
-  background: rgba(245, 176, 65, 0.12);
-  border: 1px solid rgba(245, 176, 65, 0.28);
-  padding: 4px 10px;
-  border-radius: 999px;
+  letter-spacing: 0.9px;
+  color: #C5A66A;
+  background: rgba(197, 166, 106, 0.1);
+  border: 1px solid rgba(197, 166, 106, 0.35);
+  padding: 4px 11px;
+  border-radius: 6px;
   text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(197, 166, 106, 0.2);
 }
 
 .tierCount {
-  font-size: 12px;
-  font-weight: 600;
-  color: #9ca3af;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: #A5A8B0;
 }
 
 .title {
-  font-size: 18px;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 0.4px;
+  font-family: var(--font-regal, 'Cinzel', serif);
+  font-size: 24px;
+  font-weight: 900;
+  color: #F8E7B2;
+  letter-spacing: 0.8px;
   margin: 0;
   text-transform: uppercase;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 30%, #D4AF37 70%, #9A7B20 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.3));
 }
 
 .subtitle {
   font-size: 13px;
-  color: #9ca3af;
+  color: #A5A8B0;
   margin: 0;
   max-width: 650px;
   line-height: 1.45;
@@ -87,18 +99,23 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(245, 176, 65, 0.12);
-  border: 1px solid rgba(245, 176, 65, 0.35);
-  color: #fcd34d;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 7px 14px;
-  border-radius: 999px;
-  transition: all 0.2s ease;
+  background: linear-gradient(135deg, #E2C891 0%, #C5A66A 100%);
+  border: 1px solid rgba(226, 200, 145, 0.5);
+  color: #090B10;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(197, 166, 106, 0.3);
 }
 
 .jumpBtn:hover {
-  background: rgba(245, 176, 65, 0.24);
+  background: linear-gradient(135deg, #F5F3EE 0%, #E2C891 100%);
+  box-shadow: 0 0 22px rgba(197, 166, 106, 0.55);
   transform: translateY(-1px);
 }
 
@@ -108,30 +125,32 @@
 }
 
 .arrowBtn {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: #1c1f36;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--bg-card, #151A23);
+  border: 1px solid var(--border-subtle, #30333B);
+  color: #F5F3EE;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .arrowBtn:hover:not(:disabled) {
-  background: #282d4e;
-  border-color: rgba(245, 176, 65, 0.4);
-  color: #f5b041;
+  background: var(--bg-elevated, #1B222D);
+  border-color: rgba(197, 166, 106, 0.5);
+  color: #C5A66A;
+  box-shadow: 0 0 12px rgba(197, 166, 106, 0.25);
 }
 
 .arrowDisabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
-/* Horizontal Track Wrapper */
+/* Horizontal Track Carousel */
 .scrollWrapper {
   width: 100%;
   position: relative;
@@ -140,9 +159,9 @@
 
 .trackScroll {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   overflow-x: auto;
-  padding: 16px 20px 24px 20px;
+  padding: 24px 20px 28px 20px;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -153,27 +172,30 @@
 }
 
 .trackScroll::-webkit-scrollbar-track {
-  background: rgba(14, 16, 28, 0.8);
+  background: rgba(9, 11, 16, 0.8);
   border-radius: 999px;
   margin: 0 20px;
 }
 
 .trackScroll::-webkit-scrollbar-thumb {
-  background: rgba(245, 176, 65, 0.3);
+  background: rgba(197, 166, 106, 0.35);
   border-radius: 999px;
 }
 
 .trackScroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(245, 176, 65, 0.55);
+  background: rgba(197, 166, 106, 0.65);
 }
 
-/* Individual Level Card */
+/* ======================================================== */
+/* INDIVIDUAL LUXURY LEVEL CARDS                            */
+/* ======================================================== */
+
 .levelCard {
-  flex: 0 0 180px;
-  background: linear-gradient(180deg, #181b30 0%, #111322 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 16px 14px;
+  flex: 0 0 196px;
+  background: linear-gradient(175deg, rgba(27, 34, 45, 0.85) 0%, rgba(21, 26, 35, 0.98) 100%);
+  border: 1px solid var(--border-subtle, #30333B);
+  border-radius: 22px;
+  padding: 18px 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -181,19 +203,20 @@
   position: relative;
   cursor: pointer;
   scroll-snap-align: start;
-  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(226, 200, 145, 0.08);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .levelCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.8), 0 0 24px rgba(197, 166, 106, 0.2);
+  border-color: rgba(197, 166, 106, 0.45);
 }
 
 /* Pipeline Connecting Track */
 .pipelineNode {
   position: absolute;
-  top: -10px;
+  top: -12px;
   left: 0;
   right: 0;
   display: flex;
@@ -203,77 +226,85 @@
 }
 
 .nodePoint {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: #374151;
-  border: 2px solid #111322;
+  background: #30333B;
+  border: 2px solid #090B10;
   z-index: 2;
+  transition: all 0.3s ease;
 }
 
 .nodeConnectorLine {
   position: absolute;
   left: 50%;
-  width: calc(100% + 20px);
-  height: 3px;
-  top: 3px;
+  width: calc(100% + 24px);
+  height: 3.5px;
+  top: 4px;
   z-index: 1;
 }
 
+/* Completed Level Path - Emerald Glow */
 .lineCompleted {
-  background: linear-gradient(90deg, #10b981 0%, #10b981 100%);
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  background: linear-gradient(90deg, #4DBB87 0%, #34D399 100%);
+  box-shadow: 0 0 10px rgba(77, 187, 135, 0.65);
 }
 
+/* Current Level Path - Gold to Graphite Transition */
 .lineCurrent {
-  background: linear-gradient(90deg, #10b981 0%, #f5b041 50%, #4b5563 100%);
-  box-shadow: 0 0 10px rgba(245, 176, 65, 0.7);
+  background: linear-gradient(90deg, #4DBB87 0%, #C5A66A 50%, #30333B 100%);
+  box-shadow: 0 0 14px rgba(197, 166, 106, 0.55);
 }
 
 .lineLocked {
-  background: #262942;
+  background: rgba(48, 51, 59, 0.6);
 }
 
-/* Status variants */
+/* Card Status Variants */
 .cardCompleted {
-  border-color: rgba(16, 185, 129, 0.35);
+  border-color: rgba(77, 187, 135, 0.3);
+  background: linear-gradient(175deg, rgba(21, 26, 35, 0.95) 0%, rgba(16, 20, 28, 0.98) 100%);
 }
 
 .cardCompleted .nodePoint {
-  background: #10b981;
-  box-shadow: 0 0 8px #10b981;
+  background: #4DBB87;
+  box-shadow: 0 0 10px #4DBB87;
 }
 
 .cardCurrent {
-  border-color: #f5b041;
-  background: radial-gradient(120% 120% at 50% 0%, #292444 0%, #16182c 100%);
-  box-shadow: 0 0 25px rgba(245, 176, 65, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(197, 166, 106, 0.85);
+  background: radial-gradient(130% 130% at 50% 0%, rgba(27, 34, 45, 0.95) 0%, rgba(21, 26, 35, 0.98) 100%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(197, 166, 106, 0.35), inset 0 1px 0 rgba(226, 200, 145, 0.2);
 }
 
 .cardCurrent:hover {
-  box-shadow: 0 0 35px rgba(245, 176, 65, 0.45);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 38px rgba(197, 166, 106, 0.5);
+  border-color: #E2C891;
 }
 
 .cardCurrent .nodePoint {
-  background: #f5b041;
-  box-shadow: 0 0 12px #f5b041;
-  transform: scale(1.3);
+  background: #E2C891;
+  box-shadow: 0 0 14px #E2C891, 0 0 22px rgba(197, 166, 106, 0.9);
+  transform: scale(1.35);
 }
 
 .cardNextMilestone {
-  border: 1px dashed rgba(245, 176, 65, 0.55);
-  background: linear-gradient(180deg, #1e203a 0%, #121424 100%);
+  border: 1px dashed rgba(232, 228, 218, 0.45);
+  background: linear-gradient(175deg, rgba(27, 34, 45, 0.75) 0%, rgba(16, 20, 28, 0.95) 100%);
 }
 
 .cardLocked {
   opacity: 0.78;
+  background: linear-gradient(175deg, rgba(16, 20, 28, 0.9) 0%, rgba(9, 11, 16, 0.98) 100%);
+  border-color: var(--border-subtle, #30333B);
 }
 
 .cardLocked:hover {
-  opacity: 0.95;
+  opacity: 0.96;
+  border-color: rgba(232, 228, 218, 0.25);
 }
 
-/* Card Content Styling */
+/* Card Header */
 .cardHeader {
   width: 100%;
   display: flex;
@@ -283,10 +314,11 @@
 }
 
 .levelNum {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 11px;
   font-weight: 800;
-  color: #9ca3af;
-  letter-spacing: 0.5px;
+  color: #A5A8B0;
+  letter-spacing: 0.6px;
 }
 
 .statusCompletedBadge {
@@ -294,9 +326,10 @@
   align-items: center;
   gap: 3px;
   font-size: 10px;
-  font-weight: 700;
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.14);
+  font-weight: 800;
+  color: #4DBB87;
+  background: rgba(77, 187, 135, 0.14);
+  border: 1px solid rgba(77, 187, 135, 0.35);
   padding: 2px 7px;
   border-radius: 999px;
 }
@@ -305,24 +338,25 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: 10px;
-  font-weight: 800;
-  color: #12131f;
-  background: #f5b041;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 900;
+  color: #090B10;
+  background: linear-gradient(135deg, #E2C891 0%, #C5A66A 100%);
   padding: 2px 8px;
   border-radius: 999px;
-  box-shadow: 0 0 10px rgba(245, 176, 65, 0.6);
-  animation: pulseTag 2s infinite ease-in-out;
+  box-shadow: 0 0 12px rgba(197, 166, 106, 0.7);
+  animation: pulseTag 2.4s infinite ease-in-out;
 }
 
 @keyframes pulseTag {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 8px rgba(245, 176, 65, 0.5);
+    box-shadow: 0 0 8px rgba(197, 166, 106, 0.5);
   }
   50% {
-    transform: scale(1.04);
-    box-shadow: 0 0 14px rgba(245, 176, 65, 0.8);
+    transform: scale(1.05);
+    box-shadow: 0 0 16px rgba(197, 166, 106, 0.85);
   }
 }
 
@@ -331,10 +365,10 @@
   align-items: center;
   gap: 3px;
   font-size: 10px;
-  font-weight: 700;
-  color: #fcd34d;
-  background: rgba(245, 176, 65, 0.16);
-  border: 1px solid rgba(245, 176, 65, 0.35);
+  font-weight: 800;
+  color: #E8E4DA;
+  background: rgba(232, 228, 218, 0.12);
+  border: 1px solid rgba(232, 228, 218, 0.3);
   padding: 2px 7px;
   border-radius: 999px;
 }
@@ -344,20 +378,24 @@
   align-items: center;
   gap: 3px;
   font-size: 10px;
-  font-weight: 600;
-  color: #6b7280;
-  background: rgba(255, 255, 255, 0.05);
+  font-weight: 700;
+  color: #6B7280;
+  background: rgba(255, 255, 255, 0.04);
   padding: 2px 7px;
   border-radius: 999px;
 }
 
+/* Badge Container - Pure Silhouette SVG Emblem */
 .badgeContainer {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 6px 0 10px 0;
-  transition: transform 0.2s ease;
+  margin: 6px 0 12px 0;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .levelCard:hover .badgeContainer {
@@ -366,25 +404,30 @@
 
 .badgeHalo {
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 105px;
+  height: 60px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 176, 65, 0.35) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(216, 180, 90, 0.35) 0%, transparent 75%);
   pointer-events: none;
+  filter: blur(10px);
   z-index: 0;
 }
 
 .tierName {
-  font-size: 14px;
-  font-weight: 800;
-  color: #ffffff;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 15px;
+  font-weight: 900;
+  color: #F5F3EE;
   margin: 0 0 8px 0;
   letter-spacing: 0.3px;
+  text-transform: uppercase;
 }
 
 .cardCurrent .tierName {
-  color: #fcd34d;
-  text-shadow: 0 0 12px rgba(245, 176, 65, 0.4);
+  background: linear-gradient(135deg, #F5F3EE 0%, #E2C891 60%, #C5A66A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(197, 166, 106, 0.4));
 }
 
 .xpBlock {
@@ -395,17 +438,19 @@
 }
 
 .xpLabel {
-  font-size: 10px;
-  font-weight: 600;
-  color: #6b7280;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #6B7280;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .xpValue {
-  font-size: 12px;
-  font-weight: 700;
-  color: #d1d5db;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #E8E4DA;
 }
 
 .microProgressArea {
@@ -415,33 +460,35 @@
 
 .microTrack {
   width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  height: 5px;
+  background: var(--bg-body, #090B10);
   border-radius: 999px;
   overflow: hidden;
+  border: 1px solid rgba(197, 166, 106, 0.2);
 }
 
 .microFill {
   height: 100%;
-  background: linear-gradient(90deg, #f59e0b, #fcd34d);
+  background: linear-gradient(90deg, #C5A66A, #E2C891);
   border-radius: 999px;
-  box-shadow: 0 0 6px #fcd34d;
+  box-shadow: 0 0 8px rgba(197, 166, 106, 0.6);
 }
 
 .microText {
   display: block;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 10px;
-  font-weight: 600;
-  color: #f5b041;
+  font-weight: 700;
+  color: #C5A66A;
   margin-top: 4px;
 }
 
 .rewardBox {
   width: 100%;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle, #30333B);
   border-radius: 10px;
-  padding: 6px 8px;
+  padding: 7px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -449,45 +496,54 @@
   margin-top: auto;
 }
 
+.cardCurrent .rewardBox {
+  background: rgba(197, 166, 106, 0.1);
+  border-color: rgba(197, 166, 106, 0.35);
+}
+
 .rewardIcon {
-  color: #f5b041;
+  color: #C5A66A;
   flex-shrink: 0;
 }
 
 .rewardText {
   font-size: 11px;
-  font-weight: 700;
-  color: #ffffff;
+  font-weight: 800;
+  color: #F5F3EE;
 }
 
 .rewardTextMuted {
   font-size: 11px;
-  color: #6b7280;
+  color: #6B7280;
+  font-weight: 600;
 }
 
 .inspectHint {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 10px;
-  font-weight: 600;
-  color: #9ca3af;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #A5A8B0;
   margin-top: 10px;
-  opacity: 0.7;
-  transition: opacity 0.2s ease, color 0.2s ease;
+  opacity: 0.75;
+  transition: all 0.2s ease;
 }
 
 .levelCard:hover .inspectHint {
   opacity: 1;
-  color: #f5b041;
+  color: #C5A66A;
 }
 
-/* Modal Inspection Popup */
+/* ======================================================== */
+/* LUXURY MODAL INSPECTION POPUP - OBSIDIAN GOLD            */
+/* ======================================================== */
+
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(8, 9, 16, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(9, 11, 16, 0.88);
+  backdrop-filter: blur(14px);
   z-index: 500;
   display: flex;
   align-items: center;
@@ -503,88 +559,100 @@
 
 .modalCard {
   width: 100%;
-  max-width: 440px;
-  background: linear-gradient(180deg, #1a1d35 0%, #121424 100%);
-  border: 1px solid rgba(245, 176, 65, 0.35);
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 176, 65, 0.15);
+  max-width: 460px;
+  background: linear-gradient(155deg, #1B222D 0%, #10141C 100%);
+  border: 1px solid rgba(197, 166, 106, 0.45);
+  border-radius: 26px;
+  padding: 26px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 36px rgba(197, 166, 106, 0.18), inset 0 1px 0 rgba(226, 200, 145, 0.15);
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes slideUp {
-  from { transform: translateY(20px) scale(0.96); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
+  from {
+    transform: translateY(24px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 .modalCloseBtn {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  color: #9ca3af;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle, #30333B);
+  color: #A5A8B0;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .modalCloseBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  background: rgba(197, 166, 106, 0.15);
+  color: #F5F3EE;
+  border-color: rgba(197, 166, 106, 0.4);
 }
 
 .modalTopRow {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 20px;
 }
 
 .modalTitleBlock {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .modalLvlTag {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 11px;
   font-weight: 800;
-  color: #f5b041;
+  color: #C5A66A;
   letter-spacing: 1px;
 }
 
 .modalTierName {
-  font-size: 22px;
-  font-weight: 800;
-  color: #ffffff;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 24px;
+  font-weight: 900;
+  color: #F5F3EE;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .modalXPReq {
-  font-size: 12px;
-  color: #9ca3af;
-  font-weight: 500;
+  font-size: 12.5px;
+  color: #A5A8B0;
+  font-weight: 600;
 }
 
 .modalRewardHighlight {
-  background: rgba(245, 176, 65, 0.08);
-  border: 1px solid rgba(245, 176, 65, 0.25);
-  border-radius: 14px;
-  padding: 12px 14px;
+  background: rgba(197, 166, 106, 0.1);
+  border: 1px solid rgba(197, 166, 106, 0.35);
+  border-radius: 16px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .modalAwardIcon {
-  color: #f5b041;
+  color: #C5A66A;
   flex-shrink: 0;
 }
 
@@ -594,17 +662,18 @@
 }
 
 .modalRewardHeading {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 10px;
   text-transform: uppercase;
-  font-weight: 700;
-  color: #f5b041;
-  letter-spacing: 0.5px;
+  font-weight: 800;
+  color: #C5A66A;
+  letter-spacing: 0.6px;
 }
 
 .modalRewardValue {
-  font-size: 15px;
-  font-weight: 800;
-  color: #ffffff;
+  font-size: 16px;
+  font-weight: 900;
+  color: #F5F3EE;
 }
 
 .perksListContainer {
@@ -614,11 +683,12 @@
 }
 
 .perksTitle {
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
   font-size: 13px;
-  font-weight: 700;
-  color: #d1d5db;
+  font-weight: 800;
+  color: #E8E4DA;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   margin: 0;
 }
 
@@ -628,7 +698,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
 }
 
 .perkItem {
@@ -636,29 +706,64 @@
   align-items: flex-start;
   gap: 10px;
   font-size: 13px;
-  color: #e5e7eb;
+  color: #F5F3EE;
   line-height: 1.4;
 }
 
 .perkCheck {
-  color: #10b981;
+  color: #4DBB87;
   flex-shrink: 0;
   margin-top: 2px;
 }
 
 .modalDoneBtn {
   width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  background: #252844;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 700;
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #E2C891 0%, #C5A66A 100%);
+  border: 1px solid rgba(226, 200, 145, 0.5);
+  color: #090B10;
+  font-family: var(--font-gaming, 'Orbitron', sans-serif);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
   transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(197, 166, 106, 0.35);
 }
 
 .modalDoneBtn:hover {
-  background: #31365c;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #F5F3EE 0%, #E2C891 100%);
+  box-shadow: 0 0 24px rgba(197, 166, 106, 0.6);
+  transform: translateY(-1px);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 640px) {
+  .header {
+    padding: 0 10px;
+    gap: 12px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .trackScroll {
+    padding: 18px 10px 22px 10px;
+    gap: 16px;
+  }
+  .levelCard {
+    flex: 0 0 170px;
+    padding: 14px 10px;
+  }
+  .modalOverlay {
+    padding: 12px;
+  }
+  .modalCard {
+    padding: 20px 16px;
+    border-radius: 20px;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+  }
 }

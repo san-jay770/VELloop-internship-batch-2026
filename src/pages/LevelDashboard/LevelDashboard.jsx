@@ -1,33 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Gamepad2, Play, Sparkles, Trophy, ArrowRight, Zap } from 'lucide-react';
-import { TopNav } from '../../components/Navigation/TopNav';
+import { Sidebar } from '../../components/Navigation/Sidebar';
+import { TopHeader } from '../../components/Navigation/TopHeader';
 import { BottomNav } from '../../components/Navigation/BottomNav';
-import { LevelHero } from '../../components/LevelHero/LevelHero';
-import { LevelProgressionSummary } from '../../components/LevelHero/LevelProgressionSummary';
-import { TodaysBoost } from '../../components/TodaysBoost/TodaysBoost';
+import { LegacyChamberHero } from '../../components/LegacyChamber/LegacyChamberHero';
+import { ChronoXpRail } from '../../components/LegacyChamber/ChronoXpRail';
+import { EmblemsGallery } from '../../components/LegacyChamber/EmblemsGallery';
+import { LuxuryStatsBar } from '../../components/LuxuryLevelPage/LuxuryStatsBar';
+import { LuxuryArcadeBanner } from '../../components/LuxuryLevelPage/LuxuryArcadeBanner';
 import { EarnMoreGrid } from '../../components/EarnMoreXP/EarnMoreGrid';
-import { LevelRoadmap } from '../../components/LevelRoadmap/LevelRoadmap';
 import { XPActivity } from '../../components/XPActivity/XPActivity';
 import { XpCatcherGame } from '../../components/PlayAndEarn/XpCatcherGame';
 import { ChallengeComplete } from '../../components/PlayAndEarn/ChallengeComplete';
 import { EarnAndLevelUpModal } from '../../components/EarnMoreXP/EarnAndLevelUpModal';
 import { LevelUpModal } from '../../components/LevelUpModal/LevelUpModal';
 import { Skeleton, ErrorState } from '../../components/Common/CommonComponents';
-import { LandingIntro, hasCompletedIntro, markIntroCompleted } from '../../components/Common/LandingIntro';
 import { useLevelData } from '../../hooks/useLevelData';
 import styles from './LevelDashboard.module.css';
 
 export function LevelDashboard() {
   const navigate = useNavigate();
 
-  // In-memory state: plays on every page refresh / load, but persists across tab navigation
-  const [introSeen, setIntroSeen] = useState(() => hasCompletedIntro());
-
-  const handleIntroComplete = () => {
-    markIntroCompleted();
-    setIntroSeen(true);
-  };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const {
     profile,
@@ -43,17 +37,20 @@ export function LevelDashboard() {
     refetch
   } = useLevelData();
 
-  const [activeNavTab, setActiveNavTab] = useState('rewards');
+  const [activeNavTab, setActiveNavTab] = useState('dashboard');
   const [activeScreen, setActiveScreen] = useState('dashboard');
 
   const handleNavigation = (tab) => {
     setActiveNavTab(tab);
+    setIsSidebarOpen(false);
 
-    if (tab === 'home' || tab === 'rewards') {
+    if (tab === 'dashboard' || tab === 'home' || tab === 'rewards') {
       setActiveScreen('dashboard');
       navigate('/Lvl-Dashboard');
     } else if (tab === 'earn') {
       setActiveScreen('earn');
+    } else if (tab === 'activity') {
+      setActiveScreen('activity');
     } else if (tab === 'wallet') {
       navigate('/Lvl-Dashboard/wallet');
     } else if (tab === 'profile') {
@@ -61,241 +58,204 @@ export function LevelDashboard() {
     }
   };
 
-  // Keep main dashboard content completely hidden while landing intro animation is playing
-  if (!introSeen) {
-    return <LandingIntro onComplete={handleIntroComplete} />;
-  }
-
   if (isLoading) {
     return (
-      <div className={styles.dashboardPage}>
-        <TopNav onNavigate={handleNavigation} activities={activities} />
-        <div className={styles.skeletonWrapper}>
-          <Skeleton height="60px" radius="16px" />
-          <Skeleton height="170px" radius="24px" />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-            <Skeleton height="90px" radius="16px" />
-            <Skeleton height="90px" radius="16px" />
+      <div className={styles.dashboardContainer}>
+        <div className={styles.mainWrapper}>
+          <div className={styles.skeletonWrapper}>
+            <Skeleton height="60px" radius="14px" />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '14px' }}>
+              <Skeleton height="110px" radius="14px" />
+              <Skeleton height="110px" radius="14px" />
+              <Skeleton height="110px" radius="14px" />
+              <Skeleton height="110px" radius="14px" />
+            </div>
+            <Skeleton height="200px" radius="20px" />
+            <Skeleton height="140px" radius="16px" />
+            <Skeleton height="240px" radius="16px" />
           </div>
-          <Skeleton height="140px" radius="20px" />
-          <Skeleton height="200px" radius="20px" />
         </div>
-        <BottomNav
-          activeTab={activeNavTab}
-          onSelectTab={handleNavigation}
-        />
       </div>
     );
   }
 
   if (isError && !profile) {
     return (
-      <div className={styles.dashboardPage}>
-        <TopNav onNavigate={handleNavigation} activities={activities} />
-        <ErrorState message="Unable to Load Level Progress" onRetry={refetch} />
-        <BottomNav
-          activeTab={activeNavTab}
-          onSelectTab={handleNavigation}
-        />
+      <div className={styles.dashboardContainer}>
+        <div className={styles.mainWrapper}>
+          <ErrorState message="Unable to Load Level Progress" onRetry={refetch} />
+        </div>
       </div>
     );
   }
 
+  // Safe data derivation
   const currentLevel = profile?.currentLevel || 5;
-  const currentLevelName = profile?.currentLevelName || "Ascendant";
+  const currentLevelData = levels?.find(item => Number(item.level) === Number(currentLevel));
+  const currentLevelName = profile?.currentLevelName || currentLevelData?.name || "Ascendant";
   const currentXP = profile?.currentXP ?? 6420;
-  const nextLevel = profile?.nextLevel ?? 6;
+  const nextLevel = profile?.nextLevel ?? (currentLevel < (levels?.length || 10) ? currentLevel + 1 : null);
   const requiredXP = profile?.requiredXP ?? 8000;
   const xpToNext = Math.max(0, requiredXP - currentXP);
   const progressPct = profile?.progressPct ?? 80;
-  const nextLevelData = levels.find(item => Number(item.level) === Number(nextLevel));
-  const nextLevelReward = nextLevelData?.reward ?? { type: "Spins", amount: 2 };
+
+  const nextLevelData = nextLevel ? levels?.find(item => Number(item.level) === Number(nextLevel)) : null;
+  const nextLevelName = profile?.nextLevelName
+    || nextLevelData?.name
+    || (nextLevel ? `Level ${String(nextLevel).padStart(2, '0')}` : "Max Level Reached");
+  const nextLevelReward = profile?.nextLevelReward
+    || nextLevelData?.reward
+    || (nextLevel ? { type: "Spins", amount: 2 } : null);
 
   return (
-    <div className={`${styles.dashboardPage} ${styles.dashboardReveal}`}>
-      {/* Screen 2: XP Catcher Mini-Game */}
-      {activeScreen === 'game' && (
-        <XpCatcherGame
-          onClose={() => setActiveScreen('dashboard')}
-          currentLevel={currentLevel}
-          currentXP={currentXP}
-          requiredXP={requiredXP}
-          onGameFinished={(score) => {
-            return handleGameCompleted(score);
-          }}
-        />
-      )}
+    <div className={`${styles.dashboardContainer} ${styles.dashboardReveal}`}>
+      {/* 1. Desktop & Mobile Modern Sidebar */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        activeTab={activeNavTab}
+        onSelectTab={handleNavigation}
+        profile={profile}
+        currentLevel={currentLevel}
+        currentLevelName={currentLevelName}
+        currentXP={currentXP}
+        requiredXP={requiredXP}
+        progressPct={progressPct}
+        onLaunchGame={() => setActiveScreen('game')}
+        onViewRewards={() => setActiveScreen('levelup')}
+      />
 
-      {/* Screen 3: Challenge Complete */}
-      {activeScreen === 'complete' && (
-        <ChallengeComplete
-          score={92}
-          earnedXP={30}
-          earnedVEs={12}
-          isNewBest
+      {/* 2. Main Application Workspace Area */}
+      <div className={styles.mainWrapper}>
+        {/* Modern Top Header Bar */}
+        <TopHeader
+          onToggleSidebar={() => setIsSidebarOpen(prev => !prev)}
+          activities={activities}
+          profile={profile}
           currentLevel={currentLevel}
-          currentXP={currentXP}
-          requiredXP={requiredXP}
-          onPlayAgain={() => setActiveScreen('game')}
-          onBackToDashboard={() => setActiveScreen('dashboard')}
-        />
-      )}
-
-      {/* Screen 4: Earn & Level Up Modal */}
-      {activeScreen === 'earn' && (
-        <EarnAndLevelUpModal
-          onClose={() => setActiveScreen('dashboard')}
+          currentLevelName={currentLevelName}
           onLaunchGame={() => setActiveScreen('game')}
-          onClaimFeature={handleClaimFeature}
+          onNavigate={handleNavigation}
         />
-      )}
 
-      {/* Screen 5: Level Up Celebration / Preview Modal */}
-      {activeScreen === 'levelup' && (
-        <LevelUpModal
-          level={nextLevel}
-          levelName={nextLevelData?.name || "Vanguard"}
-          reward={nextLevelReward}
-          isRewardPreview
-          onClose={() => setActiveScreen('dashboard')}
-        />
-      )}
-
-      {/* Screen 6: Recent Activity Standalone View */}
-      {activeScreen === 'activity' && (
-        <div style={{ padding: '0 0 60px 0', minHeight: '85vh' }}>
-          <TopNav
-            onNavigate={handleNavigation}
-            activities={activities}
+        {/* Screen 2: XP Catcher Mini-Game */}
+        {activeScreen === 'game' && (
+          <XpCatcherGame
+            onClose={() => setActiveScreen('dashboard')}
+            currentLevel={currentLevel}
+            currentXP={currentXP}
+            requiredXP={requiredXP}
+            onGameFinished={(score) => {
+              return handleGameCompleted(score);
+            }}
           />
-          <XPActivity
-            activities={activities}
-            todayXP={todaysBoost.xpEarned}
-            todayVE={0}
-            showAll
-            onStartEarning={() => navigate('/Lvl-Dashboard')}
+        )}
+
+        {/* Screen 3: Challenge Complete */}
+        {activeScreen === 'complete' && (
+          <ChallengeComplete
+            score={92}
+            earnedXP={30}
+            earnedVEs={12}
+            isNewBest
+            currentLevel={currentLevel}
+            currentXP={currentXP}
+            requiredXP={requiredXP}
+            onPlayAgain={() => setActiveScreen('game')}
+            onBackToDashboard={() => setActiveScreen('dashboard')}
           />
-          <BottomNav
-            activeTab={activeNavTab}
-            onSelectTab={handleNavigation}
+        )}
+
+        {/* Screen 4: Earn & Level Up Modal */}
+        {activeScreen === 'earn' && (
+          <EarnAndLevelUpModal
+            onClose={() => setActiveScreen('dashboard')}
+            onLaunchGame={() => setActiveScreen('game')}
+            onClaimFeature={handleClaimFeature}
           />
-        </div>
-      )}
+        )}
 
-      {/* Main Redesigned Dashboard View */}
-      {activeScreen === 'dashboard' && (
-        <>
-          <TopNav
-            onNavigate={handleNavigation}
-            activities={activities}
+        {/* Screen 5: Level Up Celebration / Preview Modal */}
+        {activeScreen === 'levelup' && (
+          <LevelUpModal
+            level={nextLevel || currentLevel}
+            levelName={nextLevelName}
+            reward={nextLevelReward}
+            isRewardPreview
+            onClose={() => setActiveScreen('dashboard')}
           />
+        )}
 
-          <main className={styles.mainLayout}>
-            {/* Top Row: Hero Progression & Boost */}
-            <div className={styles.topSection}>
-              <div className={styles.heroColumn}>
-                <LevelHero
-                  currentLevel={currentLevel}
-                  currentXP={currentXP}
-                  nextLevel={nextLevel}
-                  requiredXP={requiredXP}
-                  xpToNext={xpToNext}
-                  progressPct={progressPct}
-                />
-              </div>
+        {/* Screen 6: Recent Activity Standalone View */}
+        {activeScreen === 'activity' && (
+          <div style={{ padding: '24px 28px 80px 28px', minHeight: '85vh' }}>
+            <XPActivity
+              activities={activities}
+              todayXP={todaysBoost?.xpEarned || 215}
+              todayVE={0}
+              showAll
+              onViewAll={() => {}}
+              onStartEarning={() => setActiveScreen('earn')}
+            />
+          </div>
+        )}
 
-              <div className={styles.boostColumn}>
-                <TodaysBoost
-                  xpEarned={todaysBoost.xpEarned}
-                  tasksDone={todaysBoost.tasksDone}
-                  streakDays={todaysBoost.streakDays}
-                />
-              </div>
-            </div>
+        {/* Main Ultra-Premium Luxury Level Progression Content */}
+        {activeScreen === 'dashboard' && (
+          <main className={styles.dashboardMain}>
 
-            {/* Level Progression Key Metrics Bar */}
-            <LevelProgressionSummary
+            {/* 1. The Legacy Chamber Hero Showcase with 3D Centerpiece */}
+            <LegacyChamberHero
+              currentLevel={currentLevel}
+              currentXP={currentXP}
+              requiredXP={requiredXP}
+              nextLevel={nextLevel}
+              progressPct={progressPct}
+              onLaunchGame={() => setActiveScreen('game')}
+              onViewRewards={() => setActiveScreen('levelup')}
+            />
+
+            {/* 2. Horology-Inspired Standing Metric Strip */}
+            <LuxuryStatsBar
               currentLevel={currentLevel}
               currentLevelName={currentLevelName}
               currentXP={currentXP}
               requiredXP={requiredXP}
-              xpToNext={xpToNext}
-              progressPct={progressPct}
               nextLevel={nextLevel}
-              nextLevelName={nextLevelData?.name || "Vanguard"}
+              nextLevelName={nextLevelName}
               nextLevelReward={nextLevelReward}
-              totalLevels={levels.length || 10}
+              todayXP={todaysBoost?.xpEarned || 215}
+              onViewRewards={() => setActiveScreen('levelup')}
             />
 
-            {/* Middle Section: Full-Width Connected Horizontal Level Journey */}
-            <div className={styles.journeySection}>
-              <LevelRoadmap
-                levels={levels}
-                currentLevel={currentLevel}
-                currentXP={currentXP}
-              />
-            </div>
+            {/* 3. Custom Metallic Chrono Progression Rail */}
+            <ChronoXpRail
+              currentLevel={currentLevel}
+              currentXP={currentXP}
+              requiredXP={requiredXP}
+              nextLevel={nextLevel}
+              progressPct={progressPct}
+            />
 
-            {/* Bottom Grid: Play & Earn Mini-Game Launcher + Activity + Earning Grid */}
+            {/* 4. The Master Collection: 12 Bespoke 3D Metallic Emblems Gallery */}
+            <EmblemsGallery
+              currentLevel={currentLevel}
+              currentXP={currentXP}
+            />
+
+            {/* 5. Live Chrono Arcade XP Challenge Banner */}
+            <LuxuryArcadeBanner
+              onLaunchGame={() => setActiveScreen('game')}
+              onViewRewards={() => setActiveScreen('levelup')}
+            />
+
+            {/* 6. Precision Earning Hub & Session Activity Feed */}
             <div className={styles.bottomSection}>
               <div className={styles.bottomLeftCol}>
-                {/* Play & Earn Feature Banner */}
-                <section className={styles.arcadeBanner} aria-label="Play and Earn Arcade">
-                  <div className={styles.arcadeGlowBackdrop} />
-                  <div className={styles.arcadeContent}>
-                    <div className={styles.arcadeBadgeRow}>
-                      <span className={styles.arcadeLiveBadge}>
-                        <Zap size={12} fill="currentColor" />
-                        LIVE ARCADE
-                      </span>
-                      <span className={styles.arcadeScoreTag}>2X Multiplier Active</span>
-                    </div>
-
-                    <h3 className={styles.arcadeHeading}>
-                      XP CATCHER CHALLENGE
-                    </h3>
-                    <p className={styles.arcadeSubtext}>
-                      Control the 3D golden basket to catch glowing XP orbs and VE coins in a 20-second arcade rush.
-                    </p>
-
-                    <div className={styles.arcadeFooter}>
-                      <button 
-                        type="button" 
-                        className={styles.playNowBtn}
-                        onClick={() => setActiveScreen('game')}
-                      >
-                        <Play size={16} fill="currentColor" />
-                        <span>PLAY NOW</span>
-                      </button>
-
-                      <button 
-                        type="button" 
-                        className={styles.previewRewardBtn}
-                        onClick={() => setActiveScreen('levelup')}
-                      >
-                        <Trophy size={15} />
-                        <span>View Tier Rewards</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className={styles.arcadeIllustrationWrap}>
-                    <img 
-                      src="/assets/golden_basket_clean.png" 
-                      alt="Golden Basket" 
-                      className={styles.basketPromoImg}
-                      onError={(e) => {
-                        e.currentTarget.src = '/assets/golden_basket.svg';
-                      }}
-                    />
-                  </div>
-                </section>
-
-                {/* Earn More XP Opportunities */}
                 <EarnMoreGrid
                   currentLevel={currentLevel}
                   nextLevel={nextLevel}
-                  nextLevelName={nextLevelData?.name}
+                  nextLevelName={nextLevelName}
                   nextLevelReward={nextLevelReward}
                   onLaunchGame={() => setActiveScreen('game')}
                   onViewRewards={() => setActiveScreen('levelup')}
@@ -306,23 +266,25 @@ export function LevelDashboard() {
               <div className={styles.bottomRightCol}>
                 <XPActivity
                   activities={activities}
-                  todayXP={todaysBoost.xpEarned}
+                  todayXP={todaysBoost?.xpEarned || 215}
                   todayVE={0}
-                  onViewAll={() => navigate('/Lvl-Dashboard/activity')}
+                  onViewAll={() => setActiveScreen('activity')}
                   onStartEarning={() => setActiveScreen('earn')}
                 />
               </div>
             </div>
+
           </main>
+        )}
 
-          <BottomNav
-            activeTab={activeNavTab}
-            onSelectTab={handleNavigation}
-          />
-        </>
-      )}
+        {/* Mobile Persistent Navigation */}
+        <BottomNav
+          activeTab={activeNavTab}
+          onSelectTab={handleNavigation}
+        />
+      </div>
 
-      {/* Real-time Level Up Modal if triggered from backend session */}
+      {/* Real-time Level Up Celebration Modal */}
       {levelUpData && activeScreen !== 'levelup' && (
         <LevelUpModal
           level={levelUpData?.toLevel || currentLevel}

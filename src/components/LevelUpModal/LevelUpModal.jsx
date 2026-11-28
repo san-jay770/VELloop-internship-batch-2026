@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import { Gift } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { getRankData } from '../Common/BlackLabelEmblem';
+import { LevelBadge } from '../LevelHero/LevelBadge';
 import styles from './LevelUpModal.module.css';
 
-export function LevelUpModal({ 
+export function LevelUpModal({
   level,
   levelName,
   reward,
   onClose,
   isRewardPreview = false,
-  isStandalone = false 
+  isStandalone = false
 }) {
   useEffect(() => {
     if (!isStandalone && !isRewardPreview) {
@@ -44,14 +46,33 @@ export function LevelUpModal({
       </div>
 
       <div className={styles.pedestalWrapper}>
-        <img 
-          src={isRewardPreview ? '/assets/ref_treasure_chest.png' : '/assets/ref_level_up_pedestal.png'}
-          alt={isRewardPreview ? `Level ${level} reward chest` : `Level ${level} Celebration Pedestal`}
-          style={{ width: '180px', height: '170px', objectFit: 'contain' }}
-          onError={(e) => {
-            e.currentTarget.src = isRewardPreview ? '/assets/safe-1.svg' : '/assets/lvl-5.svg';
-          }}
-        />
+        {isRewardPreview ? (
+          <img
+            src="/assets/premium/png/reward_showcase_chest@4x.png"
+            alt={`Level ${level} reward chest`}
+            style={{ width: '180px', height: '170px', objectFit: 'contain', filter: 'drop-shadow(0 10px 24px rgba(216, 180, 90, 0.45))' }}
+            onError={(e) => {
+              e.currentTarget.src = '/assets/reference/reward_big_chest.png';
+            }}
+          />
+        ) : (
+          <img
+            src={getRankData(level).badgeSrc}
+            alt={`Level ${level} 3D Badge`}
+            style={{
+              width: '180px',
+              height: '180px',
+              borderRadius: '50%',
+              aspectRatio: '1 / 1',
+              objectFit: 'contain',
+              imageRendering: '-webkit-optimize-contrast',
+              filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px rgba(200, 169, 107, 0.4))'
+            }}
+            onError={(e) => {
+              e.currentTarget.src = '/assets/black_label/rank_01_novice.png';
+            }}
+          />
+        )}
       </div>
 
       <div className={styles.rewardsGrid}>
@@ -61,7 +82,7 @@ export function LevelUpModal({
         </div>
       </div>
 
-      <button 
+      <button
         className={styles.claimBtn}
         onClick={onClose}
       >

@@ -27,51 +27,60 @@ export function EarnMoreGrid({
     {
       id: 'watch_earn',
       label: 'Watch & Earn',
+      xpTag: '+50 XP',
       icon: Play,
-      bg: '#9333ea',
+      image: '/assets/operations/op_watch_earn.svg',
       action: () => onClaimFeature && onClaimFeature('watch_earn')
     },
     {
       id: 'daily_tasks',
       label: 'Daily Tasks',
+      xpTag: '+30 XP',
       icon: ClipboardCheck,
-      bg: '#f59e0b',
+      image: '/assets/operations/op_daily_tasks.svg',
       action: () => onClaimFeature && onClaimFeature('daily_tasks')
     },
     {
       id: 'refer_earn',
       label: 'Refer & Earn',
+      xpTag: '+100 XP',
       icon: Users,
-      bg: '#d97706',
+      image: '/assets/operations/op_refer_earn.svg',
       action: () => onClaimFeature && onClaimFeature('refer_earn')
     },
     {
       id: 'xp_catcher',
       label: 'XP Catcher',
+      xpTag: '2X Orbs',
       icon: Magnet,
-      bg: '#0284c7',
+      image: '/assets/operations/op_xp_catcher.svg',
       action: () => onLaunchGame && onLaunchGame()
     },
     {
       id: 'mini_games',
       label: 'Mini Games',
+      xpTag: '+75 XP',
       icon: Gamepad2,
-      bg: '#6366f1',
+      image: '/assets/operations/op_mini_games.svg',
       action: () => onLaunchGame && onLaunchGame()
     },
     {
       id: 'streak_bonus',
       label: 'Streak Bonus',
+      xpTag: '+25 XP',
       icon: Flame,
-      bg: '#ef4444',
+      image: '/assets/operations/op_streak_bonus.svg',
       action: () => onClaimFeature && onClaimFeature('streak_xp')
     }
   ];
 
   return (
-    <section className={styles.earnMoreSection} aria-label="Earn More Activities">
+    <section id="gaming-rewards-section" className={styles.earnMoreSection} aria-label="Earn More Activities">
       <div className={styles.headerRow}>
-        <h2 className={styles.sectionTitle}>EARN MORE</h2>
+        <div className={styles.titleWrap}>
+          <span className={styles.gamingBadge}>TACTICAL REWARDS</span>
+          <h2 className={styles.sectionTitle}>EARNING OPERATIONS</h2>
+        </div>
         <button
           className={styles.arrowBtn}
           aria-label="View all earning opportunities"
@@ -82,7 +91,7 @@ export function EarnMoreGrid({
       </div>
 
       <p className={styles.sectionSub}>
-        Explore fun activities and earn exciting rewards.
+        Complete active field operations and tactical challenges to earn verified XP rewards.
       </p>
 
       {/* 2x3 Grid */}
@@ -103,16 +112,28 @@ export function EarnMoreGrid({
                 }
               }}
             >
-              <div className={styles.iconBox} style={{ backgroundColor: item.bg }}>
-                <IconComponent size={22} color="#ffffff" />
+              <div className={styles.iconBox}>
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.label}
+                    className={styles.activity3DImg}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                ) : (
+                  <IconComponent size={22} color="#ffffff" />
+                )}
               </div>
-              <span className={styles.itemLabel}>{item.label}</span>
+              <div className={styles.itemContent}>
+                <span className={styles.itemLabel}>{item.label}</span>
+                {item.xpTag && <span className={styles.itemXpTag}>{item.xpTag}</span>}
+              </div>
             </div>
           );
         })}
       </div>
 
-      {/* Level 05 Rewards Card with Exact Treasure Chest Illustration */}
+      {/* Level Rewards Card with Exact Treasure Chest Illustration */}
       <div
         className={styles.rewardCard}
         onClick={onViewRewards}
@@ -171,11 +192,11 @@ export function EarnMoreGrid({
           {/* Floating 3D Treasure Chest */}
           <div className={styles.chestFloatingContainer}>
             <img
-              src="/assets/ref_treasure_chest.png"
+              src="/assets/premium/png/reward_showcase_chest_clean.png"
               alt="Level 05 Rewards Treasure Chest"
               className={styles.rewardCardImg}
               onError={(e) => {
-                e.currentTarget.src = '/assets/safe-1.svg';
+                e.currentTarget.src = '/assets/reference/reward_big_chest.png';
               }}
             />
           </div>

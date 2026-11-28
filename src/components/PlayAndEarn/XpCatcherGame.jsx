@@ -4,13 +4,13 @@ import confetti from 'canvas-confetti';
 import { ChallengeComplete } from './ChallengeComplete';
 import styles from './Game.module.css';
 
-export function XpCatcherGame({ 
-  onClose, 
-  onGameFinished, 
+export function XpCatcherGame({
+  onClose,
+  onGameFinished,
   currentLevel = 5,
   currentXP = 6420,
   requiredXP = 8000,
-  isStandalone = false 
+  isStandalone = false
 }) {
   // 'ready' | 'playing' | 'paused' | 'submitting' | 'completed' | 'error'
   const [gameState, setGameState] = useState('ready');
@@ -307,16 +307,16 @@ export function XpCatcherGame({
     updateBasketPos(clientX, rect);
   };
 
-  const overlayStyle = isStandalone 
-    ? { position: 'relative', width: '100%', height: '100%', zIndex: 1 } 
+  const overlayStyle = isStandalone
+    ? { position: 'relative', width: '100%', height: '100%', zIndex: 1 }
     : {};
 
   return (
     <div className={styles.gameModalOverlay} style={overlayStyle} role="dialog" aria-modal="true">
       {/* Top Header */}
       <header className={styles.gameHeader}>
-        <button 
-          className={styles.infoBtn} 
+        <button
+          className={styles.infoBtn}
           onClick={onClose}
           aria-label="Back to dashboard"
         >
@@ -325,8 +325,8 @@ export function XpCatcherGame({
 
         <div className={styles.gameHeaderCenter}>
           <span className={styles.gameTitle}>XP CATCHER</span>
-          <button 
-            className={styles.infoBtn} 
+          <button
+            className={styles.infoBtn}
             onClick={() => setShowInfo(!showInfo)}
             aria-label="Game Info"
           >
@@ -336,7 +336,7 @@ export function XpCatcherGame({
 
         <div className={styles.headerRightControls}>
           {gameState === 'playing' && (
-            <button 
+            <button
               className={styles.pauseBtn}
               onClick={togglePause}
               aria-label="Pause game"
@@ -368,15 +368,15 @@ export function XpCatcherGame({
             Maneuver your 3D golden basket along the bottom of the arena to catch falling reward items before the 20-second timer runs out.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '12px', fontSize: '11px' }}>
-            <span style={{ color: '#c084fc' }}>🟣 XP Orb = +10 XP</span>
+            <span style={{ color: '#E2C891' }}>✨ Gold Orb = +10 XP</span>
             <span style={{ color: '#fcd34d' }}>🟡 VE Coin = +5 VEs</span>
-            <span style={{ color: '#34d399' }}>🟢 Emerald = +20 Points</span>
-            <span style={{ color: '#f59e0b' }}>🚀 2X Multiplier active</span>
+            <span style={{ color: '#4DBB87' }}>🟢 Emerald = +20 Points</span>
+            <span style={{ color: '#C5A66A' }}>🚀 2X Multiplier active</span>
           </div>
           <p style={{ fontSize: '11px', color: '#9ca3af', margin: '0 0 10px 0' }}>
             <strong>Controls:</strong> Left/Right Arrow keys, A/D keys, or drag with touch/mouse.
           </p>
-          <button 
+          <button
             className={styles.closeTooltipBtn}
             onClick={() => setShowInfo(false)}
           >
@@ -422,8 +422,8 @@ export function XpCatcherGame({
               <span>📱 Mobile: Drag finger across the arena</span>
             </div>
 
-            <button 
-              type="button" 
+            <button
+              type="button"
               className={styles.startGameBtn}
               onClick={startGame}
             >
@@ -442,14 +442,14 @@ export function XpCatcherGame({
             <h3 style={{ color: '#ffffff', margin: '10px 0 4px 0', fontSize: '20px', fontWeight: '800' }}>GAME PAUSED</h3>
             <p style={{ color: '#9ca3af', fontSize: '13px', margin: '0 0 16px 0' }}>Score: {score} • Time Remaining: {timeLeft}s</p>
             <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
-              <button 
-                className={styles.resumeBtn} 
+              <button
+                className={styles.resumeBtn}
                 onClick={togglePause}
               >
                 Resume
               </button>
-              <button 
-                className={styles.quitBtn} 
+              <button
+                className={styles.quitBtn}
                 onClick={onClose}
               >
                 Quit
@@ -460,7 +460,7 @@ export function XpCatcherGame({
       )}
 
       {/* Game arena with canvas and golden basket overlay */}
-      <div 
+      <div
         className={styles.arenaContainer}
         onPointerDown={handlePointerMove}
         onPointerMove={handlePointerMove}
@@ -470,8 +470,8 @@ export function XpCatcherGame({
 
         {/* Floating popups */}
         {floatPops.map(p => (
-          <div 
-            key={p.id} 
+          <div
+            key={p.id}
             className={styles.floatFeedback}
             style={{ left: `${p.x - 20}px`, top: `${p.y - 20}px` }}
           >
@@ -480,7 +480,7 @@ export function XpCatcherGame({
         ))}
 
         {/* EXACT 3D GOLDEN WIRE BASKET */}
-        <div 
+        <div
           style={{
             position: 'absolute',
             bottom: '12px',
@@ -496,12 +496,12 @@ export function XpCatcherGame({
             transition: 'transform 0.04s ease-out'
           }}
         >
-          <img 
-            src="/assets/golden_basket_clean.png" 
-            alt="User Golden Basket" 
+          <img
+            src="/assets/golden_basket_clean.png"
+            alt="User Golden Basket"
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             onError={(e) => {
-              e.currentTarget.src = '/assets/golden_basket.svg';
+              e.currentTarget.src = '/assets/golden_basket_clean.png';
             }}
           />
         </div>

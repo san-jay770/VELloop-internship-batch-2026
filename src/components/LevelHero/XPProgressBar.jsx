@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import styles from './LevelHero.module.css';
 
@@ -35,9 +34,15 @@ export function XPProgressBar({
         />
       </div>
       <div className={styles.progressLabel}>
-        <span>{currentXP.toLocaleString()} / {requiredXP.toLocaleString()} XP</span>
-        <span>{xpToNext.toLocaleString()} XP to Level {String(nextLevel).padStart(2, '0')}</span>
+        <span>
+          <strong className={styles.progressPctHighlight}>{animatedPct}%</strong> Complete ({currentXP.toLocaleString()} / {requiredXP.toLocaleString()} XP)
+        </span>
+        <span>
+          <strong>{xpToNext.toLocaleString()} XP</strong> to Level {String(nextLevel).padStart(2, '0')}
+        </span>
       </div>
     </div>
   );
 }
+
+export default XPProgressBar;

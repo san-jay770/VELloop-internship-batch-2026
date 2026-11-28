@@ -1,11 +1,11 @@
-/* LandingIntro.module.css - Premium 4-Second Animated Intro for VELOOP Rewards */
+/* LandingIntro.module.css - Obsidian Gold Luxury Animated Intro for VELOOP Rewards */
 
-/* 1. Full-screen Dark Purple Canvas */
+/* 1. Full-screen Obsidian Canvas */
 .introContainer {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: radial-gradient(circle at center, #180a36 0%, #0d0520 45%, #05020c 100%);
+  background: radial-gradient(circle at center, #151A23 0%, #10141C 45%, #090B10 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@
   pointer-events: none;
 }
 
-/* Ambient Purple and Gold Glows */
+/* Ambient Gold Glows */
 .ambientPurpleGlow {
   position: absolute;
   top: 50%;
@@ -30,7 +30,7 @@
   transform: translate(-50%, -50%);
   width: 720px;
   height: 520px;
-  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.32) 0%, rgba(147, 51, 234, 0.12) 50%, transparent 72%);
+  background: radial-gradient(ellipse at center, rgba(197, 166, 106, 0.25) 0%, rgba(226, 200, 145, 0.1) 50%, transparent 72%);
   pointer-events: none;
   filter: blur(50px);
   animation: ambientBreathe 4s ease-in-out infinite;
@@ -43,7 +43,7 @@
   transform: translate(-50%, -50%);
   width: 440px;
   height: 440px;
-  background: radial-gradient(circle, rgba(245, 176, 65, 0.25) 0%, rgba(217, 119, 6, 0.08) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(197, 166, 106, 0.28) 0%, rgba(226, 200, 145, 0.08) 50%, transparent 70%);
   pointer-events: none;
   filter: blur(40px);
   animation: goldPulse 3.5s ease-in-out infinite;
@@ -85,7 +85,7 @@
   width: 100%;
 }
 
-/* 3. Glowing Purple and Golden Energy Rings Around the Logo */
+/* 3. Glowing Golden Energy Rings Around the Logo */
 .energyRingsWrapper {
   position: absolute;
   top: 48px;
@@ -105,10 +105,10 @@
   height: 230px;
   border-radius: 50%;
   border: 2px solid transparent;
-  border-top: 2.5px solid #c084fc;
-  border-right: 2px solid rgba(168, 85, 247, 0.7);
-  border-bottom: 2px solid rgba(147, 51, 234, 0.35);
-  box-shadow: 0 0 24px rgba(168, 85, 247, 0.65), inset 0 0 16px rgba(147, 51, 234, 0.45);
+  border-top: 2.5px solid var(--gold-highlight, #E2C891);
+  border-right: 2px solid rgba(197, 166, 106, 0.7);
+  border-bottom: 2px solid rgba(197, 166, 106, 0.35);
+  box-shadow: 0 0 24px rgba(197, 166, 106, 0.65), inset 0 0 16px rgba(197, 166, 106, 0.45);
   animation: ringEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both, spinCounter 9s linear infinite;
 }
 
@@ -118,10 +118,10 @@
   height: 180px;
   border-radius: 50%;
   border: 2px solid transparent;
-  border-top: 2.5px solid #fef08a;
-  border-left: 2px solid rgba(251, 191, 36, 0.85);
-  border-bottom: 1.5px solid rgba(245, 158, 11, 0.4);
-  box-shadow: 0 0 24px rgba(245, 158, 11, 0.85), inset 0 0 14px rgba(253, 224, 71, 0.5);
+  border-top: 2.5px solid #F5F3EE;
+  border-left: 2px solid rgba(226, 200, 145, 0.85);
+  border-bottom: 1.5px solid rgba(197, 166, 106, 0.4);
+  box-shadow: 0 0 24px rgba(197, 166, 106, 0.85), inset 0 0 14px rgba(226, 200, 145, 0.5);
   animation: ringEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both, spinClockwise 6.5s linear infinite;
 }
 
@@ -130,8 +130,8 @@
   width: 190px;
   height: 190px;
   border-radius: 50%;
-  border: 1.5px solid rgba(245, 176, 65, 0.6);
-  box-shadow: 0 0 18px rgba(168, 85, 247, 0.5);
+  border: 1.5px solid rgba(197, 166, 106, 0.6);
+  box-shadow: 0 0 18px rgba(197, 166, 106, 0.5);
   animation: shockwavePulse 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
   animation-delay: 0.8s;
   opacity: 0;
@@ -180,7 +180,7 @@
   }
 }
 
-/* 2. VELOOP Logo with Golden & Purple Neon Glow */
+/* 2. VELOOP Logo with Golden Glow */
 .logoContainer {
   position: relative;
   width: 105px;
@@ -197,7 +197,7 @@
   position: absolute;
   inset: -14px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 176, 65, 0.55) 0%, rgba(168, 85, 247, 0.35) 45%, transparent 75%);
+  background: radial-gradient(circle, rgba(197, 166, 106, 0.55) 0%, rgba(226, 200, 145, 0.35) 45%, transparent 75%);
   filter: blur(12px);
   animation: logoBacklightPulse 2.4s ease-in-out infinite;
 }
@@ -207,7 +207,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 0 20px rgba(245, 176, 65, 0.95)) drop-shadow(0 0 45px rgba(168, 85, 247, 0.75));
+  filter: drop-shadow(0 0 20px rgba(197, 166, 106, 0.95)) drop-shadow(0 0 45px rgba(226, 200, 145, 0.75));
   animation: logoBreathe 3s ease-in-out infinite;
 }
 
@@ -265,13 +265,13 @@
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 2.5px;
-  color: #f5b041;
-  background: rgba(245, 176, 65, 0.15);
-  border: 1.5px solid rgba(245, 176, 65, 0.4);
+  color: var(--champagne-gold, #C5A66A);
+  background: rgba(197, 166, 106, 0.15);
+  border: 1.5px solid rgba(197, 166, 106, 0.4);
   padding: 3px 12px;
   border-radius: 999px;
   text-transform: uppercase;
-  box-shadow: 0 0 14px rgba(245, 176, 65, 0.3);
+  box-shadow: 0 0 14px rgba(197, 166, 106, 0.3);
 }
 
 @keyframes brandReveal {
@@ -285,7 +285,7 @@
   }
 }
 
-/* 5. Tagline "PLAY • EARN • WIN" with Smooth Fade-in */
+/* 5. Tagline "PLAY • EARN • WIN" */
 .taglineContainer {
   display: flex;
   align-items: center;
@@ -298,12 +298,12 @@
 .taglineLineRight {
   width: 44px;
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, rgba(245, 176, 65, 0.7));
+  background: linear-gradient(90deg, transparent, rgba(197, 166, 106, 0.7));
   border-radius: 999px;
 }
 
 .taglineLineRight {
-  background: linear-gradient(90deg, rgba(245, 176, 65, 0.7), transparent);
+  background: linear-gradient(90deg, rgba(197, 166, 106, 0.7), transparent);
 }
 
 .taglineText {
@@ -311,12 +311,12 @@
   font-weight: 800;
   letter-spacing: 4.5px;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #f59e0b 0%, #fde047 25%, #ffffff 50%, #fde047 75%, #f59e0b 100%);
+  background: linear-gradient(90deg, #C5A66A 0%, #E2C891 25%, #F5F3EE 50%, #E2C891 75%, #C5A66A 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmerText 3s linear infinite;
-  filter: drop-shadow(0 2px 8px rgba(245, 176, 65, 0.4));
+  filter: drop-shadow(0 2px 8px rgba(197, 166, 106, 0.4));
 }
 
 @keyframes taglineSlideIn {
@@ -352,7 +352,7 @@
 /* 4-Point Golden Stars */
 .sparkle {
   position: absolute;
-  background: radial-gradient(circle, #ffffff 15%, #fde047 50%, #f59e0b 85%, transparent 100%);
+  background: radial-gradient(circle, #ffffff 15%, #E2C891 50%, #C5A66A 85%, transparent 100%);
   clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
   pointer-events: none;
   opacity: 0;
@@ -414,7 +414,7 @@
   45%, 65% {
     opacity: 1;
     transform: scale(1.15) rotate(45deg);
-    filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.95));
+    filter: drop-shadow(0 0 8px rgba(226, 200, 145, 0.95));
   }
   100% {
     opacity: 0;
@@ -425,7 +425,7 @@
 /* Warm Golden Floating Embers */
 .particle {
   position: absolute;
-  background: radial-gradient(circle, #ffffff 20%, #fcd34d 60%, transparent 100%);
+  background: radial-gradient(circle, #ffffff 20%, #E2C891 60%, transparent 100%);
   border-radius: 50%;
   opacity: 0;
   pointer-events: none;
@@ -479,7 +479,7 @@
   30%, 70% {
     opacity: 0.9;
     transform: translateY(-30px) scale(1);
-    box-shadow: 0 0 10px rgba(245, 176, 65, 0.8);
+    box-shadow: 0 0 10px rgba(197, 166, 106, 0.8);
   }
   100% {
     opacity: 0;
@@ -494,8 +494,8 @@
   right: 32px;
   z-index: 10;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #9ca3af;
+  border: 1px solid var(--border-subtle, #30333B);
+  color: var(--text-secondary, #A5A8B0);
   border-radius: 999px;
   padding: 6px 18px;
   font-size: 12px;
@@ -507,9 +507,9 @@
 }
 
 .skipButton:hover {
-  background: rgba(245, 176, 65, 0.16);
-  border-color: rgba(245, 176, 65, 0.45);
-  color: #ffffff;
+  background: rgba(197, 166, 106, 0.16);
+  border-color: rgba(197, 166, 106, 0.45);
+  color: var(--text-primary, #F5F3EE);
   transform: translateY(-1px);
 }
 

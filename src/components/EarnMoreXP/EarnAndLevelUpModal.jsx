@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { 
-  ArrowLeft, 
-  Play, 
-  ClipboardCheck, 
-  Users, 
-  Gamepad2, 
-  Flame, 
-  Magnet, 
-  ChevronRight, 
+import {
+  ArrowLeft,
+  Play,
+  ClipboardCheck,
+  Users,
+  Gamepad2,
+  Flame,
+  Magnet,
+  ChevronRight,
   BarChart2,
   CheckCircle2
 } from 'lucide-react';
@@ -27,7 +27,7 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
       desc: 'Watch ads and earn',
       reward: '+15 XP',
       icon: Play,
-      bg: '#9333ea',
+      image: '/assets/operations/op_watch_earn.svg',
       action: () => handleClaim('watch_earn')
     },
     {
@@ -36,7 +36,7 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
       desc: 'Complete daily tasks',
       reward: '+30 XP',
       icon: ClipboardCheck,
-      bg: '#10b981',
+      image: '/assets/operations/op_daily_tasks.svg',
       action: () => handleClaim('daily_tasks')
     },
     {
@@ -45,7 +45,7 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
       desc: 'Invite friends & earn',
       reward: '+50 XP',
       icon: Users,
-      bg: '#f59e0b',
+      image: '/assets/operations/op_refer_earn.svg',
       action: () => handleClaim('refer_earn')
     },
     {
@@ -54,7 +54,7 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
       desc: 'Play games & win',
       reward: '+75 XP',
       icon: Gamepad2,
-      bg: '#6366f1',
+      image: '/assets/operations/op_mini_games.svg',
       action: () => onLaunchGame && onLaunchGame()
     },
     {
@@ -63,7 +63,7 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
       desc: 'Maintain your streak',
       reward: '+25 XP',
       icon: Flame,
-      bg: '#ef4444',
+      image: '/assets/operations/op_streak_bonus.svg',
       disabled: true,
       action: () => {}
     },
@@ -73,7 +73,7 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
       desc: 'Catch orbs & coins',
       reward: '+10 XP',
       icon: Magnet,
-      bg: '#0284c7',
+      image: '/assets/operations/op_xp_catcher.svg',
       action: () => onLaunchGame && onLaunchGame()
     }
   ];
@@ -109,14 +109,14 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
     }
   };
 
-  const containerStyle = isStandalone 
-    ? { position: 'relative', minHeight: '100%', zIndex: 1, background: '#090a12', animation: 'none' } 
+  const containerStyle = isStandalone
+    ? { position: 'relative', minHeight: '100%', zIndex: 1, background: '#090a12', animation: 'none' }
     : {};
 
   return (
     <div className={styles.fullModalOverlay} style={containerStyle} role="dialog" aria-modal="true">
       <div className={styles.modalHeader}>
-        <button 
+        <button
           className={styles.backBtn}
           onClick={onClose}
           aria-label="Back to dashboard"
@@ -159,7 +159,7 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
           const isPending = Boolean(pendingMap[item.id]);
           const isDisabled = Boolean(item.disabled || isClaimed || isPending);
           return (
-            <div 
+            <div
               key={item.id}
               className={styles.earnListCard}
               onClick={() => {
@@ -176,8 +176,17 @@ export function EarnAndLevelUpModal({ onClose, onLaunchGame, onClaimFeature, isS
               }}
             >
               <div className={styles.cardLeft}>
-                <div className={styles.iconBox} style={{ backgroundColor: item.bg }}>
-                  <IconComp size={22} color="#ffffff" />
+                <div className={styles.iconBox}>
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className={styles.activity3DImg}
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  ) : (
+                    <IconComp size={22} color="#ffffff" />
+                  )}
                 </div>
                 <div className={styles.cardText}>
                   <span className={styles.cardTitle}>{item.title}</span>
